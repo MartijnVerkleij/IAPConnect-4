@@ -19,10 +19,10 @@ public class Move {
 	 * @param yArg height index of the board
 	 */
 	
-	public Move(int playerArg, int xArg, int yArg) {
-		player = playerArg;
-		x = xArg;
-		y = yArg;
+	public Move(int player, int x, int y) {
+		this.player = player;
+		this.x = x;
+		this.y = y;
 	}
 	
 	
