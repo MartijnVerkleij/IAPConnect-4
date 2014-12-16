@@ -9,8 +9,7 @@ package nl.utwente.iapc;
 public class Move {
 
 	private int player;
-	private int x;
-	private int y;
+	private int column;
 	
 	/**
 	 * A move done on a Board, containing coordinates and the player that the move is for.
@@ -19,10 +18,17 @@ public class Move {
 	 * @param yArg height index of the board
 	 */
 	
-	public Move(int player, int x, int y) {
+	public Move(int player, int column) {
 		this.player = player;
-		this.x = x;
-		this.y = y;
+		this.column = column;
+	}
+	
+	public int getColumn() {
+		return column;
+	}
+	
+	public int getPlayer() {
+		return player;
 	}
 	
 	

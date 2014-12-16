@@ -61,10 +61,30 @@ public class Board {
 		this.currentPlayer = currentPlayer;
 	}
 	
+	/**
+	 * Do a move. Returns a new Board or TODO .
+	 * @param move move to be done
+	 * @return BoardResult, which can be a new Board or a Board that has a winner.
+	 */
+	
 	public BoardResult move(Move move) {
-		return null; 
+		return null;
 	}
 	
+	/**
+	 * Check if the suggested Move is valid.
+	 * @param move Move to be made
+	 * @return Validity of the move
+	 */
 	
-
+	public boolean isLegalMove(Move move) {
+		boolean legal = false;
+		// TODO move player check to Game
+		if (move.getPlayer() == currentPlayer) {
+			if (board[move.getColumn()][0] == 0) {
+				legal = true;
+			}
+		}
+		return legal;
+	}
 }
