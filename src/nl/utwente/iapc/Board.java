@@ -16,7 +16,7 @@ public class Board {
 	/* TODO Optimisation code
 	private int[] columnStoneCount;
 	*/
-	private final short[][] board;
+	private final int[][] board;
 	
 	
 	
@@ -26,7 +26,7 @@ public class Board {
 	 * @param numberOfPlayers Number of players
 	 */
 	public Board(int playerCount) {
-		board = new short[BOARDWIDTH][BOARDHEIGHT];
+		board = new int[BOARDWIDTH][BOARDHEIGHT];
 		this.playerCount = playerCount;
 		currentPlayer = 1;
 		/* TODO Optimisation code
@@ -95,7 +95,7 @@ public class Board {
 	 * @return 0 for empty field, or currentPlayer
 	 */
 	
-	public int getField(short x, short y) {
+	public int getField(int x, int y) {
 		return board[x][y];
 	}
 	
