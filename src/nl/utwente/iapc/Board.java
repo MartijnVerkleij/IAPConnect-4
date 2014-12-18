@@ -16,7 +16,7 @@ public class Board {
 	/* TODO Optimisation code
 	private int[] columnStoneCount;
 	*/
-	private final int[][] board;
+	private final short[][] board;
 	
 	
 	
@@ -26,7 +26,7 @@ public class Board {
 	 * @param numberOfPlayers Number of players
 	 */
 	public Board(int playerCount) {
-		board = new int[BOARDWIDTH][BOARDHEIGHT];
+		board = new short[BOARDWIDTH][BOARDHEIGHT];
 		this.playerCount = playerCount;
 		currentPlayer = 1;
 		/* TODO Optimisation code
@@ -43,8 +43,8 @@ public class Board {
 	 * @param boardWidth Width of the Board
 	 * @param boardHeight Height of the Board
 	 */
-	public Board(int playerCount, int boardWidth, int boardHeight) {
-		board = new int[boardWidth][boardHeight];
+	public Board(short playerCount, short boardWidth, short boardHeight) {
+		board = new short[boardWidth][boardHeight];
 		this.playerCount = playerCount;
 		currentPlayer = 1;
 	}
@@ -56,7 +56,7 @@ public class Board {
 	 * @param playerCount
 	 */
 	
-	protected Board(int[][] board, int currentPlayer, int playerCount) {
+	protected Board(short[][] board, short currentPlayer, short playerCount) {
 		this.board = board;
 		this.playerCount = playerCount;
 		this.currentPlayer = currentPlayer;
@@ -88,4 +88,15 @@ public class Board {
 		}
 		return legal;
 	}
+	/**
+	 * Returns the current state of a field.
+	 * @param x x-position
+	 * @param y y-position
+	 * @return Current field state
+	 */
+	
+	public short getFieldState(short x, short y) {
+		return board[x][y];
+	}
+	
 }
