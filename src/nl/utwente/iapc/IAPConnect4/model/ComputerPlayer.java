@@ -1,4 +1,4 @@
-package nl.utwente.iapc;
+package nl.utwente.iapc.IAPConnect4.model;
 
 public abstract class ComputerPlayer implements Player {
 
