@@ -20,6 +20,7 @@ public class Board {
 	
 	
 	
+	
 	/**
 	 * Create a Connect 4 Board with a size of <code>BOARDHEIGHT</code>*<code>BOARDWIDTH</code>.
 	 * @param numberOfPlayers Number of players
@@ -49,13 +50,13 @@ public class Board {
 	}
 	
 	/**
-	 * Private constructor, used to advanced in the game. 
+	 * Protected constructor, used to advance in or end the game. 
 	 * @param board
 	 * @param currentPlayer
 	 * @param playerCount
 	 */
 	
-	private Board(int[][] board, int currentPlayer, int playerCount) {
+	protected Board(int[][] board, int currentPlayer, int playerCount) {
 		this.board = board;
 		this.playerCount = playerCount;
 		this.currentPlayer = currentPlayer;
