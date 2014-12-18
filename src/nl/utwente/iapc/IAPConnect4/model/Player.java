@@ -21,13 +21,6 @@ public interface Player {
 	public String getName();
 	
 	/**
-	 * Player number setter. 
-	 * @param playerNumber Player numer used by the Board.
-	 */
-	
-	public void setPlayerNumber(int playerNumber);
-	
-	/**
 	 * Player number getter. 
 	 * @param playerNumber Player numer used by the Board.
 	 */

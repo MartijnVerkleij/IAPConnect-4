@@ -82,10 +82,21 @@ public class Board {
 		boolean legal = false;
 		// TODO move player check to Game
 		if (move.getPlayer() == currentPlayer) {
-			if (board[move.getColumn()][0] == 0) {
+			if (getField(move.getColumn(),0) == 0) {
 				legal = true;
 			}
 		}
 		return legal;
 	}
+	/**
+	 * Returns the current state of a field.
+	 * @param x x-position
+	 * @param y y-position
+	 * @return 0 for empty field, or currentPlayer
+	 */
+	
+	public int getField(int x, int y) {
+		return board[x][y];
+	}
+	
 }
