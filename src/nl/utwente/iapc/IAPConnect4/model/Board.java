@@ -68,8 +68,16 @@ public class Board {
 	 * @return BoardResult, which can be a new Board or a Board that has a winner.
 	 */
 	
-	public BoardResult move(Move move) {
-		return null;
+	public Board move(Move move) {
+		if (isLegalMove(move))
+			{
+				//TODO Update current player
+				Board newBoard = new Board(board, currentPlayer, playerCount);
+				board[move.getColumn()][board[move.getColumn()].length - getColumnSize(move.getColumn())] = move.getPlayer();
+				return newBoard;
+			} else {
+				return null;
+			}
 	}
 	
 	/**
@@ -99,4 +107,18 @@ public class Board {
 		return board[x][y];
 	}
 	
+	/**
+	 * Returns the amount of currently used fields in a column.
+	 * @param x Column
+	 * @return size of a column
+	 */
+	public int getColumnSize (int x){
+		int size = 0;
+		for (size = 0; size < board[x].length; ++size)
+		{
+		    if (getField(x,size) > 0)
+		    	break;
+		}
+		return size;
+	}
 }
