@@ -1,4 +1,4 @@
-package nl.utwente.iapc;
+package nl.utwente.iapc.IAPConnect4.model;
 
 /**
  * A connect-4 board with variable width and height.

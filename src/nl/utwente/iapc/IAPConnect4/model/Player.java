@@ -1,4 +1,4 @@
-package nl.utwente.iapc;
+package nl.utwente.iapc.IAPConnect4.model;
 
 /**
  * Interface describing a Player playing the Connect 4 game;

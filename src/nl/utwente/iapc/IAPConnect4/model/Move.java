@@ -1,4 +1,4 @@
-package nl.utwente.iapc;
+package nl.utwente.iapc.IAPConnect4.model;
 
 /**
  * A simple class for a move done on a Board. It contains the coordinates of the move and the number of the player that did it.
