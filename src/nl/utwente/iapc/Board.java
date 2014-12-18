@@ -43,8 +43,8 @@ public class Board {
 	 * @param boardWidth Width of the Board
 	 * @param boardHeight Height of the Board
 	 */
-	public Board(short playerCount, short boardWidth, short boardHeight) {
-		board = new short[boardWidth][boardHeight];
+	public Board(int playerCount, int boardWidth, int boardHeight) {
+		board = new int[boardWidth][boardHeight];
 		this.playerCount = playerCount;
 		currentPlayer = 1;
 	}
@@ -56,7 +56,7 @@ public class Board {
 	 * @param playerCount
 	 */
 	
-	protected Board(short[][] board, short currentPlayer, short playerCount) {
+	protected Board(int[][] board, int currentPlayer, int playerCount) {
 		this.board = board;
 		this.playerCount = playerCount;
 		this.currentPlayer = currentPlayer;
@@ -82,7 +82,7 @@ public class Board {
 		boolean legal = false;
 		// TODO move player check to Game
 		if (move.getPlayer() == currentPlayer) {
-			if (board[move.getColumn()][0] == 0) {
+			if (getField(move.getColumn(),0) == 0) {
 				legal = true;
 			}
 		}
@@ -92,10 +92,10 @@ public class Board {
 	 * Returns the current state of a field.
 	 * @param x x-position
 	 * @param y y-position
-	 * @return Current field state
+	 * @return 0 for empty field, or currentPlayer
 	 */
 	
-	public short getFieldState(short x, short y) {
+	public int getField(short x, short y) {
 		return board[x][y];
 	}
 	
