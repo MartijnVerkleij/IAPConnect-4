@@ -72,8 +72,8 @@ public class Board {
 		if (isLegalMove(move))
 			{
 				//TODO Update current player
-				Board newBoard = new Board(board, currentPlayer, playerCount);
 				board[move.getColumn()][board[move.getColumn()].length - getColumnSize(move.getColumn())] = move.getPlayer();
+				Board newBoard = new Board(board, currentPlayer, playerCount);
 				return newBoard;
 			} else {
 				return null;
