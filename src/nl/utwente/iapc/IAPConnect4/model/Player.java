@@ -12,7 +12,7 @@ public interface Player {
 	 * Retrieve the desired Move from the Player.
 	 * @return Move object with column to do a move in.
 	 */
-	public Move nextMove();
+	public int nextMove();
 	
 	/**
 	 * Returns the Player name;

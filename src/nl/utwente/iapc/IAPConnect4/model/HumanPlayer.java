@@ -22,9 +22,9 @@ public class HumanPlayer implements Player {
 	}
 	
 	@Override
-	public Move nextMove() {
+	public int nextMove() {
 		// TODO
-		return null;
+		return 0;
 	}
 
 	@Override

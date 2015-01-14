@@ -7,11 +7,11 @@ public class RandomComputer extends ComputerPlayer {
 	}
 	
 	@Override
-	public Move nextMove () {
+	public int nextMove () {
 		// TODO
 		// Move determinedMove = new Move(super.number, randomInt);
 		// return dererminedMove;
-		return null;
+		return 0;
 	}
 	
 }

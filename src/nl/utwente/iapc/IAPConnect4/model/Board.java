@@ -70,15 +70,16 @@ public class Board {
 	 * @return BoardResult, which can be a new Board or a Board that has a winner.
 	 */
 	
-	public Board move(Move move) throws InvalidMoveException { 
-		if (isLegalMove(move)) {
-			//TODO Update current player
-			board[move.getColumn()][board[move.getColumn()].length - getColumnSize(move.getColumn())] = move.getPlayer();
-			Board newBoard = new Board(board, currentPlayer, playerCount);
-			return newBoard;
-		} else {
-			throw new InvalidMoveException();
-		}
+	public Board move(int move, Player player) {
+		if (isLegalMove(move))
+			{
+				//TODO Update current player
+				board[move][board[move].length - getColumnSize(move)] = player.getPlayerNumber();
+				Board newBoard = new Board(board, currentPlayer, playerCount);
+				return newBoard;
+			} else {
+				return null;
+			}
 	}
 	
 	/**
@@ -87,13 +88,11 @@ public class Board {
 	 * @return Validity of the move
 	 */
 	
-	public boolean isLegalMove(Move move) {
+	public boolean isLegalMove(int move) {
 		boolean legal = false;
 		// TODO move player check to Game
-		if (move.getPlayer() == currentPlayer) {
-			if (getField(move.getColumn(),0) == 0) {
-				legal = true;
-			}
+		if (getField(move,0) == 0) {
+			legal = true;
 		}
 		return legal;
 	}
