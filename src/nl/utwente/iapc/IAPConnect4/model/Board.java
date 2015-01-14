@@ -1,5 +1,7 @@
 package nl.utwente.iapc.IAPConnect4.model;
 
+import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
+
 /**
  * A connect-4 board with variable width and height.
  * @author Martijn Verkleij
@@ -68,16 +70,15 @@ public class Board {
 	 * @return BoardResult, which can be a new Board or a Board that has a winner.
 	 */
 	
-	public Board move(Move move) {
-		if (isLegalMove(move))
-			{
-				//TODO Update current player
-				board[move.getColumn()][board[move.getColumn()].length - getColumnSize(move.getColumn())] = move.getPlayer();
-				Board newBoard = new Board(board, currentPlayer, playerCount);
-				return newBoard;
-			} else {
-				return null;
-			}
+	public Board move(Move move) throws InvalidMoveException { 
+		if (isLegalMove(move)) {
+			//TODO Update current player
+			board[move.getColumn()][board[move.getColumn()].length - getColumnSize(move.getColumn())] = move.getPlayer();
+			Board newBoard = new Board(board, currentPlayer, playerCount);
+			return newBoard;
+		} else {
+			throw new InvalidMoveException();
+		}
 	}
 	
 	/**
@@ -120,5 +121,17 @@ public class Board {
 		    	break;
 		}
 		return size;
+	}
+	
+	public String toString() {
+		String returnString = ".-.-.-.-.-.-.-.\n";
+		returnString += "|"+board[0][0]+"|"+board[0][1]+"|"+board[0][2]+"|"+board[0][3]+"|"+board[0][4]+"|"+board[0][5]+"|"+board[0][6]+"|\n";
+		returnString += "|"+board[1][0]+"|"+board[1][1]+"|"+board[1][2]+"|"+board[1][3]+"|"+board[1][4]+"|"+board[1][5]+"|"+board[1][6]+"|\n";
+		returnString += "|"+board[2][0]+"|"+board[2][1]+"|"+board[2][2]+"|"+board[2][3]+"|"+board[2][4]+"|"+board[2][5]+"|"+board[2][6]+"|\n";
+		returnString += "|"+board[3][0]+"|"+board[3][1]+"|"+board[3][2]+"|"+board[3][3]+"|"+board[3][4]+"|"+board[3][5]+"|"+board[3][6]+"|\n";
+		returnString += "|"+board[4][0]+"|"+board[4][1]+"|"+board[4][2]+"|"+board[4][3]+"|"+board[4][4]+"|"+board[4][5]+"|"+board[4][6]+"|\n";
+		returnString += "|"+board[5][0]+"|"+board[5][1]+"|"+board[5][2]+"|"+board[5][3]+"|"+board[5][4]+"|"+board[5][5]+"|"+board[5][6]+"|\n";
+		returnString += "'-'-'-'-'-'-'-'\n"; 
+		return returnString;
 	}
 }
