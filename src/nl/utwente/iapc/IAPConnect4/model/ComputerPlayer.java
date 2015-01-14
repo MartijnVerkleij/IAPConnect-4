@@ -10,7 +10,7 @@ public abstract class ComputerPlayer implements Player {
 		this.number = number;
 	}
 	@Override
-	public int nextMove() {
+	public int nextMove(Board board) {
 		// TODO 
 		return 0;
 	}
