@@ -1,0 +1,21 @@
+package nl.utwente.iapc.IAPConnect4.model;
+
+public class WinningComputer extends ComputerPlayer {
+
+	public WinningComputer(String name, int number) {
+		super(name, number);
+	}
+	
+	@Override
+	public int nextMove (Board board) {
+		// TODO
+		int determinedMove = 0;
+		// First move in center
+		if (board.getField(3, 5) == 0)
+			determinedMove = 3;
+		// else if(true)
+			
+		return determinedMove;
+	}
+	
+}
