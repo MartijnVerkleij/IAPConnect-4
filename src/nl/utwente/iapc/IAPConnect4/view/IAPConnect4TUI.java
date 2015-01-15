@@ -13,7 +13,7 @@ public class IAPConnect4TUI extends Observable{
 		System.out.println("            Welcome to IAPConnect4            ");
 		System.out.println("                                              ");
 		System.out.println("                                              ");
-		System.out.println("  '    ..   .--. .---                      .  ");
+		System.out.println("  '    __   .--. .---                      .  ");
 		System.out.println("  |   /  \\  |   ||    .-. . .. ..- .- --- /|  ");
 		System.out.println("  |  /----\\ |--' |    | | |\\||\\||- |   | '-|  ");
 		System.out.println("  | /      \\|    '--- '-' ' '' ''- '-  '   |  \n");
@@ -24,17 +24,19 @@ public class IAPConnect4TUI extends Observable{
 		
 		Scanner user_input = new Scanner(System.in);
 		
-		switch (user_input.nextLine()) {
+		/*switch (user_input.nextLine()) {
 		case "game": controller.startGame(); break;
 		case "help": controller.showHelp(); break;
 		case default: System.out.println("Invalid option") break;
-		}
+		}*/
 		
 		
 	}
 	
 	public static void main(String[] args) {
-		new IAPConnect4TUI().showMainMenu();
+		IAPConnect4TUI tui = new IAPConnect4TUI();
+		tui.showIntro();
+		tui.showMainMenu();
 	}
 
 }

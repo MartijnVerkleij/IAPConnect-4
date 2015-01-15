@@ -63,12 +63,12 @@ public class Board {
 	 * @return BoardResult, which can be a new Board or a Board that has a winner.
 	 */
 	
-	public Board move(int move, Player player) {
+	public Board move(int move, int player) {
 		if (isLegalMove(move))
 			{
 				//TODO Update current player
 				int[] moveDone = new int[] {move, board[move].length - getColumnSize(move)};
-				board[moveDone[0]][moveDone[1]] = player.getPlayerNumber();
+				board[moveDone[0]][moveDone[1]] = player;
 				Board newBoard = new Board(board, moveDone, playerCount);
 				return newBoard;
 			} else {
@@ -116,88 +116,78 @@ public class Board {
 		return size;
 	}
 	
+	/**
+	 * Returns the winning player number, if there is one. 0 is not 
+	 * a player number, so will be returned when there is no winner.
+	 * @return player number or 0.
+	 */
 	public int getWinner() {
 		int winner = 0;
-		//vertical check
-		int countFichesInRow = 0;
-		for (int x = 0; x < BOARDWIDTH; x++) {
-			for (int y = 1; y < BOARDHEIGHT; y++) {
-				if (board[x][y] == board[x][y - 1]) {
-					countFichesInRow++;
+		
+		int x;
+		int y;
+		//check horizontal
+		y = lastMove[1];
+			int recurrence = 0; 
+			for (x = 1; x < getBoardWidth(); x++) {
+				if (board[x-1][y] == board[x][y]) {
+					recurrence++;
 				} else {
-					countFichesInRow = 0;
+					recurrence = 0;
 				}
-				if (countFichesInRow >= WINLENGTH - 1) {
+				if (recurrence >= WINLENGTH) {
 					winner = board[x][y];
 				}
 			}
-		}
-		//horizontal check
-		for (int y = 0; y < BOARDWIDTH; y++) {
-			for (int x = 1; x < BOARDHEIGHT; x++) {
-				if (board[x][y] == board[x][y - 1]) {
-					countFichesInRow++;
+		//check vertical
+		x = lastMove[0];
+			recurrence = 0;
+			for (y = 1; y < getBoardHeight(); y++) {
+				if (board[x-1][y] == board[x][y]) {
+					recurrence++;
 				} else {
-					countFichesInRow = 0;
+					recurrence = 0;
 				}
-				if (countFichesInRow >= WINLENGTH - 1) {
+				if (recurrence >= WINLENGTH) {
 					winner = board[x][y];
 				}
 			}
+		x = lastMove[0];
+		y = lastMove[1];
+		//check diagonal upperleft -> downright
+		while((x > 1) && (y > 1)) {
+			x--; y--;
 		}
-		
-		/* diagonal check:
-		 *  
-		 *    |***╱╱╱╱|
-		 *    |**╱╱╱╱╱|
-		 *    |*╱╱╱╱╱╱|
-		 * 0,3|╱╱╱╱╱╱*|
-		 * 0,4|╱╱╱╱╱**|
-		 * 0,5|╱╱╱╱***|
-		 * ------------
-		 *      |\\
-		 *      | \\
-		 *     1,5 \\
-		 *         | \
-		 *        2,5 \
-		 *           3,5  
-		 */
-		
-		//int[][] startPos = new int[][] {new int[] {0,3}, new int[] {0,4},new int[] {0,5},new int[] {1,5},new int[] {2,5},new int[] {3,5}};
-		
-		// List all fields in left and lower edge
-		
-		int[][] startPositions = new int[getBoardWidth() + getBoardHeight() - 1][2];
-		for (int i = 0 ; i < getBoardHeight(); i++) {
-			startPositions[i] = new int[]{0,i};
-		}
-		for (int j = 1 ; j < getBoardWidth(); j++) {
-			startPositions[j - 2 + getBoardHeight()] = new int[]{getBoardHeight() - 1,j};
-		}
-		
-		//check for more than 4 fields of a player in a row.
-		
-		for (int[] coordinate : startPositions) {
-			int x = coordinate[0] + 1;
-			int y = coordinate[1] + 1;
-			while (x < getBoardWidth() && y < getBoardHeight()) {
-				if (board[x][y] == board[x - 1][y - 1]) {
-					countFichesInRow++;
-				} else {
-					countFichesInRow = 0;
-				}
-				if (countFichesInRow >= WINLENGTH - 1) {
-					winner = board[x][y];
-				}
-				x++;
-				y++;
+		recurrence = 0;
+		while((x < getBoardWidth()) && (y < getBoardHeight())) {
+			if (board[x-1][y-1] == board[x][y]) {
+				recurrence++;
+			} else {
+				recurrence = 0;
 			}
-			countFichesInRow = 0;
+			if (recurrence >= WINLENGTH) {
+				winner = board[x][y];
+			}
+			x++; y++;
 		}
 		
+		//check diagonal downleft -> upperright
 		
-		
-		
+		while((x > 1) && (y < getBoardHeight() - 1)) {
+			x--; y++;
+		}
+		recurrence = 0;
+		while((x < getBoardWidth()) && (y >= 0)) {
+			if (board[x-1][y+1] == board[x][y]) {
+				recurrence++;
+			} else {
+				recurrence = 0;
+			}
+			if (recurrence >= WINLENGTH) {
+				winner = board[x][y];
+			}
+			x++; y--;
+		}
 		return winner;
 	}
 	
