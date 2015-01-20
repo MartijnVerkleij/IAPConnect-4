@@ -60,7 +60,7 @@ public class Board {
 	 * Do a move. Returns a new Board or TODO .
 	 * @param move Move to be done, integer between 0 and board.length - 1.
 	 * @param player Player that does the move
-	 * @return BoardResult, which can be a new Board or a Board that has a winner.
+	 * @return Board A new Board.
 	 */
 	
 	public Board move(int move, int player) {
