@@ -21,11 +21,9 @@ public interface Player {
 	public String getName();
 	
 	/**
-	 * Player number getter. 
-	 * @param playerNumber Player numer used by the Board.
+	 * Notify the Player of the winner of a Game.
+	 * @param player Player that won the game
 	 */
-	
-	public int getPlayerNumber();
-	
+	public void result(Player player);
 	
 }

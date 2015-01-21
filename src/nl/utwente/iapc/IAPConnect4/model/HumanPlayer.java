@@ -9,16 +9,14 @@ public class HumanPlayer implements Player {
 	 */
 	
 	private String name;
-	private int number;
 	
 	/**
 	 * A Human Player
 	 * @param name Name for the new human player
 	 * @param number Number of the new player
 	 */
-	public HumanPlayer (String name, int number) {
+	public HumanPlayer (String name) {
 		this.name = name;
-		this.number = number;
 	}
 	
 	@Override
@@ -33,8 +31,9 @@ public class HumanPlayer implements Player {
 	}
 
 	@Override
-	public int getPlayerNumber() {
-		return number;
+	public void result(Player player) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

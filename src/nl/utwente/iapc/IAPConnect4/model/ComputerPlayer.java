@@ -3,11 +3,9 @@ package nl.utwente.iapc.IAPConnect4.model;
 public abstract class ComputerPlayer implements Player {
 
 	protected String name;
-	protected int number;
 	
-	public ComputerPlayer (String name, int number) {
+	public ComputerPlayer (String name) {
 		this.name = name;
-		this.number = number;
 	}
 	@Override
 	public int nextMove(Board board) {
@@ -19,10 +17,8 @@ public abstract class ComputerPlayer implements Player {
 	public String getName() {
 		return name;
 	}
-
-	@Override
-	public int getPlayerNumber() {
-		return number;
+	
+	public void result(Player player) {
+		//TODO
 	}
-
 }

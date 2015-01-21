@@ -2,8 +2,8 @@ package nl.utwente.iapc.IAPConnect4.model;
 
 public class WinningComputer extends ComputerPlayer {
 
-	public WinningComputer(String name, int number) {
-		super(name, number);
+	public WinningComputer(String name) {
+		super(name);
 	}
 	
 	@Override

@@ -3,8 +3,8 @@ import java.util.Random;
 
 public class RandomComputer extends ComputerPlayer {
 
-	public RandomComputer(String name, int number) {
-		super(name, number);
+	public RandomComputer(String name) {
+		super(name);
 	}
 	
 	@Override
