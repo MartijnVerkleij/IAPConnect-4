@@ -28,7 +28,7 @@ public class Board {
 	public Board(int playerCount) {
 		board = new int[BOARDWIDTH][BOARDHEIGHT];
 		this.playerCount = playerCount;
-		lastMove = null;
+		lastMove = new int[] {0,0};
 	}
 	
 	/**

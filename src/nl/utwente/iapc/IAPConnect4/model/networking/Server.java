@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import nl.utwente.iapc.IAPConnect4.controller.ClientHandler;
 import nl.utwente.iapc.IAPConnect4.controller.Game;
+import nl.utwente.iapc.IAPConnect4.util.GamePoolTick;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
 public class Server {
@@ -26,6 +27,8 @@ public class Server {
 	}
 	
 	public void run() {
+		GamePoolTick tick = new GamePoolTick(10, this);
+		tick.start();
 		while(true) {
 			try {
 				Socket newClient = ssock.accept();
@@ -47,6 +50,7 @@ public class Server {
 	}
 	
 	public void checkForNewGame() {
+		System.out.println("Check if there are enough players to play a game with.");
 		LinkedList<ClientHandler> notInGame = new LinkedList<ClientHandler>();
 		for (ClientHandler cl : clients) {
 			if (cl.getGame() == null && cl.isReady()) {
@@ -65,6 +69,8 @@ public class Server {
 					notInGame.get(0).getPlayer().getName(), 
 					notInGame.get(1).getPlayer().getName()));
 			game.start();
+		} else {
+			System.out.println("No new game made");
 		}
 	}
 	
