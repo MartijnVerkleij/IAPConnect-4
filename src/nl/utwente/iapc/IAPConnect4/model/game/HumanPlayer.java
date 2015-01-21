@@ -1,4 +1,5 @@
-package nl.utwente.iapc.IAPConnect4.model;
+package nl.utwente.iapc.IAPConnect4.model.game;
+
 
 public class HumanPlayer implements Player {
 

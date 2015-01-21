@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.model;
+package nl.utwente.iapc.IAPConnect4.model.game;
 
 import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
 
@@ -61,7 +61,7 @@ public class Board {
 	 * @param player Player that does the move
 	 * @return Board A new Board.
 	 */
-	public Board move(int move, int player) {
+	public Board move(int move, int player) throws InvalidMoveException {
 		if (isLegalMove(move))
 			{
 				//TODO Update current player
@@ -70,7 +70,7 @@ public class Board {
 				Board newBoard = new Board(board, moveDone, playerCount);
 				return newBoard;
 			} else {
-				throw new InvalidMoveException();
+				throw new InvalidMoveException(player);
 			}
 	}
 	
@@ -141,7 +141,7 @@ public class Board {
 		x = lastMove[0];
 			recurrence = 0;
 			for (y = 1; y < getBoardHeight(); y++) {
-				if (board[x-1][y] == board[x][y]) {
+				if (board[x][y-1] == board[x][y]) {
 					recurrence++;
 				} else {
 					recurrence = 0;

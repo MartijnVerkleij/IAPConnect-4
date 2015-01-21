@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.model;
+package nl.utwente.iapc.IAPConnect4.model.game;
 import java.util.Random;
 
 public class RandomComputer extends ComputerPlayer {

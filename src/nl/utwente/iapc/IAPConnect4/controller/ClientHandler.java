@@ -12,11 +12,11 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
-import nl.utwente.iapc.IAPConnect4.model.Board;
-import nl.utwente.iapc.IAPConnect4.model.Command;
-import nl.utwente.iapc.IAPConnect4.model.HumanPlayer;
-import nl.utwente.iapc.IAPConnect4.model.Player;
-import nl.utwente.iapc.IAPConnect4.model.Server;
+import nl.utwente.iapc.IAPConnect4.model.game.Board;
+import nl.utwente.iapc.IAPConnect4.model.game.HumanPlayer;
+import nl.utwente.iapc.IAPConnect4.model.game.Player;
+import nl.utwente.iapc.IAPConnect4.model.networking.Command;
+import nl.utwente.iapc.IAPConnect4.model.networking.Server;
 import nl.utwente.iapc.IAPConnect4.util.Config;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;
 

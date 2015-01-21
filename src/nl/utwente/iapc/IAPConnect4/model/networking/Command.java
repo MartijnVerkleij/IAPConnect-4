@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.model;
+package nl.utwente.iapc.IAPConnect4.model.networking;
 
 import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;

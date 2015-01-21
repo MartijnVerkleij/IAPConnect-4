@@ -1,8 +1,10 @@
-package nl.utwente.iapc.IAPConnect4.model;
+package nl.utwente.iapc.IAPConnect4.controller;
 
 import java.util.ArrayList;
 
 import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
+import nl.utwente.iapc.IAPConnect4.model.game.Board;
+import nl.utwente.iapc.IAPConnect4.model.game.Player;
 
 public class Game {
 
