@@ -115,6 +115,21 @@ public class Board {
 	}
 	
 	/**
+	 * Is the board full?
+	 * @return true for a full board, or false if not
+	 */
+	public boolean isFull (){
+		boolean full = false;
+		int column = 0;
+		while (column <= BOARDWIDTH) 
+		{
+			full = full && (getColumnSize(column) == BOARDHEIGHT+);
+			column++;
+		}
+		return full;
+	}
+	
+	/**
 	 * Returns the winning player number, if there is one. 0 is not 
 	 * a player number, so will be returned when there is no winner.
 	 * @return player number or 0.
@@ -185,6 +200,10 @@ public class Board {
 				winner = board[x][y];
 			}
 			x++; y--;
+		}
+		// check for draw
+		if (winner == 0 && isFull()) {
+			winner = -1;
 		}
 		return winner;
 	}
