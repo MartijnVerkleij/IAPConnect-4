@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
 import nl.utwente.iapc.IAPConnect4.model.game.Board;
+import nl.utwente.iapc.IAPConnect4.model.game.NetworkPlayer;
 import nl.utwente.iapc.IAPConnect4.model.game.Player;
+import nl.utwente.iapc.IAPConnect4.model.networking.Command;
+import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
 public class Game {
 
@@ -23,7 +26,15 @@ public class Game {
 	public void start() {
 		while(board.getWinner() == 0) {
 			try {
-				doMove(players.get(playerToMove),players.get(playerToMove).nextMove(board));
+				Player player = players.get(playerToMove);
+				int move = players.get(playerToMove).nextMove(board);
+				doMove(player,move);
+				
+				for(Player p : players) {
+					if(p instanceof NetworkPlayer) {
+						((NetworkPlayer) p).sendCommand(new Command(Protocol.DONE_MOVE, player.getName(), "" + move));
+					}
+				}
 			} catch (InvalidMoveException e) {
 				e.printStackTrace();
 				System.err.println("ERROR: Invalid move done by: " + e.getPlayer().getName());

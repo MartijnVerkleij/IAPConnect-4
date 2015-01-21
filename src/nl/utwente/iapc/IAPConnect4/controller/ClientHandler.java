@@ -62,20 +62,28 @@ public class ClientHandler extends Thread{
 	}
 
 	private void login() {
-		try {
-			Command join = Command.parse(reader.readLine());
-			if (join.getArgument(0) == Protocol.JOIN.toString() ) {
-				throw new InvalidCommandException();
+		String playerName = null;
+		int groupNumber = -1;
+		while(playerName == null || groupNumber == -1) {
+			try {
+				Command join = Command.parse(reader.readLine());
+				System.out.println(join.toString());
+				if (!join.getArgument(0).equals(Protocol.JOIN.toString()) ) {
+					throw new InvalidCommandException();
+				}
+				playerName = join.getArgument(1);
+				groupNumber = Integer.parseInt(join.getArgument(2));
+				if (groupNumber < 0 || groupNumber> 100) {
+					throw new InvalidCommandException();
+				}
+				player = new NetworkPlayer(this, playerName);
+				
+			} catch (InvalidCommandException | IOException | NumberFormatException e) {
+				e.printStackTrace();
+				System.err.println("ERROR: Invalid login command");
 			}
-			String playerName = join.getArgument(1);
-			int groupNumber = Integer.parseInt(join.getArgument(2));
-			
-			player = new NetworkPlayer(this, playerName);
-			
-		} catch (InvalidCommandException | IOException | NumberFormatException e) {
-			e.printStackTrace();
-			System.err.println("ERROR: Invalid login command");
 		}
+		
 		
 		sendCommand(new Command(Protocol.ACCEPT, ""+Config.GROUP_NUMBER));
 		System.out.println("Client logged in: " + player.getName());
@@ -104,6 +112,7 @@ public class ClientHandler extends Thread{
 	private void parseCommand() {
 		try {
 			Command command = Command.parse(reader.readLine());
+			System.out.println(command.toString());
 			String action = command.getArgument(0);
 			if (action.equals(Protocol.READY.toString())) {
 				System.out.println("Client ready to play: " + player.getName());

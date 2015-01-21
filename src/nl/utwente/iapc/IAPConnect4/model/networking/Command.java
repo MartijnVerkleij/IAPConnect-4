@@ -1,5 +1,7 @@
 package nl.utwente.iapc.IAPConnect4.model.networking;
 
+import java.util.Arrays;
+
 import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
@@ -66,6 +68,10 @@ public class Command {
 		}
 		
 		return new Command(arg0, args);
+	}
+	
+	public String toString() {
+		return "command: \"" + command + "\"\narguments = \"" + Arrays.toString(arguments) + "\""; 
 	}
 
 }

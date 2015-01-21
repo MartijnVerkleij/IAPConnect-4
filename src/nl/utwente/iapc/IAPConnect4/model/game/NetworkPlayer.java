@@ -23,6 +23,10 @@ public class NetworkPlayer implements Player {
 	public String getName() {
 		return nickName;
 	}
+	
+	public void sendCommand(Command c) {
+		handler.sendCommand(c);
+	}
 
 	@Override
 	public void result(Player player) {

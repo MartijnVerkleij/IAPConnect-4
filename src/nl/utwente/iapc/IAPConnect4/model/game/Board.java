@@ -171,6 +171,9 @@ public class Board {
 		while((x > 1) && (y > 1)) {
 			x--; y--;
 		}
+		while((x < 1) || (y < 1)) {
+			x++; y++;
+		}
 		recurrence = 0;
 		while((x < getBoardWidth()) && (y < getBoardHeight())) {
 			if (board[x-1][y-1] == board[x][y]) {
@@ -184,10 +187,15 @@ public class Board {
 			x++; y++;
 		}
 		
+		//x = lastMove[0];
+		//y = lastMove[1];
 		//check diagonal downleft -> upperright
 		
-		while((x > 1) && (y < getBoardHeight() - 1)) {
+		while((x > 1) && (y < getBoardHeight() - 2)) {
 			x--; y++;
+		}
+		while((x < 1) || (y > getBoardHeight() - 2)) {
+			x++; y--;
 		}
 		recurrence = 0;
 		while((x < getBoardWidth()) && (y >= 0)) {
