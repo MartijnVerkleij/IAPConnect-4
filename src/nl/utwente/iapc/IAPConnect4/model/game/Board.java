@@ -45,11 +45,12 @@ public class Board {
 	
 	/**
 	 * Protected constructor, used to advance in or end the game. 
+	 * Made public for testing purposes
 	 * @param board
 	 * @param currentPlayer
 	 * @param playerCount
 	 */
-	protected Board(int[][] board, int[] lastMove, int playerCount) {
+	private Board(int[][] board, int[] lastMove, int playerCount) {
 		this.board = board;
 		this.playerCount = playerCount;
 		this.lastMove = lastMove;
