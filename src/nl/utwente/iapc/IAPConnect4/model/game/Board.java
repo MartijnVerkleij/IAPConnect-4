@@ -123,7 +123,7 @@ public class Board {
 		int column = 0;
 		while (column <= BOARDWIDTH) 
 		{
-			full = full && (getColumnSize(column) == BOARDHEIGHT+);
+			full = full && (getColumnSize(column) == BOARDHEIGHT);
 			column++;
 		}
 		return full;
