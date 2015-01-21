@@ -18,11 +18,9 @@ public class Game {
 		players.add(player2);
 		board = new Board(players.size());
 		playerToMove = 0;
-		
-		start();
 	}
 	
-	private void start() {
+	public void start() {
 		while(board.getWinner() == 0) {
 			try {
 				doMove(players.get(playerToMove),players.get(playerToMove).nextMove(board));
@@ -33,8 +31,13 @@ public class Game {
 		}
 		
 		for(Player p : players) {
-			p.result(players.get(board.getWinner()));
+			if (board.getWinner() >= 0) {
+				p.result(players.get(board.getWinner()));
+			} else {
+				p.result(null);
+			}
 		}
+		playerToMove = -1;
 	}
 	
 	

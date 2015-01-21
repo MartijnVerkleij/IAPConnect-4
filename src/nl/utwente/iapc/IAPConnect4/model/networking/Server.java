@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import nl.utwente.iapc.IAPConnect4.controller.ClientHandler;
 import nl.utwente.iapc.IAPConnect4.controller.Game;
+import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
 public class Server {
 	ServerSocket ssock;
@@ -30,8 +31,8 @@ public class Server {
 				Socket newClient = ssock.accept();
 				ClientHandler handler = new ClientHandler(newClient, this);
 				clients.add(handler);
+				handler.start();
 				System.out.println("New Client");
-				checkForNewGame();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -45,11 +46,25 @@ public class Server {
 		}
 	}
 	
-	private void checkForNewGame() {
+	public void checkForNewGame() {
+		LinkedList<ClientHandler> notInGame = new LinkedList<ClientHandler>();
 		for (ClientHandler cl : clients) {
-			if (cl) {
-				return c;
+			if (cl.getGame() == null && cl.isReady()) {
+				notInGame.add(cl);
 			}
+		}
+		
+		if (notInGame.size() > 1) {
+			Game game = new Game(notInGame.get(0).getPlayer(), notInGame.get(1).getPlayer());
+			games.add(game);
+			System.out.println("New game with: " + notInGame.get(0).getPlayer().getName() + 
+					" + " + notInGame.get(1).getPlayer().getName());
+			notInGame.get(0).newGame(game);
+			notInGame.get(1).newGame(game);
+			broadcastCommand(new Command(Protocol.START_GAME, 
+					notInGame.get(0).getPlayer().getName(), 
+					notInGame.get(1).getPlayer().getName()));
+			game.start();
 		}
 	}
 	
