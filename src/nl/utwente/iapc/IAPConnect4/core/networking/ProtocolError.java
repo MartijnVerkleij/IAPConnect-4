@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.util;
+package nl.utwente.iapc.IAPConnect4.core.networking;
 
 public class ProtocolError {
 	public static final String GENERIC_ERROR = "001";

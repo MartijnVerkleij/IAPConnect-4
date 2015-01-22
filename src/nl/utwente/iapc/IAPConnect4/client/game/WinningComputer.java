@@ -1,5 +1,6 @@
-package nl.utwente.iapc.IAPConnect4.model.game;
+package nl.utwente.iapc.IAPConnect4.client.game;
 
+import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
 public class WinningComputer extends ComputerPlayer {
 
@@ -8,7 +9,7 @@ public class WinningComputer extends ComputerPlayer {
 	}
 	
 	@Override
-	public int nextMove (Board board) {
+	public int nextMove (BoardModel board) {
 		// TODO
 		int determinedMove = 0;
 		// First move in center

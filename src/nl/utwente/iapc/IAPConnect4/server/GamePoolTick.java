@@ -1,6 +1,5 @@
-package nl.utwente.iapc.IAPConnect4.util;
+package nl.utwente.iapc.IAPConnect4.server;
 
-import nl.utwente.iapc.IAPConnect4.model.networking.Server;
 
 public class GamePoolTick extends Thread {
 	

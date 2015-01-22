@@ -1,17 +1,16 @@
-package nl.utwente.iapc.IAPConnect4.model.networking;
+package nl.utwente.iapc.IAPConnect4.client;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import nl.utwente.iapc.IAPConnect4.controller.Game;
-import nl.utwente.iapc.IAPConnect4.controller.ServerHandler;
+import nl.utwente.iapc.IAPConnect4.core.Game;
 
 public class Client {
 	Socket sock;
 	ServerHandler handler;
 	
-	public Client(String name, InetAddress server, int port) {
+	public Client(String playerName, InetAddress server, int port) {
 		try {
 			sock = new Socket(server, port);
 			System.out.println("IAPConnect4 Client\nConnection established with server");

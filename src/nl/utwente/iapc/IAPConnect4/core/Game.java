@@ -1,25 +1,25 @@
-package nl.utwente.iapc.IAPConnect4.controller;
+package nl.utwente.iapc.IAPConnect4.core;
 
 import java.util.ArrayList;
 
-import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
-import nl.utwente.iapc.IAPConnect4.model.game.Board;
-import nl.utwente.iapc.IAPConnect4.model.game.NetworkPlayer;
-import nl.utwente.iapc.IAPConnect4.model.game.Player;
-import nl.utwente.iapc.IAPConnect4.model.networking.Command;
-import nl.utwente.iapc.IAPConnect4.util.Protocol;
+import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
+import nl.utwente.iapc.IAPConnect4.core.game.NetworkPlayer;
+import nl.utwente.iapc.IAPConnect4.core.game.Player;
+import nl.utwente.iapc.IAPConnect4.core.networking.Command;
+import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
+import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
 public class Game extends Thread{
 
 	private ArrayList<Player> players;
-	private Board board;
+	private BoardModel board;
 	private int playerToMove; 
 	
 	public Game(Player player1, Player player2) {
 		players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		board = new Board();
+		board = new BoardModel();
 		playerToMove = 1;
 	}
 	
@@ -55,7 +55,7 @@ public class Game extends Thread{
 	
 	private void doMove(Player player, int move) throws InvalidMoveException {
 		if(players.indexOf(player) + 1 == playerToMove) {
-			Board newBoard = board.move(move, playerToMove);
+			BoardModel newBoard = board.move(move, playerToMove);
 			board = newBoard;
 			playerToMove = 1 + ((playerToMove) % players.size());
 		} else {

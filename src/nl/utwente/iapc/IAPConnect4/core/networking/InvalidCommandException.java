@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.exception;
+package nl.utwente.iapc.IAPConnect4.core.networking;
 
 public class InvalidCommandException extends Exception {
 

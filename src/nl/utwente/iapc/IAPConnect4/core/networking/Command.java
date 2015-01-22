@@ -1,9 +1,6 @@
-package nl.utwente.iapc.IAPConnect4.model.networking;
+package nl.utwente.iapc.IAPConnect4.core.networking;
 
 import java.util.Arrays;
-
-import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
-import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
 public class Command {
 	

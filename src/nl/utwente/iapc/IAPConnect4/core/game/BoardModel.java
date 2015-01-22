@@ -1,15 +1,13 @@
-package nl.utwente.iapc.IAPConnect4.model.game;
+package nl.utwente.iapc.IAPConnect4.core.game;
 
 import java.util.Arrays;
-
-import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
 
 /**
  * A connect-4 board with variable width and height.
  * @author Martijn Verkleij & Axel Vugts
  *
  */
-public class Board {
+public class BoardModel {
 
 	public static final int BOARDHEIGHT = 6;
 	public static final int BOARDWIDTH = 7;
@@ -22,7 +20,7 @@ public class Board {
 	 * Create a Connect 4 Board with a size of <code>BOARDHEIGHT</code>*<code>BOARDWIDTH</code>.
 	 * @param numberOfPlayers Number of players
 	 */
-	public Board() {
+	public BoardModel() {
 		board = new int[BOARDWIDTH][BOARDHEIGHT];
 		lastMove = new int[] {0,0};
 	}
@@ -33,7 +31,7 @@ public class Board {
 	 * @param boardWidth Width of the Board
 	 * @param boardHeight Height of the Board
 	 */
-	public Board(int boardWidth, int boardHeight) {
+	public BoardModel(int boardWidth, int boardHeight) {
 		board = new int[boardWidth][boardHeight];
 		lastMove = new int[] {0,0};
 	}
@@ -44,7 +42,7 @@ public class Board {
 	 * @param currentPlayer
 	 * @param playerCount
 	 */
-	protected Board(int[][] board, int moveDone) {
+	protected BoardModel(int[][] board, int moveDone) {
 		this.board = board;
 		//TODO Make this less ugly
 		if (this.getEmptyFields(moveDone) == 0){
@@ -60,14 +58,14 @@ public class Board {
 	 * @param player Player that does the move
 	 * @return Board A new Board.
 	 */
-	public Board move(int move, int player) throws InvalidMoveException {
+	public BoardModel move(int move, int player) throws InvalidMoveException {
 		if (isLegalMove(move))
 			{
 				//TODO Update current player
 				int moveDone = move;
 				System.out.println("moveDone: ["+move+","+(getEmptyFields(move)-1)+"]");
 				board[move][(getEmptyFields(move)-1)] = (player);
-				Board newBoard = new Board(board, moveDone);
+				BoardModel newBoard = new BoardModel(board, moveDone);
 				return newBoard;
 			} else {
 				throw new InvalidMoveException(this);
