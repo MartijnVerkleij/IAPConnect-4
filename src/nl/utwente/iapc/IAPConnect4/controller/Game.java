@@ -19,8 +19,8 @@ public class Game {
 		players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		board = new Board(players.size());
-		playerToMove = 0;
+		board = new Board();
+		playerToMove = 1;
 	}
 	
 	public void start() {
@@ -58,10 +58,10 @@ public class Game {
 	
 	
 	private void doMove(Player player, int move) throws InvalidMoveException {
-		if(players.indexOf(player) == playerToMove) {
+		if(players.indexOf(player) + 1 == playerToMove) {
 			Board newBoard = board.move(move, playerToMove);
 			board = newBoard;
-			playerToMove = (playerToMove + 1) % players.size();
+			playerToMove = 1 + ((playerToMove + 1) % players.size());
 		} else {
 			throw new InvalidMoveException(player, board);
 		}

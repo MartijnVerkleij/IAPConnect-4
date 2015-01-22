@@ -25,7 +25,7 @@ public class Board {
 	 * Create a Connect 4 Board with a size of <code>BOARDHEIGHT</code>*<code>BOARDWIDTH</code>.
 	 * @param numberOfPlayers Number of players
 	 */
-	public Board(int playerCount) {
+	public Board() {
 		board = new int[BOARDWIDTH][BOARDHEIGHT];
 		lastMove = new int[] {0,0};
 	}
@@ -36,9 +36,9 @@ public class Board {
 	 * @param boardWidth Width of the Board
 	 * @param boardHeight Height of the Board
 	 */
-	public Board(int playerCount, int boardWidth, int boardHeight) {
+	public Board(int boardWidth, int boardHeight) {
 		board = new int[boardWidth][boardHeight];
-		lastMove = new int[] {0,0};;
+		lastMove = new int[] {0,0};
 	}
 	
 	/**
