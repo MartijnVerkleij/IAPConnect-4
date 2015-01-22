@@ -17,10 +17,11 @@ public class InvalidMoveException extends Exception {
 		this.player = player;
 		this.brd = board;
 	}
-	
-	public InvalidMoveException(int player) {
-		this.playerInt = player;
+	public InvalidMoveException(Board board) {
+		this.player = null;
+		this.brd = board;
 	}
+	
 	
 	public Player getPlayer() {
 		return player;

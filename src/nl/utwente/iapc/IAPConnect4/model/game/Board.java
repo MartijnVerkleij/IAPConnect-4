@@ -49,7 +49,12 @@ public class Board {
 	 */
 	protected Board(int[][] board, int moveDone) {
 		this.board = board;
-		this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone)-1)};
+		//TODO Make this less ugly
+		if (this.getEmptyFields(moveDone) == 0){
+			this.lastMove = new int[] {moveDone,this.getEmptyFields(moveDone)};
+		} else {
+			this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone)-1)};
+		}
 	}
 	
 	/**
@@ -68,7 +73,7 @@ public class Board {
 				Board newBoard = new Board(board, moveDone);
 				return newBoard;
 			} else {
-				throw new InvalidMoveException(player);
+				throw new InvalidMoveException(this);
 			}
 	}
 	

@@ -37,8 +37,8 @@ public class Game {
 				System.out.println(board.toString());
 			} catch (InvalidMoveException e) {
 				e.printStackTrace();
+				System.err.println("ERROR: Invalid move done");
 				System.err.println("Here's your board " + e.getBoard().toString());
-				System.err.println("ERROR: Invalid move done by: " + e.getPlayer().getName());
 			}
 			finally {
 			}
