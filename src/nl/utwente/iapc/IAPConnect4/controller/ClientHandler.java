@@ -46,7 +46,7 @@ public class ClientHandler extends Thread{
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
 			exit = true;
 		}
-		boolean ready = false;
+		ready = false;
 	}
 	
 	public void run() {
