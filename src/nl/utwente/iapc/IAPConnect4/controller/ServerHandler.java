@@ -17,7 +17,7 @@ import nl.utwente.iapc.IAPConnect4.model.networking.Server;
 import nl.utwente.iapc.IAPConnect4.util.Config;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
-public class ServerHandler {
+public class ServerHandler extends Thread {
 	
 	Socket sock;
 	Client client;
@@ -79,6 +79,7 @@ public class ServerHandler {
 	public void sendCommand(Command c) {
 		
 	}
+
 	
 	//evt. getters
 

@@ -18,7 +18,7 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
-			System.exit(0);
+			System.exit(1);
 		}
 	}
 	
