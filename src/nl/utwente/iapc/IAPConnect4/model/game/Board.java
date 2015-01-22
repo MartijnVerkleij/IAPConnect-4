@@ -1,10 +1,12 @@
 package nl.utwente.iapc.IAPConnect4.model.game;
 
+import java.util.Arrays;
+
 import nl.utwente.iapc.IAPConnect4.exception.InvalidMoveException;
 
 /**
  * A connect-4 board with variable width and height.
- * @author Martijn Verkleij
+ * @author Martijn Verkleij & Axel Vugts
  *
  */
 public class Board {
@@ -12,9 +14,7 @@ public class Board {
 	public static final int BOARDHEIGHT = 6;
 	public static final int BOARDWIDTH = 7;
 	public static final int WINLENGTH = 4;
-	
-	private final int playerCount;
-	
+		
 	/* TODO Optimisation code
 	private int[] columnStoneCount;
 	*/
@@ -27,7 +27,6 @@ public class Board {
 	 */
 	public Board(int playerCount) {
 		board = new int[BOARDWIDTH][BOARDHEIGHT];
-		this.playerCount = playerCount;
 		lastMove = new int[] {0,0};
 	}
 	
@@ -39,8 +38,7 @@ public class Board {
 	 */
 	public Board(int playerCount, int boardWidth, int boardHeight) {
 		board = new int[boardWidth][boardHeight];
-		this.playerCount = playerCount;
-		lastMove = null;
+		lastMove = new int[] {0,0};;
 	}
 	
 	/**
@@ -49,10 +47,9 @@ public class Board {
 	 * @param currentPlayer
 	 * @param playerCount
 	 */
-	protected Board(int[][] board, int[] lastMove, int playerCount) {
+	protected Board(int[][] board, int moveDone) {
 		this.board = board;
-		this.playerCount = playerCount;
-		this.lastMove = lastMove;
+		this.lastMove = new int[] {moveDone,(this.getColumnSize(moveDone)-1)};
 	}
 	
 	/**
@@ -65,9 +62,10 @@ public class Board {
 		if (isLegalMove(move))
 			{
 				//TODO Update current player
-				int[] moveDone = new int[] {move, board[move].length - getColumnSize(move)};
-				board[moveDone[0]][moveDone[1]] = player;
-				Board newBoard = new Board(board, moveDone, playerCount);
+				int moveDone = move;
+				System.out.println("moveDone: ["+move+","+(getColumnSize(move)-1)+"]");
+				board[move][(getColumnSize(move)-1)] = (player+1);
+				Board newBoard = new Board(board, moveDone);
 				return newBoard;
 			} else {
 				throw new InvalidMoveException(player);
@@ -106,11 +104,11 @@ public class Board {
 	 */
 	public int getColumnSize (int x){
 		int size = 0;
-		for (size = 0; size < board[x].length; size++)
+		for (size = 0; size < BOARDHEIGHT; size++)
 		{
 		    if (getField(x,size) > 0)
 		    	break;
-		}
+		} 
 		return size;
 	}
 	
@@ -121,9 +119,10 @@ public class Board {
 	public boolean isFull (){
 		boolean full = false;
 		int column = 0;
-		while (column <= BOARDWIDTH) 
+		// TODO: check < or <=
+		while (column < BOARDWIDTH) 
 		{
-			full = full && (getColumnSize(column) == BOARDHEIGHT);
+			full = full && (getColumnSize(column) == 0);
 			column++;
 		}
 		return full;
@@ -141,6 +140,8 @@ public class Board {
 		int y;
 		//check horizontal
 		y = lastMove[1];
+		// TODO: For debug
+		System.out.println("lastMove: " + Arrays.toString(lastMove));
 			int recurrence = 0; 
 			for (x = 1; x < getBoardWidth(); x++) {
 				if (board[x-1][y] == board[x][y]) {
@@ -226,11 +227,11 @@ public class Board {
 	
 	public String toString() {
 		String returnString = ".-.-.-.-.-.-.-.\n";
-		for (int i = 0; i < board.length; i++)
+		for (int i = 0; i < (BOARDHEIGHT); i++)
 		{
-			for (int j = 0; j < board[i].length; j++)
+			for (int j = 0; j < (BOARDWIDTH); j++)
 			{
-				returnString += "|"+getField(i, j);
+				returnString += "|"+getField(j, i);
 			}
 			returnString += "|\n";
 		}

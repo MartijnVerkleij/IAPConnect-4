@@ -8,10 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
 import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
-import nl.utwente.iapc.IAPConnect4.model.game.HumanPlayer;
 import nl.utwente.iapc.IAPConnect4.model.game.NetworkPlayer;
 import nl.utwente.iapc.IAPConnect4.model.game.Player;
 import nl.utwente.iapc.IAPConnect4.model.networking.Command;

@@ -11,7 +11,7 @@ public class RandomComputer extends ComputerPlayer {
 	public int nextMove (Board board) {
 		// TODO
 		Random rand = new Random();
-	    int determinedMove = rand.nextInt((board.BOARDWIDTH) + 1);
+	    int determinedMove = rand.nextInt((board.getBoardWidth()) + 1);
 		return determinedMove;
 	}
 	

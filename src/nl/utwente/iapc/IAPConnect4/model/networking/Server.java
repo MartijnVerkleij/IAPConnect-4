@@ -27,7 +27,7 @@ public class Server {
 	}
 	
 	public void run() {
-		GamePoolTick tick = new GamePoolTick(10, this);
+		GamePoolTick tick = new GamePoolTick(1, this);
 		tick.start();
 		while(true) {
 			try {
@@ -50,7 +50,6 @@ public class Server {
 	}
 	
 	public void checkForNewGame() {
-		System.out.println("Check if there are enough players to play a game with.");
 		LinkedList<ClientHandler> notInGame = new LinkedList<ClientHandler>();
 		for (ClientHandler cl : clients) {
 			if (cl.getGame() == null && cl.isReady()) {
@@ -60,11 +59,11 @@ public class Server {
 		
 		if (notInGame.size() > 1) {
 			Game game = new Game(notInGame.get(0).getPlayer(), notInGame.get(1).getPlayer());
-			games.add(game);
 			System.out.println("New game with: " + notInGame.get(0).getPlayer().getName() + 
 					" + " + notInGame.get(1).getPlayer().getName());
 			notInGame.get(0).newGame(game);
 			notInGame.get(1).newGame(game);
+			games.add(game);
 			broadcastCommand(new Command(Protocol.START_GAME, 
 					notInGame.get(0).getPlayer().getName(), 
 					notInGame.get(1).getPlayer().getName()));

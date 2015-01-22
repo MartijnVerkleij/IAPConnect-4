@@ -27,44 +27,49 @@ public class Game {
 		while(board.getWinner() == 0) {
 			try {
 				Player player = players.get(playerToMove);
-				int move = players.get(playerToMove).nextMove(board);
+				int move = player.nextMove(board);
 				doMove(player,move);
-				
 				for(Player p : players) {
 					if(p instanceof NetworkPlayer) {
 						((NetworkPlayer) p).sendCommand(new Command(Protocol.DONE_MOVE, player.getName(), "" + move));
 					}
 				}
+				System.out.println(board.toString());
 			} catch (InvalidMoveException e) {
 				e.printStackTrace();
+				System.err.println("Here's your board " + e.getBoard().toString());
 				System.err.println("ERROR: Invalid move done by: " + e.getPlayer().getName());
+			}
+			finally {
 			}
 		}
 		
 		for(Player p : players) {
 			if (board.getWinner() >= 0) {
-				p.result(players.get(board.getWinner()));
+				// TODO Implement draws (-1)
+				p.result((players.get(board.getWinner()-1)));
 			} else {
 				p.result(null);
 			}
 		}
-		playerToMove = -1;
+		playerToMove = -1; 
 	}
 	
 	
 	
 	private void doMove(Player player, int move) throws InvalidMoveException {
 		if(players.indexOf(player) == playerToMove) {
-			board.move(move, playerToMove);
+			Board newBoard = board.move(move, playerToMove);
+			board = newBoard;
 			playerToMove = (playerToMove + 1) % players.size();
 		} else {
-			throw new InvalidMoveException(player);
+			throw new InvalidMoveException(player, board);
 		}
 	}
 	
-	public Board getBoard() {
-		return board;
-	}
+	//public Board getBoard() {
+	//	return board;
+	//}
 	
 	
 }
