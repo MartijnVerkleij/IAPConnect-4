@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.util;
+package nl.utwente.iapc.IAPConnect4.core;
 
 public class Config {
 	

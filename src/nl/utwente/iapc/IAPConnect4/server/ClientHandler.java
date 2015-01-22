@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.controller;
+package nl.utwente.iapc.IAPConnect4.server;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,14 +8,14 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
-import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
-import nl.utwente.iapc.IAPConnect4.model.game.NetworkPlayer;
-import nl.utwente.iapc.IAPConnect4.model.game.Player;
-import nl.utwente.iapc.IAPConnect4.model.networking.Command;
-import nl.utwente.iapc.IAPConnect4.model.networking.Server;
-import nl.utwente.iapc.IAPConnect4.util.Config;
-import nl.utwente.iapc.IAPConnect4.util.Protocol;
-import nl.utwente.iapc.IAPConnect4.util.ProtocolError;
+import nl.utwente.iapc.IAPConnect4.core.Config;
+import nl.utwente.iapc.IAPConnect4.core.Game;
+import nl.utwente.iapc.IAPConnect4.core.game.NetworkPlayer;
+import nl.utwente.iapc.IAPConnect4.core.game.Player;
+import nl.utwente.iapc.IAPConnect4.core.networking.Command;
+import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
+import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
+import nl.utwente.iapc.IAPConnect4.core.networking.ProtocolError;
 
 public class ClientHandler extends Thread{
 	

@@ -1,5 +1,7 @@
-package nl.utwente.iapc.IAPConnect4.model.game;
+package nl.utwente.iapc.IAPConnect4.client.game;
+
 import java.util.Random;
+import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
 public class RandomComputer extends ComputerPlayer {
 
@@ -8,7 +10,7 @@ public class RandomComputer extends ComputerPlayer {
 	}
 	
 	@Override
-	public int nextMove (Board board) {
+	public int nextMove (BoardModel board) {
 		// TODO
 		Random rand = new Random();
 	    int determinedMove = rand.nextInt((board.getBoardWidth()) + 1);

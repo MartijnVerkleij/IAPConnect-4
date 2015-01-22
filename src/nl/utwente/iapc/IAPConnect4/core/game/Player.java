@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.model.game;
+package nl.utwente.iapc.IAPConnect4.core.game;
 
 
 /**
@@ -13,7 +13,7 @@ public interface Player {
 	 * Retrieve the desired Move from the Player.
 	 * @return Move object with column to do a move in.
 	 */
-	public int nextMove(Board board);
+	public int nextMove(BoardModel board);
 	
 	/**
 	 * Returns the Player name;

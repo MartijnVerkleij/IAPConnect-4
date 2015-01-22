@@ -1,8 +1,8 @@
-package nl.utwente.iapc.IAPConnect4.model.game;
+package nl.utwente.iapc.IAPConnect4.core.game;
 
-import nl.utwente.iapc.IAPConnect4.controller.ClientHandler;
-import nl.utwente.iapc.IAPConnect4.model.networking.Command;
-import nl.utwente.iapc.IAPConnect4.util.Protocol;
+import nl.utwente.iapc.IAPConnect4.core.networking.Command;
+import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
+import nl.utwente.iapc.IAPConnect4.server.ClientHandler;
 
 public class NetworkPlayer implements Player {
 	
@@ -15,7 +15,7 @@ public class NetworkPlayer implements Player {
 	}
 
 	@Override
-	public int nextMove(Board board) {
+	public int nextMove(BoardModel board) {
 		return handler.requestMove();
 	}
 

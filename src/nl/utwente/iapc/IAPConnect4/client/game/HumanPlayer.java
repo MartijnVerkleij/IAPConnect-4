@@ -1,5 +1,7 @@
-package nl.utwente.iapc.IAPConnect4.model.game;
+package nl.utwente.iapc.IAPConnect4.client.game;
 
+import nl.utwente.iapc.IAPConnect4.core.game.Player;
+import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
 public class HumanPlayer implements Player {
 
@@ -21,7 +23,7 @@ public class HumanPlayer implements Player {
 	}
 	
 	@Override
-	public int nextMove(Board board) {
+	public int nextMove(BoardModel board) {
 		// TODO
 		return 0;
 	}
