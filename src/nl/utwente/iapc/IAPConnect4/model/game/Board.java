@@ -64,7 +64,7 @@ public class Board {
 				//TODO Update current player
 				int moveDone = move;
 				System.out.println("moveDone: ["+move+","+(getEmptyFields(move)-1)+"]");
-				board[move][(getEmptyFields(move)-1)] = (player+1);
+				board[move][(getEmptyFields(move)-1)] = (player);
 				Board newBoard = new Board(board, moveDone);
 				return newBoard;
 			} else {
