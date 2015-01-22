@@ -15,9 +15,6 @@ public class Board {
 	public static final int BOARDWIDTH = 7;
 	public static final int WINLENGTH = 4;
 		
-	/* TODO Optimisation code
-	private int[] columnStoneCount;
-	*/
 	private final int[][] board;
 	private final int[] lastMove;
 	
@@ -53,7 +50,7 @@ public class Board {
 		if (this.getEmptyFields(moveDone) == 0){
 			this.lastMove = new int[] {moveDone,this.getEmptyFields(moveDone)};
 		} else {
-			this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone)-1)};
+			this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone))};
 		}
 	}
 	
@@ -92,14 +89,18 @@ public class Board {
 		return legal;
 	}
 	/**
-	 * Returns the current state of a field.
+	 * Returns the current state of a field. -1 if invalid index.
 	 * @param x x-position
 	 * @param y y-position
 	 * @return 0 for empty field, or currentPlayer
 	 */
 	
 	public int getField(int x, int y) {
-		return board[x][y];
+		int field = -1;
+		if(x >= 0 && x <= getBoardWidth() - 1 && y >= 0 && y <= getBoardHeight() - 1) {
+			field = board[x][y];
+		}
+		return field;
 	}
 	
 	/**
@@ -134,11 +135,50 @@ public class Board {
 	}
 	
 	/**
+	 * Returns how many consecutive fields of a given player are found in a certain direction.
+	 * @param x Base position x
+	 * @param y Base position y
+	 * @param dx direction in x-axis
+	 * @param dy direction in y-axis
+	 * @param player player to look for.
+	 * @return number of consecutive fields from Player player.
+	 */
+	
+	private int count(int x, int y, int dx, int dy, int player) {
+		if(getField(x, y) == player) {
+			return 1 + count(x + dx, y + dy, dx, dy, player);
+		} else {
+			return 0;
+		}
+	}
+	
+	/**
 	 * Returns the winning player number, if there is one. 0 is not 
 	 * a player number, so will be returned when there is no winner.
 	 * @return player number or 0.
 	 */
 	public int getWinner() {
+		int winner = 0;
+		int[][] directions = {new int[]{0,1}, new int[]{1,0}, new int[]{1,1}, new int[]{-1,1}};
+		
+		int x = lastMove[0];
+		int y = lastMove[1];
+		int field = getField(x, y);
+
+		for(int[] direction : directions) {
+			int dx = direction[0];
+			int dy = direction[1];
+			
+			if (count(x, y, dx, dy, field) + 
+					count(x - dx, y - dy, -dx, -dy, field) > 3) {
+				winner = field;
+			}
+		}
+		return winner;
+	}
+	
+	
+	public int getWinnerOld() {
 		int winner = 0;
 		
 		int x;
@@ -232,11 +272,12 @@ public class Board {
 	
 	public String toString() {
 		String returnString = ".-.-.-.-.-.-.-.\n";
-		for (int i = 0; i < (BOARDHEIGHT); i++)
+		for (int y = 0; y < (BOARDHEIGHT); y++)
 		{
-			for (int j = 0; j < (BOARDWIDTH); j++)
+			for (int x = 0; x < (BOARDWIDTH); x++)
 			{
-				returnString += "|"+getField(j, i);
+				String field = (getField(x, y) != 0) ? "" + getField(x, y) :  " ";
+				returnString += "|"+field;
 			}
 			returnString += "|\n";
 		}
