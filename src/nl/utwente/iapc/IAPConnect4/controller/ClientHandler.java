@@ -125,7 +125,7 @@ public class ClientHandler extends Thread{
 			
 		} catch (InvalidCommandException | IOException | NumberFormatException e) {
 			e.printStackTrace();
-			System.err.println("ERROR: Invalid login command");
+			System.err.println("ERROR: Invalid command");
 		}
 	}
 	

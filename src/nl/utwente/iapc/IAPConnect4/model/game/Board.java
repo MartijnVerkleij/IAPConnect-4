@@ -53,7 +53,7 @@ public class Board {
 		if (this.getEmptyFields(moveDone) == 0){
 			this.lastMove = new int[] {moveDone,this.getEmptyFields(moveDone)};
 		} else {
-			this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone)-1)};
+			this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone))};
 		}
 	}
 	
@@ -232,11 +232,12 @@ public class Board {
 	
 	public String toString() {
 		String returnString = ".-.-.-.-.-.-.-.\n";
-		for (int i = 0; i < (BOARDHEIGHT); i++)
+		for (int y = 0; y < (BOARDHEIGHT); y++)
 		{
-			for (int j = 0; j < (BOARDWIDTH); j++)
+			for (int x = 0; x < (BOARDWIDTH); x++)
 			{
-				returnString += "|"+getField(j, i);
+				String field = (getField(x, y) != 0) ? "" + getField(x, y) :  " ";
+				returnString += "|"+field;
 			}
 			returnString += "|\n";
 		}
