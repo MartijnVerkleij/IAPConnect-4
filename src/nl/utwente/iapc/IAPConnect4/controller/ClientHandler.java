@@ -56,6 +56,15 @@ public class ClientHandler extends Thread{
 				parseCommand();
 			}
 		}
+		try {
+			reader.close();
+			writer.close();
+			sock.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Error while closing connections");
+		}
+		
 	}
 
 	private void login() {
@@ -103,7 +112,11 @@ public class ClientHandler extends Thread{
 			exit = true;
 		}
 		return lastMove;
-		
+	}
+	
+	public void endGame() {
+		game = null;
+		ready = false;
 	}
 	
 	private void parseCommand() {
@@ -126,6 +139,7 @@ public class ClientHandler extends Thread{
 		} catch (InvalidCommandException | IOException | NumberFormatException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Invalid command");
+			exit = true;
 		}
 	}
 	

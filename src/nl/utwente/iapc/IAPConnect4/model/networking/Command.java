@@ -50,6 +50,9 @@ public class Command {
 	}
 	
 	public static Command parse(String command) throws InvalidCommandException {
+		if (command == null) {
+			throw new InvalidCommandException();
+		}
 		String[] splitCommand = command.split(" ");
 		Protocol arg0 = null;
 		for (Protocol p : Protocol.values()) {

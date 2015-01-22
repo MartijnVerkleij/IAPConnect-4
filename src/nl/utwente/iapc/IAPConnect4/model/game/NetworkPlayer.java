@@ -35,6 +35,7 @@ public class NetworkPlayer implements Player {
 		} else {
 			handler.sendCommand(new Command(Protocol.GAME_END));
 		}
+		handler.endGame();
 	}
 
 }

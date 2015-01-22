@@ -154,8 +154,9 @@ public class Board {
 	
 	/**
 	 * Returns the winning player number, if there is one. 0 is not 
-	 * a player number, so will be returned when there is no winner.
-	 * @return player number or 0.
+	 * a player number, so will be returned when there is no winner. 
+	 * -1 is draw
+	 * @return player number, 0, or -1.
 	 */
 	public int getWinner() {
 		int winner = 0;
@@ -174,6 +175,9 @@ public class Board {
 				winner = field;
 			}
 		}
+		
+		
+		
 		return winner;
 	}
 	

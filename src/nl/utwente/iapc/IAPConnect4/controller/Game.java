@@ -9,7 +9,7 @@ import nl.utwente.iapc.IAPConnect4.model.game.Player;
 import nl.utwente.iapc.IAPConnect4.model.networking.Command;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
-public class Game {
+public class Game extends Thread{
 
 	private ArrayList<Player> players;
 	private Board board;
@@ -23,7 +23,7 @@ public class Game {
 		playerToMove = 1;
 	}
 	
-	public void start() {
+	public void run() {
 		while(board.getWinner() == 0) {
 			try {
 				Player player = players.get(playerToMove - 1);
@@ -40,8 +40,6 @@ public class Game {
 				System.err.println("ERROR: Invalid move done");
 				System.err.println("Here's your board " + e.getBoard().toString());
 			}
-			finally {
-			}
 		}
 		
 		for(Player p : players) {
@@ -55,8 +53,6 @@ public class Game {
 		playerToMove = -1; 
 	}
 	
-	
-	
 	private void doMove(Player player, int move) throws InvalidMoveException {
 		if(players.indexOf(player) + 1 == playerToMove) {
 			Board newBoard = board.move(move, playerToMove);
@@ -66,10 +62,4 @@ public class Game {
 			throw new InvalidMoveException(player, board);
 		}
 	}
-	
-	//public Board getBoard() {
-	//	return board;
-	//}
-	
-	
 }
