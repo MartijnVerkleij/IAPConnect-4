@@ -26,7 +26,7 @@ public class Game {
 	public void start() {
 		while(board.getWinner() == 0) {
 			try {
-				Player player = players.get(playerToMove);
+				Player player = players.get(playerToMove - 1);
 				int move = player.nextMove(board);
 				doMove(player,move);
 				for(Player p : players) {
@@ -61,7 +61,7 @@ public class Game {
 		if(players.indexOf(player) + 1 == playerToMove) {
 			Board newBoard = board.move(move, playerToMove);
 			board = newBoard;
-			playerToMove = 1 + ((playerToMove + 1) % players.size());
+			playerToMove = 1 + ((playerToMove) % players.size());
 		} else {
 			throw new InvalidMoveException(player, board);
 		}

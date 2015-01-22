@@ -149,7 +149,7 @@ public class Board {
 				} else {
 					recurrence = 0;
 				}
-				if (recurrence >= WINLENGTH) {
+				if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
 					winner = board[x][y];
 				}
 			}
@@ -162,7 +162,7 @@ public class Board {
 				} else {
 					recurrence = 0;
 				}
-				if (recurrence >= WINLENGTH) {
+				if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
 					winner = board[x][y];
 				}
 			}
@@ -182,7 +182,7 @@ public class Board {
 			} else {
 				recurrence = 0;
 			}
-			if (recurrence >= WINLENGTH) {
+			if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
 				winner = board[x][y];
 			}
 			x++; y++;
@@ -205,7 +205,7 @@ public class Board {
 			} else {
 				recurrence = 0;
 			}
-			if (recurrence >= WINLENGTH) {
+			if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
 				winner = board[x][y];
 			}
 			x++; y--;
