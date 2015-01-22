@@ -49,7 +49,7 @@ public class Board {
 	 */
 	protected Board(int[][] board, int moveDone) {
 		this.board = board;
-		this.lastMove = new int[] {moveDone,(this.getColumnSize(moveDone)-1)};
+		this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone)-1)};
 	}
 	
 	/**
@@ -63,8 +63,8 @@ public class Board {
 			{
 				//TODO Update current player
 				int moveDone = move;
-				System.out.println("moveDone: ["+move+","+(getColumnSize(move)-1)+"]");
-				board[move][(getColumnSize(move)-1)] = (player+1);
+				System.out.println("moveDone: ["+move+","+(getEmptyFields(move)-1)+"]");
+				board[move][(getEmptyFields(move)-1)] = (player+1);
 				Board newBoard = new Board(board, moveDone);
 				return newBoard;
 			} else {
@@ -99,14 +99,14 @@ public class Board {
 	
 	/**
 	 * Returns the amount of currently unused fields in a column.
-	 * @param x Column
+	 * @param column Column
 	 * @return size of a column
 	 */
-	public int getColumnSize (int x){
+	public int getEmptyFields (int column){
 		int size = 0;
 		for (size = 0; size < BOARDHEIGHT; size++)
 		{
-		    if (getField(x,size) > 0)
+		    if (getField(column,size) > 0)
 		    	break;
 		} 
 		return size;
@@ -122,7 +122,7 @@ public class Board {
 		// TODO: check < or <=
 		while (column < BOARDWIDTH) 
 		{
-			full = full && (getColumnSize(column) == 0);
+			full = full && (getEmptyFields(column) == 0);
 			column++;
 		}
 		return full;
