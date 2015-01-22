@@ -1,5 +1,7 @@
 package nl.utwente.iapc.IAPConnect4.core.game;
 
+import nl.utwente.iapc.IAPConnect4.core.Game;
+
 
 /**
  * Interface describing a Player playing the Connect 4 game;
@@ -10,10 +12,10 @@ package nl.utwente.iapc.IAPConnect4.core.game;
 public interface Player {
 	
 	/**
-	 * Retrieve the desired Move from the Player.
+	 * Do a move on the given Game
 	 * @return Move object with column to do a move in.
 	 */
-	public int nextMove(BoardModel board);
+	public void doMove(int move);
 	
 	/**
 	 * Returns the Player name;
@@ -27,4 +29,10 @@ public interface Player {
 	 */
 	public void result(Player player);
 	
+	/**
+	 * Adds the Game object to the Player
+	 *  @param game Game to add
+	 */
+	
+	public void addGame(Game game);
 }

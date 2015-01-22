@@ -59,18 +59,21 @@ public class Server {
 				notInGame.add(cl);
 			}
 		}
-		
+
 		if (notInGame.size() > 1) {
 			Game game = new Game(notInGame.get(0).getPlayer(), notInGame.get(1).getPlayer());
 			System.out.println("New game with: " + notInGame.get(0).getPlayer().getName() + 
 					" + " + notInGame.get(1).getPlayer().getName());
 			notInGame.get(0).newGame(game);
 			notInGame.get(1).newGame(game);
+			notInGame.get(0).getPlayer().addGame(game);
+			notInGame.get(1).getPlayer().addGame(game);
 			games.add(game);
 			broadcastCommand(new Command(Protocol.START_GAME, 
 					notInGame.get(0).getPlayer().getName(), 
 					notInGame.get(1).getPlayer().getName()));
-			game.start();
+			
+			game.startGame();
 		} else {
 			System.out.print(".");
 		}

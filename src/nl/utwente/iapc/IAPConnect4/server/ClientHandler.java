@@ -10,7 +10,6 @@ import java.util.concurrent.Semaphore;
 
 import nl.utwente.iapc.IAPConnect4.core.Config;
 import nl.utwente.iapc.IAPConnect4.core.Game;
-import nl.utwente.iapc.IAPConnect4.core.game.NetworkPlayer;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
@@ -26,18 +25,12 @@ public class ClientHandler extends Thread{
 	Player player;
 	Game game;
 	boolean ready;
-	Semaphore lastMoveReady = new Semaphore(1);
 	boolean exit;
-	
-	
-	int lastMove;
-	
 	
 	public ClientHandler(Socket sock, Server server) {
 		this.server = server;
 		game = null;
 		exit = false;
-		lastMove = -1;
 		try {
 			reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			writer = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
@@ -57,9 +50,11 @@ public class ClientHandler extends Thread{
 			}
 		}
 		try {
+			if (game instanceof Game) {
+				game.handleWin();
+			}
 			reader.close();
 			writer.close();
-			sock.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Error while closing connections");
@@ -79,39 +74,28 @@ public class ClientHandler extends Thread{
 				}
 				playerName = join.getArgument(1);
 				groupNumber = Integer.parseInt(join.getArgument(2));
-				if (groupNumber < 0 || groupNumber> 100) {
+				if (groupNumber < 0 || groupNumber > 100) {
+					exit = true;
 					throw new InvalidCommandException();
 				}
-				player = new NetworkPlayer(this, playerName);
+				player = new ServerPlayer(this, playerName);
 				
+				sendCommand(new Command(Protocol.ACCEPT, ""+Config.GROUP_NUMBER));
+				System.out.println("Client logged in: " + player.getName());
 			} catch (InvalidCommandException | IOException | NumberFormatException e) {
 				e.printStackTrace();
 				System.err.println("ERROR: Invalid login command");
 			}
 		}
-		
-		
-		sendCommand(new Command(Protocol.ACCEPT, ""+Config.GROUP_NUMBER));
-		System.out.println("Client logged in: " + player.getName());
 	}
 	
 	public void newGame(Game game) {
 		this.game = game;
 	}
 	
-	public int requestMove() {
+	public void requestMove() {
 		server.broadcastCommand(new Command(Protocol.REQUEST_MOVE, player.getName()));
 		System.out.println("Requested move from: " + player.getName());
-		
-		try {
-			lastMoveReady.acquire();
-			lastMoveReady.acquire();
-			lastMoveReady.release();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			exit = true;
-		}
-		return lastMove;
 	}
 	
 	public void endGame() {
@@ -128,18 +112,16 @@ public class ClientHandler extends Thread{
 				System.out.println("Client ready to play: " + player.getName());
 				ready = true;
 				server.checkForNewGame();
-			} else if (lastMoveReady.availablePermits() == 0 && action.equals(Protocol.DO_MOVE.toString())) {
+			} else if (action.equals(Protocol.DO_MOVE.toString())) {
 				try {
-					lastMove = Integer.parseInt(command.getArgument(1));
-					lastMoveReady.release();
+					player.doMove(Integer.parseInt(command.getArgument(1)));
 				} catch (NumberFormatException e) {
 					sendCommand(new Command(Protocol.ERROR, ProtocolError.INVALID_MOVE));
 				}
 			}
 			
 		} catch (InvalidCommandException | IOException | NumberFormatException e) {
-			e.printStackTrace();
-			System.err.println("ERROR: Invalid command");
+			System.err.println("ERROR: Invalid command from client");
 			exit = true;
 		}
 	}

@@ -10,12 +10,12 @@ import java.util.concurrent.Semaphore;
 
 import nl.utwente.iapc.IAPConnect4.core.Config;
 import nl.utwente.iapc.IAPConnect4.core.Game;
-import nl.utwente.iapc.IAPConnect4.core.game.NetworkPlayer;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 import nl.utwente.iapc.IAPConnect4.server.Server;
+import nl.utwente.iapc.IAPConnect4.server.ServerPlayer;
 
 public class ServerHandler extends Thread {
 	
@@ -59,7 +59,7 @@ public class ServerHandler extends Thread {
 			Command join = new Command(Protocol.JOIN, playerName, groupNumber + "");
 			System.out.println(join.toString());
 			sendCommand(join);
-			player = new NetworkPlayer(this, playerName);
+			player = new HumanPlayer(this, playerName);
 			
 		} catch (InvalidCommandException | IOException | NumberFormatException e) {
 			e.printStackTrace();
@@ -79,8 +79,4 @@ public class ServerHandler extends Thread {
 	public void sendCommand(Command c) {
 		
 	}
-
-	
-	//evt. getters
-
 }

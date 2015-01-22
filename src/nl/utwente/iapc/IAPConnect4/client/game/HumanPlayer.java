@@ -1,5 +1,7 @@
 package nl.utwente.iapc.IAPConnect4.client.game;
 
+import nl.utwente.iapc.IAPConnect4.core.Game;
+import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
@@ -12,6 +14,7 @@ public class HumanPlayer implements Player {
 	 */
 	
 	private String name;
+	private Game game;
 	
 	/**
 	 * A Human Player
@@ -23,9 +26,12 @@ public class HumanPlayer implements Player {
 	}
 	
 	@Override
-	public int nextMove(BoardModel board) {
-		// TODO
-		return 0;
+	public void doMove(int move) {
+		try {
+			game.doMove(this, move);
+		} catch (InvalidMoveException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -35,6 +41,12 @@ public class HumanPlayer implements Player {
 
 	@Override
 	public void result(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addGame(Game game) {
 		// TODO Auto-generated method stub
 		
 	}
