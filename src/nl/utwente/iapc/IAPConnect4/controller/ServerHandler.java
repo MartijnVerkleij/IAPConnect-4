@@ -8,9 +8,14 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
+import nl.utwente.iapc.IAPConnect4.exception.InvalidCommandException;
+import nl.utwente.iapc.IAPConnect4.model.game.NetworkPlayer;
 import nl.utwente.iapc.IAPConnect4.model.game.Player;
 import nl.utwente.iapc.IAPConnect4.model.networking.Client;
+import nl.utwente.iapc.IAPConnect4.model.networking.Command;
 import nl.utwente.iapc.IAPConnect4.model.networking.Server;
+import nl.utwente.iapc.IAPConnect4.util.Config;
+import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
 public class ServerHandler {
 	
@@ -47,8 +52,24 @@ public class ServerHandler {
 		}
 	}
 	
-	private void login() {
+	private void login(String PlayerName) {
+		String playerName = PlayerName;
+		int groupNumber = Config.GROUP_NUMBER;
+		try {
+			Command join = new Command(Protocol.JOIN, playerName, groupNumber + "");
+			System.out.println(join.toString());
+			sendCommand(join);
+			player = new NetworkPlayer(this, playerName);
+			
+		} catch (InvalidCommandException | IOException | NumberFormatException e) {
+			e.printStackTrace();
+			System.err.println("ERROR: Invalid login command");
+		}
 		
+		
+		
+		sendCommand(new Command(Protocol.ACCEPT, ""+Config.GROUP_NUMBER));
+		System.out.println("Client logged in: " + player.getName());
 	}
 	
 	private void parseCommand() {
