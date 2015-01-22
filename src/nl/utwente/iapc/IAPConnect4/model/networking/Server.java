@@ -1,6 +1,7 @@
 package nl.utwente.iapc.IAPConnect4.model.networking;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
@@ -18,11 +19,14 @@ public class Server {
 	public Server(int port) {
 		try {
 			ssock = new ServerSocket(port);
-			System.out.println("IAPConnect4 Server\nAccepting connections");
+			System.out.println("IAPConnect4 Server\nAccepting connections on port "+port);
+		} catch (BindException e) {
+			System.err.println("ERROR: Port "+port+" already in use. Exiting.");
+			System.exit(1);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
-			System.exit(0);
+			System.exit(1);
 		}
 	}
 	
