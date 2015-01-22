@@ -8,8 +8,6 @@ import java.util.LinkedList;
 
 import nl.utwente.iapc.IAPConnect4.controller.ClientHandler;
 import nl.utwente.iapc.IAPConnect4.controller.Game;
-import nl.utwente.iapc.IAPConnect4.util.Config;
-import nl.utwente.iapc.IAPConnect4.util.GamePoolTick;
 import nl.utwente.iapc.IAPConnect4.util.Protocol;
 
 public class Server {
@@ -31,8 +29,6 @@ public class Server {
 	}
 	
 	public void startServer() {
-		GamePoolTick tick = new GamePoolTick(Config.GAME_POOL_TICK, this);
-		tick.start();
 		while(true) {
 			try {
 				Socket newClient = ssock.accept();

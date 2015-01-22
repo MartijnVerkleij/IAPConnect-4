@@ -127,6 +127,7 @@ public class ClientHandler extends Thread{
 			if (action.equals(Protocol.READY.toString())) {
 				System.out.println("Client ready to play: " + player.getName());
 				ready = true;
+				server.checkForNewGame();
 			} else if (lastMoveReady.availablePermits() == 0 && action.equals(Protocol.DO_MOVE.toString())) {
 				try {
 					lastMove = Integer.parseInt(command.getArgument(1));
