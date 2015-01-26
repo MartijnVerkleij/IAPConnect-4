@@ -2,7 +2,6 @@ package nl.utwente.iapc.IAPConnect4.menu;
 
 import java.awt.Container;
 import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
@@ -32,12 +31,12 @@ public class MenuView extends JFrame {
 	private JLabel serverPortLabel;
 	private JTextField serverPort;
 	
-	public MenuView (MenuController mc) {
+	public MenuView(MenuController mc) {
 		super("IAPConnect-4");
 		controller = mc;
 		init();
 	}
-	private void init () {
+	private void init() {
 		Container c = getContentPane();
 		
 		Font fnt = new Font("Comic Sans", java.awt.Font.BOLD , 24);
@@ -63,19 +62,22 @@ public class MenuView extends JFrame {
 		
 		// Add ActionListeners
 		joinButton.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				serverPanel.setVisible(false);
-				joinPanel.setVisible(!joinPanel.isVisible());
-			}});
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					serverPanel.setVisible(false);
+					joinPanel.setVisible(!joinPanel.isVisible());
+				}
+			});
 		serverButton.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				joinPanel.setVisible(false);
-				serverPanel.setVisible(!serverPanel.isVisible());
-			}});
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					joinPanel.setVisible(false);
+					serverPanel.setVisible(!serverPanel.isVisible());
+				}
+			});
 		quitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				controller.QuitGame();
-			}});
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					controller.quitGame();
+				}
+			});
 		
 		// Add elements
 		c.add(titleLabel);

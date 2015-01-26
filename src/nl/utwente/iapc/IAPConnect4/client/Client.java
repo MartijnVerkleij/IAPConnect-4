@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import nl.utwente.iapc.IAPConnect4.core.Game;
-
 public class Client {
 	Socket sock;
 	ServerHandler handler;
