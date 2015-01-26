@@ -18,8 +18,8 @@ public class MenuView extends JFrame {
 	private static final long serialVersionUID = 1640405174352813833L;
 	private MenuController controller;
 	private JLabel titleLabel;
-	private JButton joinButton;
-	private JButton serverButton;
+	private JButton showJoinButton;
+	private JButton showServerButton;
 	private JButton quitButton;
 	
 	private JPanel joinPanel;
@@ -29,8 +29,10 @@ public class MenuView extends JFrame {
 	private JTextField joinPort;
 	private JLabel hostnameLabel;
 	private JTextField hostname;
+	private JButton joinButton;
 	private JLabel serverPortLabel;
 	private JTextField serverPort;
+	private JButton serverButton;
 	
 	public MenuView (MenuController mc) {
 		super("IAPConnect-4");
@@ -43,8 +45,8 @@ public class MenuView extends JFrame {
 		Font fnt = new Font("Comic Sans", java.awt.Font.BOLD , 24);
 		// Element declaration
 		titleLabel = new JLabel("IAPConnect-4");
-		joinButton = new JButton("Join online game");
-		serverButton = new JButton("Start Server");
+		showJoinButton = new JButton("Join online game");
+		showServerButton = new JButton("Start Server");
 		quitButton = new JButton("Quit game");
 		joinPanel = new JPanel();
 		serverPanel = new JPanel();
@@ -52,8 +54,10 @@ public class MenuView extends JFrame {
 		joinPort = new JTextField(5);
 		hostnameLabel = new JLabel("Hostname:");
 		hostname = new JTextField(10);
+		joinButton = new JButton("Join");
 		serverPortLabel = new JLabel("Port:");
 		serverPort = new JTextField(5);
+		serverButton = new JButton("Start");
 		
 		// Applying changes
 		titleLabel.setFont(fnt);
@@ -62,16 +66,25 @@ public class MenuView extends JFrame {
 		serverPanel.setVisible(false);
 		
 		// Add ActionListeners
-		joinButton.addActionListener(new ActionListener() {
+		showJoinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				serverPanel.setVisible(false);
 				joinPanel.setVisible(!joinPanel.isVisible());
 			}});
-		serverButton.addActionListener(new ActionListener() {
+		showServerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				joinPanel.setVisible(false);
 				serverPanel.setVisible(!serverPanel.isVisible());
 			}});
+		joinButton.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				//
+			}});
+		serverButton.addActionListener(new ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				controller.serverMode(Integer.parseInt(serverPort.getText()));
+			}});
+		
 		quitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				controller.QuitGame();
@@ -79,20 +92,27 @@ public class MenuView extends JFrame {
 		
 		// Add elements
 		c.add(titleLabel);
-		c.add(joinButton);
+		c.add(showJoinButton);
 		c.add(joinPanel);
 		joinPanel.add(hostnameLabel);
 		joinPanel.add(hostname);
 		joinPanel.add(joinPortLabel);
 		joinPanel.add(joinPort);
-		c.add(serverButton);
+		joinPanel.add(joinButton);
+		c.add(showServerButton);
 		c.add(serverPanel);
 		serverPanel.add(serverPortLabel);
 		serverPanel.add(serverPort);
+		serverPanel.add(serverButton);
 		c.add(quitButton);
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 		pack();
 		setVisible(true);
 	}
-	
+	public void showView() {
+		this.setVisible(true);
+	}
+	public void hideView(){
+		this.setVisible(false);
+	}
 }
