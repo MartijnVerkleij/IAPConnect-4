@@ -11,7 +11,7 @@ public abstract class ComputerPlayer implements Player {
 	public ComputerPlayer (String name) {
 		this.name = name;
 	}
-	@Override
+	
 	public int nextMove(BoardModel board) {
 		// TODO 
 		return 0;

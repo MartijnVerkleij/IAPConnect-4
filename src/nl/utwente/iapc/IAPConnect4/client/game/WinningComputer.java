@@ -1,5 +1,6 @@
 package nl.utwente.iapc.IAPConnect4.client.game;
 
+import nl.utwente.iapc.IAPConnect4.core.Game;
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
 public class WinningComputer extends ComputerPlayer {
@@ -18,6 +19,18 @@ public class WinningComputer extends ComputerPlayer {
 		// else if(true)
 			
 		return determinedMove;
+	}
+
+	@Override
+	public void doMove(int move) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addGame(Game game) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

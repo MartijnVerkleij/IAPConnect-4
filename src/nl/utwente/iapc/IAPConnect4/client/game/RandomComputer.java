@@ -9,7 +9,7 @@ public class RandomComputer extends ComputerPlayer {
 		super(name);
 	}
 	
-	@Override
+	
 	public int nextMove (BoardModel board) {
 		// TODO
 		Random rand = new Random();
