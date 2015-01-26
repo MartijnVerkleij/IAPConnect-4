@@ -13,7 +13,7 @@ public class IAPConnect4 {
 		// Safety precaution
 	}
 	public static void main(String[] args) {
-		MenuController menuController = new MenuController();
+		getInstance().menuController = new MenuController();
 	}
 	
 	public static synchronized IAPConnect4 getInstance() {
@@ -23,10 +23,10 @@ public class IAPConnect4 {
 		return instance;
 	}
 	public void serverMode(int port) {
-		serverController = new ServerController(port);
+		getInstance().serverController = new ServerController(port);
 	}
 	public void returnToMenu() {
-		serverController = null;
-		menuController.returnToMenu();
+		//serverController = null;
+		getInstance().menuController.returnToMenu();
 	}
 }
