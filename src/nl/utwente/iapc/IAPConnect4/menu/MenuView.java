@@ -1,9 +1,12 @@
 package nl.utwente.iapc.IAPConnect4.menu;
 
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 public class MenuView extends JFrame {
 
@@ -41,13 +45,13 @@ public class MenuView extends JFrame {
 	private void init() {
 		Container c = getContentPane();
 		
-		Font fnt = new Font("Comic Sans", java.awt.Font.BOLD , 24);
+		Font fnt = new Font("Arial", java.awt.Font.BOLD , 28);
 		// Element declaration
 		titleLabel = new JLabel("IAPConnect-4");
 		showJoinButton = new JButton("Join online game");
 		showServerButton = new JButton("Start Server");
 		quitButton = new JButton("Quit game");
-		joinPanel = new JPanel();
+		joinPanel = new JPanel(new GridLayout(0,2));
 		serverPanel = new JPanel();
 		joinPortLabel = new JLabel("Port:");
 		joinPort = new JTextField(5);
@@ -60,20 +64,25 @@ public class MenuView extends JFrame {
 		
 		// Applying changes
 		titleLabel.setFont(fnt);
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		titleLabel.setBorder(BorderFactory.createEmptyBorder(5,10,5,10));
+		showJoinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinPanel.setVisible(false);
+		showServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		serverPanel.setVisible(false);
-		
+		quitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		// Add ActionListeners
 		showJoinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				serverPanel.setVisible(false);
 				joinPanel.setVisible(!joinPanel.isVisible());
+				pack();
 			}});
 		showServerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				joinPanel.setVisible(false);
 				serverPanel.setVisible(!serverPanel.isVisible());
+				pack();
 			}});
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
