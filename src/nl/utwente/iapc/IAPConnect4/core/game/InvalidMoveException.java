@@ -1,7 +1,5 @@
 package nl.utwente.iapc.IAPConnect4.core.game;
 
-import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
-
 public class InvalidMoveException extends Exception {
 
 	private static final long serialVersionUID = -8593386180456593769L;

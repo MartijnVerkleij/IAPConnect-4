@@ -50,17 +50,8 @@ public class ClientHandler extends Thread{
 				parseCommand();
 			}
 		}
-		try {
-			if (game instanceof Game) {
-				game.handleWin();
-			}
-			reader.close();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.err.println("Error while closing connections");
-		}
-		
+		System.out.println("Client Disconnect");
+		closeConnection();
 	}
 
 	private void login() {
@@ -146,5 +137,19 @@ public class ClientHandler extends Thread{
 	
 	public boolean isReady() {
 		return ready;
+	}
+	
+	public void closeConnection() {
+		try {
+			if (game != null) {
+				System.out.println("Handling win");
+				game.handleWin();
+			}
+			writer.close();
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.err.println("Error while closing connections");
+		}
 	}
 }

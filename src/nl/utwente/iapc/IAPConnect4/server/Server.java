@@ -6,9 +6,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
-
 import nl.utwente.iapc.IAPConnect4.core.Game;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
+import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 
@@ -16,8 +16,10 @@ public class Server {
 	ServerSocket ssock;
 	LinkedList<ClientHandler> clients = new LinkedList<ClientHandler>();
 	LinkedList<Game> games = new LinkedList<Game>();
+	boolean exit;
 	
 	public Server(int port) {
+		exit = false;
 		try {
 			ssock = new ServerSocket(port);
 			System.out.println("IAPConnect4 Server\nAccepting connections on port " + port);
@@ -27,12 +29,12 @@ public class Server {
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
-			System.exit(1);
+			exit = true;
 		}
 	}
 	
 	public void startServer() {
-		while (true) {
+		while (!exit) {
 			try {
 				Socket newClient = ssock.accept();
 				ClientHandler handler = new ClientHandler(newClient, this);
@@ -40,6 +42,7 @@ public class Server {
 				handler.start();
 				System.out.println("New Client");
 			} catch (IOException e) {
+				System.err.println("ERROR: Unsuucesfully accepted new Client.");
 				e.printStackTrace();
 			}
 		}
@@ -88,8 +91,13 @@ public class Server {
 		return null;
 	}
 	
-	public void sendCommand(String clientName, Command c) throws NullPointerException{
-		findClient(clientName).sendCommand(c);
+	public void sendCommand(String clientName, Command c) throws InvalidCommandException {
+		ClientHandler addressee = findClient(clientName);
+		if (addressee != null) {
+			addressee.sendCommand(c);
+		} else {
+			throw new InvalidCommandException();
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -99,5 +107,8 @@ public class Server {
 		
 	}
 	
-	
+	public void stopServer() {
+		exit = true;
+		
+	}
 }

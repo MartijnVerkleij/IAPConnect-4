@@ -22,7 +22,7 @@ public class BoardModel {
 	 */
 	public BoardModel() {
 		board = new int[BOARDWIDTH][BOARDHEIGHT];
-		lastMove = new int[] {0,0};
+		lastMove = new int[] {0, 0};
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class BoardModel {
 	 */
 	public BoardModel(int boardWidth, int boardHeight) {
 		board = new int[boardWidth][boardHeight];
-		lastMove = new int[] {0,0};
+		lastMove = new int[] {0, 0};
 	}
 	
 	/**
@@ -45,10 +45,10 @@ public class BoardModel {
 	protected BoardModel(int[][] board, int moveDone) {
 		this.board = board;
 		//TODO Make this less ugly
-		if (this.getEmptyFields(moveDone) == 0){
-			this.lastMove = new int[] {moveDone,this.getEmptyFields(moveDone)};
+		if (this.getEmptyFields(moveDone) == 0) {
+			this.lastMove = new int[] {moveDone, this.getEmptyFields(moveDone)};
 		} else {
-			this.lastMove = new int[] {moveDone,(this.getEmptyFields(moveDone))};
+			this.lastMove = new int[] {moveDone, this.getEmptyFields(moveDone)};
 		}
 	}
 	
@@ -59,17 +59,16 @@ public class BoardModel {
 	 * @return Board A new Board.
 	 */
 	public BoardModel move(int move, int player) throws InvalidMoveException {
-		if (isLegalMove(move))
-			{
-				//TODO Update current player
-				int moveDone = move;
-				System.out.println("moveDone: ["+move+","+(getEmptyFields(move)-1)+"]");
-				board[move][(getEmptyFields(move)-1)] = (player);
-				BoardModel newBoard = new BoardModel(board, moveDone);
-				return newBoard;
-			} else {
-				throw new InvalidMoveException(this);
-			}
+		if (isLegalMove(move)) {
+			//TODO Update current player
+			int moveDone = move;
+			System.out.println("moveDone: [" + move + "," + (getEmptyFields(move) - 1) + "]");
+			board[move][getEmptyFields(move) - 1] = player;
+			BoardModel newBoard = new BoardModel(board, moveDone);
+			return newBoard;
+		} else {
+			throw new InvalidMoveException(this);
+		}
 	}
 	
 	/**
@@ -81,7 +80,7 @@ public class BoardModel {
 	public boolean isLegalMove(int move) {
 		boolean legal = false;
 		// TODO move player check to Game
-		if (getField(move,0) == 0) {
+		if (getField(move, 0) == 0) {
 			legal = true;
 		}
 		return legal;
@@ -95,7 +94,7 @@ public class BoardModel {
 	
 	public int getField(int x, int y) {
 		int field = -1;
-		if(x >= 0 && x <= getBoardWidth() - 1 && y >= 0 && y <= getBoardHeight() - 1) {
+		if (x >= 0 && x <= getBoardWidth() - 1 && y >= 0 && y <= getBoardHeight() - 1) {
 			field = board[x][y];
 		}
 		return field;
@@ -106,12 +105,13 @@ public class BoardModel {
 	 * @param column Column
 	 * @return size of a column
 	 */
-	public int getEmptyFields (int column){
+	public int getEmptyFields(int column) {
 		int size = 0;
-		for (size = 0; size < BOARDHEIGHT; size++)
-		{
-		    if (getField(column,size) > 0)
+		for (size = 0; size < BOARDHEIGHT; size++) {
+		    if (getField(column, size) > 0) {
 		    	break;
+		    }
+		    	
 		} 
 		return size;
 	}
@@ -120,7 +120,7 @@ public class BoardModel {
 	 * Is the board full?
 	 * @return true for a full board, or false if not
 	 */
-	public boolean isFull (){
+	public boolean isFull() {
 		boolean full = false;
 		int column = 0;
 		// TODO: check < or <=
@@ -143,7 +143,7 @@ public class BoardModel {
 	 */
 	
 	private int count(int x, int y, int dx, int dy, int player) {
-		if(getField(x, y) == player) {
+		if (getField(x, y) == player) {
 			return 1 + count(x + dx, y + dy, dx, dy, player);
 		} else {
 			return 0;
@@ -158,18 +158,18 @@ public class BoardModel {
 	 */
 	public int getWinner() {
 		int winner = 0;
-		int[][] directions = {new int[]{0,1}, new int[]{1,0}, new int[]{1,1}, new int[]{-1,1}};
+		int[][] directions = {new int[]{0, 1}, new int[]{1, 0}, new int[]{1, 1}, new int[]{-1, 1}};
 		
 		int x = lastMove[0];
 		int y = lastMove[1];
 		int field = getField(x, y);
 
-		for(int[] direction : directions) {
+		for (int[] direction : directions) {
 			int dx = direction[0];
 			int dy = direction[1];
 			
 			if (count(x, y, dx, dy, field) + 
-					count(x - dx, y - dy, -dx, -dy, field) > 3) {
+							count(x - dx, y - dy, -dx, -dy, field) > 3) {
 				winner = field;
 			}
 		}
@@ -189,42 +189,42 @@ public class BoardModel {
 		y = lastMove[1];
 		// TODO: For debug
 		System.out.println("lastMove: " + Arrays.toString(lastMove));
-			int recurrence = 0; 
-			for (x = 1; x < getBoardWidth(); x++) {
-				if (board[x-1][y] == board[x][y]) {
-					recurrence++;
-				} else {
-					recurrence = 0;
-				}
-				if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
-					winner = board[x][y];
-				}
+		int recurrence = 0; 
+		for (x = 1; x < getBoardWidth(); x++) {
+			if (board[x - 1][y] == board[x][y]) {
+				recurrence++;
+			} else {
+				recurrence = 0;
 			}
+			if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
+				winner = board[x][y];
+			}
+		}
 		//check vertical
 		x = lastMove[0];
-			recurrence = 0;
-			for (y = 1; y < getBoardHeight(); y++) {
-				if (board[x][y-1] == board[x][y]) {
-					recurrence++;
-				} else {
-					recurrence = 0;
-				}
-				if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
-					winner = board[x][y];
-				}
+		recurrence = 0;
+		for (y = 1; y < getBoardHeight(); y++) {
+			if (board[x][y - 1] == board[x][y]) {
+				recurrence++;
+			} else {
+				recurrence = 0;
 			}
+			if (recurrence >= WINLENGTH - 1 && board[x][y] != 0) {
+				winner = board[x][y];
+			}
+		}
 		x = lastMove[0];
 		y = lastMove[1];
 		//check diagonal upperleft -> downright
-		while((x > 1) && (y > 1)) {
+		while ((x > 1) && (y > 1)) {
 			x--; y--;
 		}
-		while((x < 1) || (y < 1)) {
+		while ((x < 1) || (y < 1)) {
 			x++; y++;
 		}
 		recurrence = 0;
-		while((x < getBoardWidth()) && (y < getBoardHeight())) {
-			if (board[x-1][y-1] == board[x][y]) {
+		while ((x < getBoardWidth()) && (y < getBoardHeight())) {
+			if (board[x - 1][y - 1] == board[x][y]) {
 				recurrence++;
 			} else {
 				recurrence = 0;
@@ -239,15 +239,15 @@ public class BoardModel {
 		//y = lastMove[1];
 		//check diagonal downleft -> upperright
 		
-		while((x > 1) && (y < getBoardHeight() - 2)) {
+		while ((x > 1) && (y < getBoardHeight() - 2)) {
 			x--; y++;
 		}
-		while((x < 1) || (y > getBoardHeight() - 2)) {
+		while ((x < 1) || (y > getBoardHeight() - 2)) {
 			x++; y--;
 		}
 		recurrence = 0;
-		while((x < getBoardWidth()) && (y >= 0)) {
-			if (board[x-1][y+1] == board[x][y]) {
+		while ((x < getBoardWidth()) && (y >= 0)) {
+			if (board[x - 1][y + 1] == board[x][y]) {
 				recurrence++;
 			} else {
 				recurrence = 0;
@@ -274,12 +274,10 @@ public class BoardModel {
 	
 	public String toString() {
 		String returnString = ".-.-.-.-.-.-.-.\n";
-		for (int y = 0; y < (BOARDHEIGHT); y++)
-		{
-			for (int x = 0; x < (BOARDWIDTH); x++)
-			{
+		for (int y = 0; y < BOARDHEIGHT; y++) {
+			for (int x = 0; x < BOARDWIDTH; x++) {
 				String field = (getField(x, y) != 0) ? "" + getField(x, y) :  " ";
-				returnString += "|"+field;
+				returnString += "|" + field;
 			}
 			returnString += "|\n";
 		}

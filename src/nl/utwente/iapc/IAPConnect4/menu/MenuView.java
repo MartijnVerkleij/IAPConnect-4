@@ -2,7 +2,6 @@ package nl.utwente.iapc.IAPConnect4.menu;
 
 import java.awt.Container;
 import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
@@ -34,12 +33,12 @@ public class MenuView extends JFrame {
 	private JTextField serverPort;
 	private JButton serverButton;
 	
-	public MenuView (MenuController mc) {
+	public MenuView(MenuController mc) {
 		super("IAPConnect-4");
 		controller = mc;
 		init();
 	}
-	private void init () {
+	private void init() {
 		Container c = getContentPane();
 		
 		Font fnt = new Font("Comic Sans", java.awt.Font.BOLD , 24);

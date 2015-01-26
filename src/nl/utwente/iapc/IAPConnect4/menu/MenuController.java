@@ -4,7 +4,7 @@ import nl.utwente.iapc.IAPConnect4.IAPConnect4;
 
 public class MenuController {
 	private MenuView mv;
-	public MenuController () {
+	public MenuController() {
 		mv = new MenuView(this);
 		
 	}

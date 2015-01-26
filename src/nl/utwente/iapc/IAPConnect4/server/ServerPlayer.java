@@ -1,7 +1,6 @@
 package nl.utwente.iapc.IAPConnect4.server;
 
 import nl.utwente.iapc.IAPConnect4.core.Game;
-import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
@@ -13,9 +12,9 @@ public class ServerPlayer implements Player {
 	String nickName;
 	Game game;
 	
-	public ServerPlayer(ClientHandler handler, String nickName) {
-		this.handler = handler;
-		this.nickName = nickName;
+	public ServerPlayer(ClientHandler handlerArg, String nickNameArg) {
+		this.handler = handlerArg;
+		this.nickName = nickNameArg;
 	}
 	
 	@Override
@@ -28,8 +27,8 @@ public class ServerPlayer implements Player {
 		}
 	}
 	
-	public void addGame(Game game) {
-		this.game = game;
+	public void addGame(Game gameArg) {
+		this.game = gameArg;
 	}
 
 	@Override
