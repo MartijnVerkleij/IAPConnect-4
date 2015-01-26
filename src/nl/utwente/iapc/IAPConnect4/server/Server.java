@@ -94,8 +94,7 @@ public class Server {
 	
 	public static void main(String[] args) {
 		if (args.length > 0) {
-			Server server = new Server(Integer.parseInt(args[0]));
-			server.startServer();
+			
 		}
 		
 	}
