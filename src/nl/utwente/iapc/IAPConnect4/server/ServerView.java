@@ -41,6 +41,7 @@ public class ServerView extends JFrame {
 		stopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				stopButton.setEnabled(false);
+				dispose();
 				controller.stopGame();
 			}});
 		

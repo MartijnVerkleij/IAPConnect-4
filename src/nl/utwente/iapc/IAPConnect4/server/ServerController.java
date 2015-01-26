@@ -1,5 +1,6 @@
 package nl.utwente.iapc.IAPConnect4.server;
 
+import nl.utwente.iapc.IAPConnect4.IAPConnect4;
 import nl.utwente.iapc.IAPConnect4.menu.MenuView;
 
 public class ServerController {
@@ -11,13 +12,8 @@ public class ServerController {
 		
 	}
 	public void stopGame() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		sv.dispose();
+		server.stopServer();
+		IAPConnect4.getInstance().returnToMenu();
 	}
 
 }

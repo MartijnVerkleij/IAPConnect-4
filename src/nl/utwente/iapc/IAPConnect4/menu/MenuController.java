@@ -11,7 +11,7 @@ public class MenuController {
 	public void serverMode(int port) {
 		IAPConnect4.getInstance().serverMode(port);
 	}
-	public void QuitGame() {
+	public void quitGame() {
 		System.exit(0);
 	}
 	public void returnToMenu() {

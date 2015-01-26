@@ -100,15 +100,7 @@ public class Server {
 		}
 	}
 	
-	public static void main(String[] args) {
-		if (args.length > 0) {
-			
-		}
-		
-	}
-	
 	public void stopServer() {
 		exit = true;
-		
 	}
 }

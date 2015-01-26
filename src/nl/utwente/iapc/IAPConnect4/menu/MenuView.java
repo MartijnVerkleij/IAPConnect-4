@@ -90,12 +90,13 @@ public class MenuView extends JFrame {
 			}});
 		serverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
+				hideView();
 				controller.serverMode(Integer.parseInt(serverPort.getText()));
 			}});
 		
 		quitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				controller.QuitGame();
+				controller.quitGame();
 			}});
 		
 		// Add elements
