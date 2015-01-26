@@ -4,7 +4,7 @@ import nl.utwente.iapc.IAPConnect4.core.Game;
 
 
 /**
- * Interface describing a Player playing the Connect 4 game;
+ * Interface describing a Player playing the Connect 4 game.
  * @author Martijn Verkleij
  *
  */
@@ -12,13 +12,13 @@ import nl.utwente.iapc.IAPConnect4.core.Game;
 public interface Player {
 	
 	/**
-	 * Do a move on the given Game
+	 * Do a move on the given Game.
 	 * @return Move object with column to do a move in.
 	 */
 	public void doMove(int move);
 	
 	/**
-	 * Returns the Player name;
+	 * Returns the Player name.
 	 * @return player name.
 	 */
 	public String getName();
@@ -30,7 +30,7 @@ public interface Player {
 	public void result(Player player);
 	
 	/**
-	 * Adds the Game object to the Player
+	 * Adds the Game object to the Player.
 	 *  @param game Game to add
 	 */
 	

@@ -29,6 +29,7 @@ public class ClientHandler extends Thread{
 	
 	public ClientHandler(Socket sock, Server server) {
 		this.server = server;
+		this.sock = sock;
 		game = null;
 		exit = false;
 		try {
@@ -45,7 +46,7 @@ public class ClientHandler extends Thread{
 	public void run() {
 		if (!exit) {
 			login();
-			while(!exit) {
+			while (!exit) {
 				parseCommand();
 			}
 		}
@@ -65,11 +66,11 @@ public class ClientHandler extends Thread{
 	private void login() {
 		String playerName = null;
 		int groupNumber = -1;
-		while(playerName == null || groupNumber == -1) {
+		while (playerName == null || groupNumber == -1) {
 			try {
 				Command join = Command.parse(reader.readLine());
 				System.out.println(join.toString());
-				if (!join.getArgument(0).equals(Protocol.JOIN.toString()) ) {
+				if (!join.getArgument(0).equals(Protocol.JOIN.toString())) {
 					throw new InvalidCommandException();
 				}
 				playerName = join.getArgument(1);
@@ -80,7 +81,7 @@ public class ClientHandler extends Thread{
 				}
 				player = new ServerPlayer(this, playerName);
 				
-				sendCommand(new Command(Protocol.ACCEPT, ""+Config.GROUP_NUMBER));
+				sendCommand(new Command(Protocol.ACCEPT, "" + Config.GROUP_NUMBER));
 				System.out.println("Client logged in: " + player.getName());
 			} catch (InvalidCommandException | IOException | NumberFormatException e) {
 				e.printStackTrace();

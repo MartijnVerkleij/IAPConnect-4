@@ -9,7 +9,7 @@ import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 import nl.utwente.iapc.IAPConnect4.server.ServerPlayer;
 
-public class Game{
+public class Game  {
 
 	private ArrayList<Player> players;
 	private BoardModel board;
@@ -28,14 +28,15 @@ public class Game{
 	}
 	
 	public void doMove(Player player, int move) throws InvalidMoveException {
-		if(players.indexOf(player) + 1 == playerToMove) {
+		if (players.indexOf(player) + 1 == playerToMove) {
 			BoardModel newBoard = board.move(move, playerToMove);
 			board = newBoard;
-			playerToMove = 1 + ((playerToMove) % players.size());
+			playerToMove = 1 + (playerToMove % players.size());
 			
-			for(Player p : players) {
-				if(p instanceof ServerPlayer) {
-					((ServerPlayer) p).sendCommand(new Command(Protocol.DONE_MOVE, player.getName(), "" + move));
+			for (Player p : players) {
+				if (p instanceof ServerPlayer) {
+					((ServerPlayer) p).sendCommand(new Command(Protocol.DONE_MOVE, 
+									player.getName(), "" + move));
 				}
 			}
 			
@@ -52,17 +53,18 @@ public class Game{
 	}
 	
 	public void notifyMove() {
-		for(Player p : players) {
-			if(p instanceof ServerPlayer) {
-				((ServerPlayer) p).sendCommand(new Command(Protocol.REQUEST_MOVE, players.get(playerToMove - 1).getName()));
+		for (Player p : players) {
+			if (p instanceof ServerPlayer) {
+				((ServerPlayer) p).sendCommand(new Command(Protocol.REQUEST_MOVE, 
+								players.get(playerToMove - 1).getName()));
 			}
 		}
 	}
 	
 	public void handleWin() {
-		for(Player p : players) {
+		for (Player p : players) {
 			if (board.getWinner() > 0) {
-				p.result((players.get(board.getWinner()-1)));
+				p.result(players.get(board.getWinner() - 1));
 			} else {
 				p.result(null);
 			}

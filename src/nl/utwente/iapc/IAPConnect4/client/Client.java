@@ -25,9 +25,10 @@ public class Client {
 		handler = new ServerHandler(sock, this);
 		handler.start();
 		
-		while (true) {
-			Thread.sleep(10000);
-		}
+	}
+	
+	public void requestMoveFromPlayer() {
+		
 	}
 	
 

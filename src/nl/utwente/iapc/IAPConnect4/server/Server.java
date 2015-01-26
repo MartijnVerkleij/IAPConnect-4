@@ -20,9 +20,9 @@ public class Server {
 	public Server(int port) {
 		try {
 			ssock = new ServerSocket(port);
-			System.out.println("IAPConnect4 Server\nAccepting connections on port "+port);
+			System.out.println("IAPConnect4 Server\nAccepting connections on port " + port);
 		} catch (BindException e) {
-			System.err.println("ERROR: Port "+port+" already in use. Exiting.");
+			System.err.println("ERROR: Port " + port + " already in use. Exiting.");
 			System.exit(1);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -32,7 +32,7 @@ public class Server {
 	}
 	
 	public void startServer() {
-		while(true) {
+		while (true) {
 			try {
 				Socket newClient = ssock.accept();
 				ClientHandler handler = new ClientHandler(newClient, this);
@@ -63,15 +63,15 @@ public class Server {
 		if (notInGame.size() > 1) {
 			Game game = new Game(notInGame.get(0).getPlayer(), notInGame.get(1).getPlayer());
 			System.out.println("New game with: " + notInGame.get(0).getPlayer().getName() + 
-					" + " + notInGame.get(1).getPlayer().getName());
+							" + " + notInGame.get(1).getPlayer().getName());
 			notInGame.get(0).newGame(game);
 			notInGame.get(1).newGame(game);
 			notInGame.get(0).getPlayer().addGame(game);
 			notInGame.get(1).getPlayer().addGame(game);
 			games.add(game);
 			broadcastCommand(new Command(Protocol.START_GAME, 
-					notInGame.get(0).getPlayer().getName(), 
-					notInGame.get(1).getPlayer().getName()));
+							notInGame.get(0).getPlayer().getName(), 
+							notInGame.get(1).getPlayer().getName()));
 			
 			game.startGame();
 		} else {
