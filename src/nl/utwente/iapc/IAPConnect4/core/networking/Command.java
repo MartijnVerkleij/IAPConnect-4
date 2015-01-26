@@ -12,12 +12,12 @@ public class Command {
 		arguments = new String[]{};
 	}
 	
-	public Command(Protocol p, String arg1){
+	public Command(Protocol p, String arg1) {
 		command = p;
-		arguments = new String[]{ arg1 };
+		arguments = new String[]{arg1};
 	}
 	
-	public Command(Protocol p, String arg1, String arg2){
+	public Command(Protocol p, String arg1, String arg2) {
 		command = p;
 		arguments = new String[]{arg1, arg2};
 	}
@@ -64,7 +64,7 @@ public class Command {
 		
 		String[] args = new String[splitCommand.length - 1];
 		for (int i = 1; i < splitCommand.length; i++) {
-			args[i-1] = splitCommand[i];
+			args[i - 1] = splitCommand[i];
 		}
 		
 		return new Command(arg0, args);

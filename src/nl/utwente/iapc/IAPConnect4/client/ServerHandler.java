@@ -59,7 +59,7 @@ public class ServerHandler extends Thread {
 		String playerName = "Test" + new Random().nextInt(50);
 		if (!exit) {
 			login(playerName);
-			while(!exit) {
+			while (!exit) {
 				parseCommand();
 			}
 		}
@@ -98,13 +98,13 @@ public class ServerHandler extends Thread {
 					board = new BoardModel();
 					gamePlayers = tempPlayers;
 				}
-				System.out.println("New game started with " + tempPlayers.get(0) + " and " + tempPlayers.get(1));
+				System.out.println("New game started with " + tempPlayers.get(0) + 
+								" and " + tempPlayers.get(1));
 				
 			} else if (action.equals(Protocol.DONE_MOVE.toString())) {
 				try {
-					int playerIndex = 0;
-					String playerName = command.getArgument(1);					
-					board = board.move(Integer.parseInt(command.getArgument(2)), gamePlayers.indexOf(command.getArgument(1)));
+					board = board.move(Integer.parseInt(command.getArgument(2)), 
+									gamePlayers.indexOf(command.getArgument(1)));
 				} catch (NumberFormatException | InvalidMoveException e) {
 					sendCommand(new Command(Protocol.ERROR, ProtocolError.INVALID_MOVE));
 				}
