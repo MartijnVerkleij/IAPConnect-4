@@ -12,10 +12,8 @@ import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 public class Client {
 	Socket sock;
 	ServerHandler handler;
-	ClientController clientController;
 	
-	public Client(String playerName, InetAddress server, int port, 
-					ClientController clientControllerArg) {
+	public Client(String playerName, InetAddress server, int port) {
 		try {
 			sock = new Socket(server, port);
 			System.out.println("IAPConnect4 Client\nConnection established with server");
@@ -33,7 +31,7 @@ public class Client {
 	}
 	
 	public BoardModel getBoard() {
-		return ServerHandler.getBoard();
+		return handler.getBoard();
 	}
 	
 	public void requestMoveFromPlayer() {

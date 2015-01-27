@@ -1,12 +1,10 @@
 package nl.utwente.iapc.IAPConnect4.client;
 
 import java.net.InetAddress;
-import java.util.Observable;
-import java.util.Observer;
 
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 
-public class ClientController implements {
+public class ClientController {
 	
 	private ClientView cv;
 	private Client client;
@@ -17,5 +15,8 @@ public class ClientController implements {
 	}
 	public BoardModel getBoard() {
 		return client.getBoard();
+	}
+	public void startClient() {
+		client.startClient();
 	}
 }
