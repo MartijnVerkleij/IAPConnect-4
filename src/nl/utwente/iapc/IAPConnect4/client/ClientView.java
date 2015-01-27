@@ -21,6 +21,10 @@ public class ClientView extends JFrame {
 	private JLabel titleLabel;
 	private JPanel boardJPanel;
 	
+	private final Color empty = new Color(255, 255, 255);
+	private final Color player1 = new Color(0, 255, 0);
+	private final Color player2 = new Color(255, 0, 0);
+	
 	
 	public ClientView(ClientController cc) {
 		super("IAPConnect-4");
@@ -54,9 +58,6 @@ public class ClientView extends JFrame {
 	
 	private void drawBoard(JPanel target) {
 		target.setLayout(new GridLayout(0, controller.getBoard().getBoardWidth()));
-		Color empty = new Color(255, 255, 255);
-		Color player1 = new Color(0, 255, 0);
-		Color player2 = new Color(255, 0, 0);
 		for (int y = 0; y < controller.getBoard().getBoardHeight(); y++) {
 			for (int x = 0; x < controller.getBoard().getBoardWidth(); x++) {
 				JButton field = new JButton(x+","+y);
@@ -78,7 +79,19 @@ public class ClientView extends JFrame {
 	}
 	
 	private void doMove(java.awt.event.ActionEvent e) {
-		//((GridLayout) board.getLayout()).;
-		
+		// Executes when button pressed
+		((GridLayout) board.getLayout()).;
+	}
+	public void setCell (int x, int y, int player, boolean enabled){
+		JButton field = (JButton) boardJPanel.getComponent(x * controller.getBoard().getBoardWidth() + y);
+		field.setEnabled(enabled);
+		switch (controller.getBoard().getField(x, y)) {
+		case 0: field.setForeground(empty);
+			break;
+		case 1: field.setForeground(player1);
+			break;
+		case 2: field.setForeground(player2);
+			break;
+	}
 	}
 }
