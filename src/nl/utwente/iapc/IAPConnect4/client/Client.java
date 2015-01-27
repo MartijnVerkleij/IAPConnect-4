@@ -39,14 +39,13 @@ public class Client extends Observable {
 	}
 	
 	public void newGame() {
-		System.out.println("notifyObserver()" + countObservers());
 		setChanged();
-		notifyObservers(1);
+		notifyObservers(Protocol.START_GAME);
 	}
 	
 	public void requestMoveFromPlayer() {
 		setChanged();
-		notifyObservers(2);
+		notifyObservers(Protocol.DO_MOVE);
 	}
 	
 	public void doMove(int move) throws InvalidCommandException {
