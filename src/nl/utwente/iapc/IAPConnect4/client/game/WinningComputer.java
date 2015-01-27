@@ -10,12 +10,13 @@ public class WinningComputer extends ComputerPlayer {
 	}
 	
 	@Override
-	public int nextMove (BoardModel board) {
+	public int nextMove(BoardModel board) {
 		// TODO
 		int determinedMove = 0;
 		// First move in center
-		if (board.getField(3, 5) == 0)
+		if (board.getField(3, 5) == 0) {
 			determinedMove = 3;
+		}
 		// else if(true)
 			
 		return determinedMove;

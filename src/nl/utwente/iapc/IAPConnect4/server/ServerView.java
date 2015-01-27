@@ -2,15 +2,12 @@ package nl.utwente.iapc.IAPConnect4.server;
 
 import java.awt.Container;
 import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class ServerView extends JFrame {
@@ -43,7 +40,7 @@ public class ServerView extends JFrame {
 				stopButton.setEnabled(false);
 				dispose();
 				controller.stopGame();
-			}});
+			} });
 		
 		// Add elements
 		c.add(titleLabel);

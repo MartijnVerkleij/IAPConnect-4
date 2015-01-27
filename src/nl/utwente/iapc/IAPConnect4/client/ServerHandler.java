@@ -6,25 +6,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-import java.util.logging.Handler;
 
-import javax.swing.text.PlainDocument;
 
 import nl.utwente.iapc.IAPConnect4.core.Config;
-import nl.utwente.iapc.IAPConnect4.core.Game;
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
-import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 import nl.utwente.iapc.IAPConnect4.core.networking.ProtocolError;
-import nl.utwente.iapc.IAPConnect4.server.Server;
-import nl.utwente.iapc.IAPConnect4.server.ServerPlayer;
 
 public class ServerHandler extends Thread {
 	
