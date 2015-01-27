@@ -19,7 +19,7 @@ public class ClientView extends JFrame {
 	private static final long serialVersionUID = -6605519650382227198L;
 	private ClientController controller;
 	private JLabel titleLabel;
-	private JPanel board;
+	private JPanel boardJPanel;
 	
 	
 	public ClientView(ClientController cc) {
@@ -28,11 +28,13 @@ public class ClientView extends JFrame {
 		init();
 	}
 	private void init() {
+		System.out.println("Gui spawned!");
 		Container c = getContentPane();
 		
 		Font fnt = new Font("Arial", java.awt.Font.BOLD , 28);
 		// Element declaration
 		titleLabel = new JLabel("Client");
+		boardJPanel = new JPanel();
 		
 		// Applying changes
 		titleLabel.setFont(fnt);
@@ -42,13 +44,14 @@ public class ClientView extends JFrame {
 		// Add ActionListeners
 		
 		// Add elements
-		drawBoard(board);
+		drawBoard(boardJPanel);
 		c.add(titleLabel);
-		c.add(board);
+		c.add(boardJPanel);
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 		pack();
 		setVisible(true);
 	}
+	
 	private void drawBoard(JPanel target) {
 		target.setLayout(new GridLayout(0, controller.getBoard().getBoardWidth()));
 		Color empty = new Color(255, 255, 255);

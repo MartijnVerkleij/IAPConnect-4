@@ -1,7 +1,7 @@
 package nl.utwente.iapc.IAPConnect4.core.networking;
 
 public enum Protocol {
-	JOIN, READY, DO_MOVE, ERROR, ACCEPT, START_GAME, REQUEST_MOVE, DONE_MOVE, GAME_END;
+	JOIN, READY_FOR_GAME, DO_MOVE, ERROR, ACCEPT, START_GAME, REQUEST_MOVE, DONE_MOVE, GAME_END;
 	
 	public String toString() {
 		return this.name().toLowerCase();

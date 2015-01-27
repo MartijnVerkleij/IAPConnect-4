@@ -3,13 +3,14 @@ package nl.utwente.iapc.IAPConnect4.client;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Observable;
 
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
-public class Client {
+public class Client extends Observable {
 	
 	Socket sock;
 	ServerHandler handler;
@@ -35,8 +36,15 @@ public class Client {
 		return handler.getBoard();
 	}
 	
+	public void newGame() {
+		System.out.println("notifyObserver()" + countObservers());
+		setChanged();
+		notifyObservers(1);
+	}
+	
 	public void requestMoveFromPlayer() {
-		
+		setChanged();
+		notifyObservers(2);
 	}
 	
 	public void doMove(int move) throws InvalidCommandException {

@@ -62,15 +62,17 @@ public class ServerHandler extends Thread {
 		int groupNumber = Config.GROUP_NUMBER;
 		try {
 			Command join = new Command(Protocol.JOIN, playerName, groupNumber + "");
-			System.out.println(join.toString());
+			System.out.println("join:\n" + join.toString());
 			sendCommand(join);
 			player = playerName;
 			Command accept = Command.parse(reader.readLine());
 			groupNumber = Integer.parseInt(accept.getArgument(1));
-			if (!accept.getCommand().equals(Protocol.ACCEPT) || groupNumber <= 0) {
+			if (!accept.getArgument(0).equals(Protocol.ACCEPT.toString()) || groupNumber <= 0) {
 				throw new InvalidCommandException();
 			}
 			System.out.println("Logged in on server: " + groupNumber);
+			
+			sendCommand(new Command(Protocol.READY_FOR_GAME));
 		} catch (InvalidCommandException | IOException | NumberFormatException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Not succesfully logged in");
@@ -90,6 +92,7 @@ public class ServerHandler extends Thread {
 				if (tempPlayers.indexOf(player) >= 0) {
 					board = new BoardModel();
 					gamePlayers = tempPlayers;
+					client.newGame();
 				}
 				System.out.println("New game started with " + tempPlayers.get(0) + 
 								" and " + tempPlayers.get(1));

@@ -100,7 +100,7 @@ public class ClientHandler extends Thread{
 			Command command = Command.parse(reader.readLine());
 			System.out.println(command.toString());
 			String action = command.getArgument(0);
-			if (action.equals(Protocol.READY.toString())) {
+			if (action.equals(Protocol.READY_FOR_GAME.toString())) {
 				System.out.println("Client ready to play: " + player.getName());
 				ready = true;
 				server.checkForNewGame();

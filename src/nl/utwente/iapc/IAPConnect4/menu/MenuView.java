@@ -57,16 +57,16 @@ public class MenuView extends JFrame {
 		serverPanel = new JPanel();
 		
 		joinNickLabel = new JLabel("Nickname:");
-		joinNick = new JTextField(10);
+		joinNick = new JTextField(20);
 		joinPortLabel = new JLabel("Port:");
-		joinPort = new JTextField(5);
+		joinPort = new JTextField("" + 2000);
 		hostnameLabel = new JLabel("Hostname:");
-		hostname = new JTextField(10);
+		hostname = new JTextField("localhost");
 		joinLabel = new JLabel("Ready?");
 		joinButton = new JButton("Join");
 		
 		serverPortLabel = new JLabel("Port:");
-		serverPort = new JTextField(5);
+		serverPort = new JTextField("" + 2000);
 		serverButton = new JButton("Start");
 		
 		// Applying changes
