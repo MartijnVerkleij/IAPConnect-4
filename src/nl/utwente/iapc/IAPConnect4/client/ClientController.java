@@ -42,8 +42,10 @@ public class ClientController implements Observer {
 		} else if ((Protocol) arg == Protocol.DONE_MOVE) {
 			System.out.println("Move gedaan clientcontroller");
 			cv.refreshBoard();
+		} else if ((Protocol) arg == Protocol.GAME_END) {
+			System.out.println("Game end");
+			cv.endGame();
 		}
-		
 	}
 	public void doMove(int x) {
 		try {
