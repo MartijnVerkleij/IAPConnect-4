@@ -38,6 +38,11 @@ public class Client extends Observable {
 		return handler.getBoard();
 	}
 	
+	
+	public ServerHandler getHandler() {
+		return handler;
+	}
+	
 	public void newGame() {
 		setChanged();
 		notifyObservers(Protocol.START_GAME);

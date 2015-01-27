@@ -61,6 +61,7 @@ public class ClientView extends JFrame {
 		for (int y = 0; y < controller.getBoard().getBoardHeight(); y++) {
 			for (int x = 0; x < controller.getBoard().getBoardWidth(); x++) {
 				JButton field = new JButton(x + "," + y);
+				field.setEnabled(false);
 				switch (controller.getBoard().getField(x, y)) {
 					case 0: field.setForeground(empty);
 						break;
@@ -80,9 +81,9 @@ public class ClientView extends JFrame {
 	
 	private void doMove(java.awt.event.ActionEvent e) {
 		// Executes when button pressed
-		((GridLayout) board.getLayout()).;
+		
 	}
-	public void setCell (int x, int y, int player, boolean enabled){
+	public void updateCell (int x, int y, int player, boolean enabled){
 		JButton field = (JButton) boardJPanel.getComponent(x * controller.getBoard().getBoardWidth() + y);
 		field.setEnabled(enabled);
 		switch (controller.getBoard().getField(x, y)) {
@@ -92,6 +93,23 @@ public class ClientView extends JFrame {
 			break;
 		case 2: field.setForeground(player2);
 			break;
+		}
 	}
+	public void updateAllCells (boolean enabled){
+		for (int x = 0; x < boardJPanel.getComponentCount(); x++) {
+			boardJPanel.getComponent(x).setEnabled(enabled);
+		}
+	}
+	public void refreshBoard() {
+		JPanel newBoardJPanel = new JPanel();
+		drawBoard(newBoardJPanel);
+		boardJPanel = newBoardJPanel;
+	}
+	public void unlockBoard(){
+		for (Component field : boardJPanel.getComponents()) {
+			if (field.getBackground() == empty) {
+				field.setEnabled(true);
+			}
+		}
 	}
 }
