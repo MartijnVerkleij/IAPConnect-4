@@ -12,9 +12,9 @@ import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 public class Client extends Observable {
 	
-	Socket sock;
-	ServerHandler handler;
-	String playerName;
+	private Socket sock;
+	private ServerHandler handler;
+	private String playerName;
 	
 	public Client(String playerNameArg, InetAddress server, int port) {
 		try {
