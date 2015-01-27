@@ -21,18 +21,18 @@ import nl.utwente.iapc.IAPConnect4.core.networking.ProtocolError;
 
 public class ServerHandler extends Thread {
 	
-	Socket sock;
-	Client client;
-	BufferedReader reader;
-	BufferedWriter writer;
-	String player;
+	private Socket sock;
+	private Client client;
+	private BufferedReader reader;
+	private BufferedWriter writer;
+	private String player;
 	
-	BoardModel board;
-	LinkedList<String> gamePlayers;
+	private BoardModel board;
+	private LinkedList<String> gamePlayers;
 	
-	boolean ready;
-	Semaphore lastMoveReady = new Semaphore(1);
-	boolean exit;
+	private boolean ready;
+	private Semaphore lastMoveReady = new Semaphore(1);
+	private boolean exit;
 
 	public ServerHandler(Socket sockArg, Client clientArg, String playerArg) {
 		this.player = playerArg;

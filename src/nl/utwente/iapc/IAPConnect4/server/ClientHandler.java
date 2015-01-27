@@ -18,14 +18,14 @@ import nl.utwente.iapc.IAPConnect4.core.networking.ProtocolError;
 
 public class ClientHandler extends Thread{
 	
-	Socket sock;
-	Server server;
-	BufferedReader reader;
-	BufferedWriter writer;
-	Player player;
-	Game game;
-	boolean ready;
-	boolean exit;
+	private Socket sock;
+	private Server server;
+	private BufferedReader reader;
+	private BufferedWriter writer;
+	private Player player;
+	private Game game;
+	private boolean ready;
+	private boolean exit;
 	
 	public ClientHandler(Socket sock, Server server) {
 		this.server = server;
