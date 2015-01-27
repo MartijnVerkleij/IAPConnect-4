@@ -13,11 +13,15 @@ import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 
 public class Server {
+	
 	private ServerSocket ssock;
 	private LinkedList<ClientHandler> clients = new LinkedList<ClientHandler>();
 	private LinkedList<Game> games = new LinkedList<Game>();
-	boolean exit;
+	private boolean exit;
 	
+	
+	//@ requires port > 0 && port < 65535;
+	//@ ensures !isExiting() ==> getServerSocket() != null;
 	public Server(int port) {
 		exit = false;
 		try {
@@ -32,6 +36,8 @@ public class Server {
 		}
 	}
 	
+	
+	//@ requires !isExiting() ==> getServerSocket() != null;
 	public void startServer() {
 		while (!exit) {
 			try {
@@ -50,19 +56,29 @@ public class Server {
 	}
 	
 	
+	
 	public void broadcastCommand(Command c) {
 		for (ClientHandler cl : clients) {
 			cl.sendCommand(c);
 		}
 	}
 	
-	public void checkForNewGame() {
-		LinkedList<ClientHandler> notInGame = new LinkedList<ClientHandler>();
+	//@pure
+	public LinkedList<ClientHandler> availablePlayers() {
+		LinkedList<ClientHandler> availablePlayers = new LinkedList<ClientHandler>();
 		for (ClientHandler cl : clients) {
 			if (cl.getGame() == null && cl.isReady()) {
-				notInGame.add(cl);
+				availablePlayers.add(cl);
 			}
 		}
+		return availablePlayers;
+	}
+	
+	
+	/*@ ensures \old(availablePlayers().size() > 1) ==> 
+	  	getGames().size() == \old(getGames().size()) + 1; @*/
+	public void checkForNewGame() {
+		LinkedList<ClientHandler> notInGame = availablePlayers();
 
 		if (notInGame.size() > 1) {
 			Game game = new Game(notInGame.get(0).getPlayer(), notInGame.get(1).getPlayer());
@@ -105,6 +121,7 @@ public class Server {
 		clients.remove(ch);
 	}
 	
+	//requires foreach
 	public void stopServer() {
 		exit = true;
 		for (ClientHandler ch : clients) {
@@ -116,5 +133,20 @@ public class Server {
 		} catch (InterruptedException | IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//@pure
+	public ServerSocket getServerSocket() {
+		return ssock;
+	}
+	
+	//@pure
+	public LinkedList<Game> getGames() {
+		return games;
+	}
+	
+	//@pure
+	public boolean isExiting() {
+		return exit;
 	}
 }

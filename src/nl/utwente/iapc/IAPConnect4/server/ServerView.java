@@ -39,7 +39,7 @@ public class ServerView extends JFrame {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				stopButton.setEnabled(false);
 				dispose();
-				controller.stopGame();
+				controller.stopServer();
 			} });
 		// Add elements
 		c.add(titleLabel);

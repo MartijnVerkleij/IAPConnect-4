@@ -23,6 +23,7 @@ public class IAPConnect4 {
 	}
 	public void serverMode(int port) {
 		getInstance().serverController = new ServerController(port);
+		getInstance().serverController.startServer();
 	}
 	public void returnToMenu() {
 		//serverController = null;
