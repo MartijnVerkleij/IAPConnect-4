@@ -10,6 +10,7 @@ import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 public class Client {
+	
 	Socket sock;
 	ServerHandler handler;
 	ClientController clientController;
@@ -33,7 +34,7 @@ public class Client {
 	}
 	
 	public BoardModel getBoard() {
-		return ServerHandler.getBoard();
+		return handler.getBoard();
 	}
 	
 	public void requestMoveFromPlayer() {

@@ -1,7 +1,6 @@
 package nl.utwente.iapc.IAPConnect4.server;
 
 import nl.utwente.iapc.IAPConnect4.IAPConnect4;
-import nl.utwente.iapc.IAPConnect4.menu.MenuView;
 
 public class ServerController {
 	private ServerView sv;

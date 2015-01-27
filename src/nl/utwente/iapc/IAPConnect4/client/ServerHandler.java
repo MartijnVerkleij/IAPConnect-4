@@ -34,12 +34,12 @@ public class ServerHandler extends Thread {
 	Semaphore lastMoveReady = new Semaphore(1);
 	boolean exit;
 
-	public ServerHandler(Socket sock, Client client) {
-		this.sock = sock;
-		this.client = client;
+	public ServerHandler(Socket sockArg, Client clientArg) {
+		this.sock = sockArg;
+		this.client = clientArg;
 		try {
-			reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-			writer = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+			reader = new BufferedReader(new InputStreamReader(sockArg.getInputStream()));
+			writer = new BufferedWriter(new OutputStreamWriter(sockArg.getOutputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
@@ -104,10 +104,12 @@ public class ServerHandler extends Thread {
 				
 				//TODO disable UI on successful move
 			} else if (action.equals(Protocol.REQUEST_MOVE.toString())) {
-				//TODO ask Client for Move
+				client.requestMoveFromPlayer();
 			} else if (action.equals(Protocol.GAME_END.toString())) {
 				board = null;
 				gamePlayers = null;
+				
+				//TODO show fancy win dialog
 			}
 			
 			
