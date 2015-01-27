@@ -60,7 +60,7 @@ public class ClientView extends JFrame {
 		target.setLayout(new GridLayout(0, controller.getBoard().getBoardWidth()));
 		for (int y = 0; y < controller.getBoard().getBoardHeight(); y++) {
 			for (int x = 0; x < controller.getBoard().getBoardWidth(); x++) {
-				JButton field = new JButton(x+","+y);
+				JButton field = new JButton(x + "," + y);
 				switch (controller.getBoard().getField(x, y)) {
 					case 0: field.setForeground(empty);
 						break;
