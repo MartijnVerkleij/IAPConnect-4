@@ -140,4 +140,5 @@ public class ServerHandler extends Thread {
 	public BoardModel getBoard() {
 		return board;
 	}
+
 }
