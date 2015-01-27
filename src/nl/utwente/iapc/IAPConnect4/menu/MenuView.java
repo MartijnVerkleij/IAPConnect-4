@@ -26,11 +26,15 @@ public class MenuView extends JFrame {
 	private JPanel joinPanel;
 	private JPanel serverPanel;
 	
+	private JLabel joinNickLabel;
+	private JTextField joinNick;
 	private JLabel joinPortLabel;
 	private JTextField joinPort;
 	private JLabel hostnameLabel;
 	private JTextField hostname;
+	private JLabel joinLabel;
 	private JButton joinButton;
+	
 	private JLabel serverPortLabel;
 	private JTextField serverPort;
 	private JButton serverButton;
@@ -51,11 +55,16 @@ public class MenuView extends JFrame {
 		quitButton = new JButton("Quit game");
 		joinPanel = new JPanel(new GridLayout(0, 2));
 		serverPanel = new JPanel();
+		
+		joinNickLabel = new JLabel("Nickname:");
+		joinNick = new JTextField(10);
 		joinPortLabel = new JLabel("Port:");
 		joinPort = new JTextField(5);
 		hostnameLabel = new JLabel("Hostname:");
 		hostname = new JTextField(10);
+		joinLabel = new JLabel("Ready?");
 		joinButton = new JButton("Join");
+		
 		serverPortLabel = new JLabel("Port:");
 		serverPort = new JTextField(5);
 		serverButton = new JButton("Start");
@@ -66,9 +75,12 @@ public class MenuView extends JFrame {
 		titleLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 		showJoinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinPanel.setVisible(false);
+		joinLabel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));;
 		showServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		serverPanel.setVisible(false);
 		quitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		
 		// Add ActionListeners
 		showJoinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -101,10 +113,13 @@ public class MenuView extends JFrame {
 		c.add(titleLabel);
 		c.add(showJoinButton);
 		c.add(joinPanel);
+		joinPanel.add(joinNickLabel);
+		joinPanel.add(joinNick);
 		joinPanel.add(hostnameLabel);
 		joinPanel.add(hostname);
 		joinPanel.add(joinPortLabel);
 		joinPanel.add(joinPort);
+		joinPanel.add(joinLabel);
 		joinPanel.add(joinButton);
 		c.add(showServerButton);
 		c.add(serverPanel);
