@@ -115,7 +115,7 @@ public class ServerHandler extends Thread {
 			} else if (action.equals(Protocol.GAME_END.toString())) {
 				board = null;
 				gamePlayers = null;
-				
+				client.endGame(command.getArgument(1));
 				//TODO show fancy win dialog
 			}
 			
