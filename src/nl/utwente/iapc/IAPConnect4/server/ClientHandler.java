@@ -151,5 +151,6 @@ public class ClientHandler extends Thread{
 			e.printStackTrace();
 			System.err.println("Error while closing connections");
 		}
+		server.removeClient(this);
 	}
 }
