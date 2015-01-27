@@ -14,9 +14,11 @@ public class Client extends Observable {
 	
 	Socket sock;
 	ServerHandler handler;
+	String playerName;
 	
-	public Client(String playerName, InetAddress server, int port) {
+	public Client(String playerNameArg, InetAddress server, int port) {
 		try {
+			this.playerName = playerNameArg;
 			sock = new Socket(server, port);
 			System.out.println("IAPConnect4 Client\nConnection established with server");
 		} catch (IOException e) {
@@ -27,7 +29,7 @@ public class Client extends Observable {
 	}
 	
 	public void startClient() {
-		handler = new ServerHandler(sock, this);
+		handler = new ServerHandler(sock, this, playerName);
 		handler.start();
 		
 	}
