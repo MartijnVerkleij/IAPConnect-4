@@ -13,19 +13,18 @@ import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 
 public class Server {
-	ServerSocket ssock;
-	LinkedList<ClientHandler> clients = new LinkedList<ClientHandler>();
-	LinkedList<Game> games = new LinkedList<Game>();
+	private ServerSocket ssock;
+	private LinkedList<ClientHandler> clients = new LinkedList<ClientHandler>();
+	private LinkedList<Game> games = new LinkedList<Game>();
 	boolean exit;
 	
 	public Server(int port) {
 		exit = false;
 		try {
 			ssock = new ServerSocket(port);
-			System.out.println("IAPConnect4 Server\nAccepting connections on port " + port);
 		} catch (BindException e) {
 			System.err.println("ERROR: Port " + port + " already in use. Exiting.");
-			System.exit(1);
+			exit = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
@@ -36,6 +35,8 @@ public class Server {
 	public void startServer() {
 		while (!exit) {
 			try {
+				System.out.println("IAPConnect4 Server\nAccepting connections on port " + 
+								ssock.getLocalPort());
 				Socket newClient = ssock.accept();
 				ClientHandler handler = new ClientHandler(newClient, this);
 				clients.add(handler);
@@ -102,5 +103,14 @@ public class Server {
 	
 	public void stopServer() {
 		exit = true;
+		for (ClientHandler ch : clients) {
+			ch.closeConnection();
+		}
+		try {
+			Thread.sleep(1000);
+			ssock.close();
+		} catch (InterruptedException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
