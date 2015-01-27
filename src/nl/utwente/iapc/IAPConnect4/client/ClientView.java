@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ClientView extends JFrame {
@@ -112,5 +113,16 @@ public class ClientView extends JFrame {
 				field.setEnabled(true);
 			}
 		}
+	}
+	public void gameEnd(String winnerName) {
+		String result = "The game has ended, you ";
+		if (winnerName == null) {
+			result += "didn't lose, but didn't win either.\nIt's a draw!";
+		} else if (winnerName.equals(controller.getClient().getPlayerName()) {
+			result += "won!\nWell done!";
+		} else {
+			result ++ "lost!\nBetter luck next time!";
+		}
+		JOptionPane.showMessageDialog(this, result);
 	}
 }

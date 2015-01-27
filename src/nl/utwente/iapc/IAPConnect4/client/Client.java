@@ -75,5 +75,9 @@ public class Client extends Observable {
 	public void doMove(int move) throws InvalidCommandException {
 		handler.sendCommand(new Command(Protocol.DO_MOVE, "" + move));
 	}
+	
+	public String getPlayerName() {
+		return playerName;
+	}
 }
 

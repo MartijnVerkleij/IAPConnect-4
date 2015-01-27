@@ -17,8 +17,10 @@ public class ClientController implements Observer {
 		client = new Client(playerName, server, port);
 		client.addObserver(this);
 	}
-	
-	
+
+	public Client getClient() {
+		return client;
+	}
 	
 	public BoardModel getBoard() {
 		return client.getBoard();
