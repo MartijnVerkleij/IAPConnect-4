@@ -41,7 +41,6 @@ public class ServerView extends JFrame {
 				dispose();
 				controller.stopGame();
 			} });
-		
 		// Add elements
 		c.add(titleLabel);
 		c.add(stopButton);
