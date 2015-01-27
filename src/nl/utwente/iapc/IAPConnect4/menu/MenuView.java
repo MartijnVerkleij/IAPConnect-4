@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 public class MenuView extends JFrame {
 
@@ -51,7 +49,7 @@ public class MenuView extends JFrame {
 		showJoinButton = new JButton("Join online game");
 		showServerButton = new JButton("Start Server");
 		quitButton = new JButton("Quit game");
-		joinPanel = new JPanel(new GridLayout(0,2));
+		joinPanel = new JPanel(new GridLayout(0, 2));
 		serverPanel = new JPanel();
 		joinPortLabel = new JLabel("Port:");
 		joinPort = new JTextField(5);
@@ -65,7 +63,7 @@ public class MenuView extends JFrame {
 		// Applying changes
 		titleLabel.setFont(fnt);
 		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		titleLabel.setBorder(BorderFactory.createEmptyBorder(5,10,5,10));
+		titleLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 		showJoinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinPanel.setVisible(false);
 		showServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -77,27 +75,27 @@ public class MenuView extends JFrame {
 				serverPanel.setVisible(false);
 				joinPanel.setVisible(!joinPanel.isVisible());
 				pack();
-			}});
+			} });
 		showServerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				joinPanel.setVisible(false);
 				serverPanel.setVisible(!serverPanel.isVisible());
 				pack();
-			}});
+			} });
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				//
-			}});
+			} });
 		serverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				hideView();
 				controller.serverMode(Integer.parseInt(serverPort.getText()));
-			}});
+			} });
 		
 		quitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				controller.quitGame();
-			}});
+			} });
 		
 		// Add elements
 		c.add(titleLabel);
@@ -121,7 +119,7 @@ public class MenuView extends JFrame {
 	public void showView() {
 		this.setVisible(true);
 	}
-	public void hideView(){
+	public void hideView() {
 		this.setVisible(false);
 	}
 }

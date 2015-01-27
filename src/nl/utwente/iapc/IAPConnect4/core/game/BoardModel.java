@@ -124,8 +124,7 @@ public class BoardModel {
 		boolean full = false;
 		int column = 0;
 		// TODO: check < or <=
-		while (column < BOARDWIDTH) 
-		{
+		while (column < BOARDWIDTH) {
 			full = full && (getEmptyFields(column) == 0);
 			column++;
 		}

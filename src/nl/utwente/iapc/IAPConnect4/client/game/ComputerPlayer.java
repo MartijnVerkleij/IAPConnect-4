@@ -8,7 +8,7 @@ public abstract class ComputerPlayer implements Player {
 
 	protected String name;
 	
-	public ComputerPlayer (String name) {
+	public ComputerPlayer(String name) {
 		this.name = name;
 	}
 	
