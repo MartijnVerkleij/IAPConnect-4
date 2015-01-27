@@ -63,11 +63,11 @@ public class ClientView extends JFrame {
 				JButton field = new JButton(x + "," + y);
 				field.setEnabled(false);
 				switch (controller.getBoard().getField(x, y)) {
-					case 0: field.setForeground(empty);
+					case 0: field.setBackground(empty);
 						break;
-					case 1: field.setForeground(player1);
+					case 1: field.setBackground(player1);
 						break;
-					case 2: field.setForeground(player2);
+					case 2: field.setBackground(player2);
 						break;
 				}
 				field.addActionListener(new ActionListener() {

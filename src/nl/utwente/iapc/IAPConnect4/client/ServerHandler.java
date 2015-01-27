@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import nl.utwente.iapc.IAPConnect4.core.Config;
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
@@ -100,13 +101,17 @@ public class ServerHandler extends Thread {
 				try {
 					board = board.move(Integer.parseInt(command.getArgument(2)), 
 									gamePlayers.indexOf(command.getArgument(1)));
+					client.moveDone();
 				} catch (NumberFormatException | InvalidMoveException e) {
 					sendCommand(new Command(Protocol.ERROR, ProtocolError.INVALID_MOVE));
 				}
 				
 				//TODO disable UI on successful move
 			} else if (action.equals(Protocol.REQUEST_MOVE.toString())) {
-				client.requestMoveFromPlayer();
+				if (command.getArgument(1).equals(player)) {
+					System.out.println("Doe een move");
+					client.requestMoveFromPlayer();
+				}
 			} else if (action.equals(Protocol.GAME_END.toString())) {
 				board = null;
 				gamePlayers = null;

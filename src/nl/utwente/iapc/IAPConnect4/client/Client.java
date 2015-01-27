@@ -53,6 +53,11 @@ public class Client extends Observable {
 		notifyObservers(Protocol.DO_MOVE);
 	}
 	
+	public void moveDone() {
+		setChanged();
+		notifyObservers(Protocol.DONE_MOVE);
+	}
+	
 	public void doMove(int move) throws InvalidCommandException {
 		handler.sendCommand(new Command(Protocol.DO_MOVE, "" + move));
 	}
