@@ -96,7 +96,8 @@ public class MenuView extends JFrame {
 			} });
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				//
+				hideView();
+				controller.clientMode(joinNick.getText(), hostname.getText(), Integer.parseInt(joinPort.getText()));
 			} });
 		serverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
