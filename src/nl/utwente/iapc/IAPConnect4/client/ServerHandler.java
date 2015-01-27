@@ -34,7 +34,8 @@ public class ServerHandler extends Thread {
 	Semaphore lastMoveReady = new Semaphore(1);
 	boolean exit;
 
-	public ServerHandler(Socket sockArg, Client clientArg) {
+	public ServerHandler(Socket sockArg, Client clientArg, String playerArg) {
+		this.player = playerArg;
 		this.sock = sockArg;
 		this.client = clientArg;
 		try {
@@ -49,22 +50,20 @@ public class ServerHandler extends Thread {
 	}
 	
 	public void run() {
-		String playerName = "Test" + new Random().nextInt(50);
 		if (!exit) {
-			login(playerName);
+			login();
 			while (!exit) {
 				parseCommand();
 			}
 		}
 	}
 	
-	private void login(String playerName) {
+	private void login() {
 		int groupNumber = Config.GROUP_NUMBER;
 		try {
-			Command join = new Command(Protocol.JOIN, playerName, groupNumber + "");
+			Command join = new Command(Protocol.JOIN, player, groupNumber + "");
 			System.out.println("join:\n" + join.toString());
 			sendCommand(join);
-			player = playerName;
 			Command accept = Command.parse(reader.readLine());
 			groupNumber = Integer.parseInt(accept.getArgument(1));
 			if (!accept.getArgument(0).equals(Protocol.ACCEPT.toString()) || groupNumber <= 0) {
