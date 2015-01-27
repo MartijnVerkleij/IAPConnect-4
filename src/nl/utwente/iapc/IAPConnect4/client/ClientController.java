@@ -42,7 +42,7 @@ public class ClientController implements Observer {
 			cv.refreshBoard();
 		} else if ((Protocol) arg == Protocol.GAME_END) {
 			System.out.println("Game end");
-			cv.endGame();
+			cv.endGame(((Client) o).getWinner());
 		}
 	}
 	public void doMove(int x) {

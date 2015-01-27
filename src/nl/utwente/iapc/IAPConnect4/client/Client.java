@@ -15,6 +15,7 @@ public class Client extends Observable {
 	private Socket sock;
 	private ServerHandler handler;
 	private String playerName;
+	private String winner;
 	
 	public Client(String playerNameArg, InetAddress server, int port) {
 		try {
@@ -56,6 +57,19 @@ public class Client extends Observable {
 	public void moveDone() {
 		setChanged();
 		notifyObservers(Protocol.DONE_MOVE);
+	}
+	
+	public void setWinner(String winnerArg) {
+		winner = winnerArg;
+	}
+	public String getWinner() {
+		return winner;
+	}
+	
+	public void endGame(String winnerArg) {
+		setWinner(winnerArg);
+		setChanged();
+		notifyObservers(Protocol.GAME_END);
 	}
 	
 	public void doMove(int move) throws InvalidCommandException {
