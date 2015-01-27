@@ -1,7 +1,5 @@
 package nl.utwente.iapc.IAPConnect4.core.game;
 
-import java.util.Arrays;
-
 /**
  * A connect-4 board with variable width and height.
  * @author Martijn Verkleij & Axel Vugts

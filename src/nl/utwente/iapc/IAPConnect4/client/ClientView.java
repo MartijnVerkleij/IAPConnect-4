@@ -81,6 +81,7 @@ public class ClientView extends JFrame {
 	
 	private void doMove(java.awt.event.ActionEvent e) {
 		// Executes when button pressed
+		controller.doMove(boardJPanel.getComponentZOrder((JButton) e.getSource()) % controller.getBoard().getBoardWidth());
 		
 	}
 	public void updateCell (int x, int y, int player, boolean enabled){

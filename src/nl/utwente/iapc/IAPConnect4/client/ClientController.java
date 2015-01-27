@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
+import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 public class ClientController implements Observer {
@@ -42,6 +43,14 @@ public class ClientController implements Observer {
 		} else if ((Protocol) arg == Protocol.GAME_END) {
 			System.out.println("Game end");
 			cv.endGame();
+		}
+	}
+	public void doMove(int x) {
+		try {
+			client.doMove(x);
+		} catch (InvalidCommandException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
