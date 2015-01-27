@@ -118,10 +118,10 @@ public class ClientView extends JFrame {
 		String result = "The game has ended, you ";
 		if (winnerName == null) {
 			result += "didn't lose, but didn't win either.\nIt's a draw!";
-		} else if (winnerName.equals(controller.getClient().getPlayerName()) {
+		} else if (winnerName.equals(controller.getClient().getPlayerName())) {
 			result += "won!\nWell done!";
 		} else {
-			result ++ "lost!\nBetter luck next time!";
+			result += "lost!\nBetter luck next time!";
 		}
 		JOptionPane.showMessageDialog(this, result);
 	}

@@ -44,7 +44,7 @@ public class ClientController implements Observer {
 			cv.refreshBoard();
 		} else if ((Protocol) arg == Protocol.GAME_END) {
 			System.out.println("Game end");
-			cv.endGame(((Client) o).getWinner());
+			cv.gameEnd(((Client) o).getWinner());
 		}
 	}
 	public void doMove(int x) {
