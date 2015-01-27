@@ -328,7 +328,7 @@ Server
 \begin_inset Newline newline
 \end_inset
 
-nl.utwente.iapc.IAPConnect4.model.networking.Server.
+nl.utwente.iapc.IAPConnect4.menu.MenuController
 \end_layout
 
 \begin_layout Enumerate
@@ -344,17 +344,21 @@ nl.utwente.iapc.IAPConnect4.model.networking.Server.
 
 \emph on
 "A server should be able to support multiple instances of the game that
- are played simultaneously by different clients."
+ are played simultaneously by different clients."
 \emph default
 
 \begin_inset Newline newline
 \end_inset
 
-nl.utwente.iapc.IAPConnect4.model.networking.Server.
+nl.utwente.iapc.IAPConnect4.model.server.Server
 \end_layout
 
 \begin_layout Enumerate
 The TUI ensures that all communication messages are written to System.out.
+\begin_inset Newline newline
+\end_inset
+
+-
 \end_layout
 
 \begin_layout Enumerate
@@ -368,7 +372,7 @@ The TUI ensures that all communication messages are written to System.out.
 \begin_inset Newline newline
 \end_inset
 
-nl.utwente.iapc.IAPConnect4.util.Protocol
+nl.utwente.iapc.IAPConnect4.core.networking.Protocol
 \end_layout
 
 \begin_layout Subsection
@@ -382,6 +386,10 @@ The client should have a user friendly TUI, which provides several options
  to the user (e.g., possibility to a enter port number and IP address) to
  request a game at the server.
  
+\begin_inset Newline newline
+\end_inset
+
+nl.utwente.iapc.IAPConnect4.menu.MenuView
 \end_layout
 
 \begin_layout Enumerate
@@ -409,7 +417,6 @@ The client provides a hint functionality.
  player.
  The move may only be proposed, the human player should have the possibility
  to decide whether to play this move, or make a different one.
- 
 \end_layout
 
 \begin_layout Enumerate
