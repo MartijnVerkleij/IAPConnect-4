@@ -9,11 +9,13 @@ public class ServerController {
 	public ServerController(int port) {
 		sv = new ServerView(this);
 		server = new Server(port);
-		server.startServer();
 	}
 	public void stopGame() {
 		server.stopServer();
 		IAPConnect4.getInstance().returnToMenu();
+	}
+	public void startGame() {
+		server.startServer();
 	}
 
 }
