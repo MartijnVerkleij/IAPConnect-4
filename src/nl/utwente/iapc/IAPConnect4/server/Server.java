@@ -101,6 +101,10 @@ public class Server {
 		}
 	}
 	
+	public void removeClient(ClientHandler ch) {
+		clients.remove(ch);
+	}
+	
 	public void stopServer() {
 		exit = true;
 		for (ClientHandler ch : clients) {

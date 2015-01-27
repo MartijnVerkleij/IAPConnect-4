@@ -4,11 +4,18 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
+import nl.utwente.iapc.IAPConnect4.core.networking.Command;
+import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
+import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
+
 public class Client {
 	Socket sock;
 	ServerHandler handler;
+	ClientController clientController;
 	
-	public Client(String playerName, InetAddress server, int port) {
+	public Client(String playerName, InetAddress server, int port, 
+					ClientController clientControllerArg) {
 		try {
 			sock = new Socket(server, port);
 			System.out.println("IAPConnect4 Client\nConnection established with server");
@@ -25,10 +32,16 @@ public class Client {
 		
 	}
 	
+	public BoardModel getBoard() {
+		return ServerHandler.getBoard();
+	}
+	
 	public void requestMoveFromPlayer() {
 		
 	}
 	
-
+	public void doMove(int move) throws InvalidCommandException {
+		handler.sendCommand(new Command(Protocol.DO_MOVE, "" + move));
+	}
 }
 

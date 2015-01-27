@@ -127,4 +127,8 @@ public class ServerHandler extends Thread {
 			e.printStackTrace();
 		}
 	}
+	
+	public BoardModel getBoard() {
+		return board;
+	}
 }
