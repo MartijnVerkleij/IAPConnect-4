@@ -3897,7 +3897,7 @@ ClientHandler(
 status open
 
 \begin_layout Plain Layout
-Socket socketArg, Server serverArg
+Socket sockArg, Server serverArg
 \end_layout
 
 \end_inset
@@ -4080,7 +4080,7 @@ Voorzorgs-maatregelen:
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+sockArg != null;
 \end_layout
 
 \end_inset
@@ -4271,7 +4271,8 @@ Voorzorgs-maatregelen:
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Valide poort, binnen 0 en 65535.
+ 
 \end_layout
 
 \end_inset

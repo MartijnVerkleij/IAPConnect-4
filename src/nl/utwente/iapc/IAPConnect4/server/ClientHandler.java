@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-import nl.utwente.iapc.IAPConnect4.client.Client;
 import nl.utwente.iapc.IAPConnect4.core.Config;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
