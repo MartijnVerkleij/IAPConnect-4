@@ -68,7 +68,7 @@ public class ServerHandler extends Thread {
 			sendCommand(join);
 			Command accept = Command.parse(reader.readLine());
 			groupNumber = Integer.parseInt(accept.getArgument(1));
-			if (!accept.getArgument(0).equals(Protocol.ACCEPT.toString()) || groupNumber <= 0) {
+			if (!accept.getArgument(0).equals(Protocol.ACCEPT.toString()) /*|| groupNumber <= 0*/) {
 				throw new InvalidCommandException();
 			}
 			System.out.println("Logged in on server: " + groupNumber);

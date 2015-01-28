@@ -19,6 +19,10 @@ public class WinningComputer extends ComputerPlayer {
 		// First move in center
 		if (board.getField(3, 5) == 0) {
 			determinedMove = 3;
+		} else if (board.isLegalMove(3)) {
+			determinedMove = 3;
+		} else if (board.isLegalMove(6)) {
+			determinedMove = 6;
 		} else { 
 			determinedMove = backup.nextMove(board);
 		}
