@@ -81,6 +81,7 @@ public class ServerHandler extends Thread {
 		}
 	}
 	
+	
 	private void parseCommand() {
 		try {
 			Command command = Command.parse(reader.readLine());

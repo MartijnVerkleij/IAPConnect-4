@@ -35,7 +35,7 @@ public class Server extends Thread {
 		}
 	}
 	
-	
+	//@ requires !isExiting() ==> getServerSocket() != null;
 	public void run() {
 		startServer();
 	}
@@ -63,7 +63,7 @@ public class Server extends Thread {
 	}
 	
 	
-	
+	//requires clients.size() > 0 ==> 
 	public void broadcastCommand(Command c) {
 		for (ClientHandler cl : clients) {
 			cl.sendCommand(c);
@@ -106,6 +106,7 @@ public class Server extends Thread {
 		}
 	}
 	
+	// ensures
 	private ClientHandler findClient(String name) {
 		for (ClientHandler c : clients) {
 			if (c.getPlayer().getName().equals(name)) {
@@ -128,7 +129,7 @@ public class Server extends Thread {
 		clients.remove(ch);
 	}
 	
-	//requires foreach
+	//requires \forall
 	public void stopServer() {
 		exit = true;
 		for (ClientHandler ch : clients) {

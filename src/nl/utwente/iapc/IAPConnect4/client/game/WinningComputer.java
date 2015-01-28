@@ -26,6 +26,7 @@ public class WinningComputer extends ComputerPlayer {
 		} else { 
 			determinedMove = backup.nextMove(board);
 		}
+		
 		return determinedMove;
 	}
 

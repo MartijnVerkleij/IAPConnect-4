@@ -75,6 +75,10 @@ public class ClientHandler extends Thread{
 			} catch (InvalidCommandException | IOException | NumberFormatException e) {
 				e.printStackTrace();
 				System.err.println("ERROR: Invalid login command");
+				sendCommand(new Command(Protocol.ERROR, "002"));
+				exit = true;
+				playerName = "";
+				groupNumber = 666;
 			}
 		}
 	}

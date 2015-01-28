@@ -19,11 +19,12 @@ public class ClientController implements Observer {
 	private ComputerPlayer ai;
 	
 	public ClientController(String playerName, InetAddress server, int port) {
-		ai = new WinningComputer("failing");
+		
 		ourMove = false;
 		aiEnabled = false;
 		client = new Client(playerName, server, port);
 		client.addObserver(this);
+		
 	}
 
 	public Client getClient() {
@@ -65,6 +66,7 @@ public class ClientController implements Observer {
 
 		if ((Protocol) arg == Protocol.START_GAME) {
 			cv = new ClientView(this);
+			ai = new WinningComputer("");
 		} else if ((Protocol) arg == Protocol.DO_MOVE) {
 			System.out.println("Doe een move clientcontroller");
 			ourMove = true;
