@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import nl.utwente.iapc.IAPConnect4.IAPConnect4;
+import nl.utwente.iapc.IAPConnect4.client.game.WinningComputer;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
@@ -73,8 +74,20 @@ public class ClientView extends JFrame {
 				aiButton.setText("AI Toggled: " + controller.aiIsEnabled());
 			}
 		});
+		
+		final JButton hintButton = new JButton("Hint");
+		hintButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.toggleAI();
+				JOptionPane.showMessageDialog(((JButton) e.getSource()).getParent(), 
+								"Your best bet is column " 
+								+ (new WinningComputer("")).nextMove(controller.getBoard()));
+			}
+		});
 
 		c.add(aiButton);
+		c.add(hintButton);
 		c.add(boardJPanel);
 
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));

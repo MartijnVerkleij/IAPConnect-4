@@ -3042,7 +3042,8 @@ Voorzorgs-maatregelen:
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Moet geconstrueerd worden met minstends een string onderdeel van Protocol.getAllV
+alues() en eventueel met enige Strings.
 \end_layout
 
 \end_inset
@@ -4823,6 +4824,12 @@ System tests
 
 \begin_layout Section
 Metrics
+\end_layout
+
+\begin_layout Standard
+Binnen Metrics bleek dat onze code het meest complex was in Server, ClientHandle
+r en Command.
+ Dit betekende dat deze klassen zijn beschreven met Javadoc en JML-statements.
 \end_layout
 
 \begin_layout Chapter
