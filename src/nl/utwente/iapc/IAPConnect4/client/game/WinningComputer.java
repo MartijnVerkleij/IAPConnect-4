@@ -34,11 +34,5 @@ public class WinningComputer extends ComputerPlayer {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void addGame(Game game) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }
