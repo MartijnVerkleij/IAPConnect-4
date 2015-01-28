@@ -100,7 +100,7 @@ public class ServerHandler extends Thread {
 			} else if (action.equals(Protocol.DONE_MOVE.toString())) {
 				try {
 					board = board.move(Integer.parseInt(command.getArgument(2)), 
-									gamePlayers.indexOf(command.getArgument(1)));
+									gamePlayers.indexOf(command.getArgument(1))+1);
 					client.moveDone();
 				} catch (NumberFormatException | InvalidMoveException e) {
 					sendCommand(new Command(Protocol.ERROR, ProtocolError.INVALID_MOVE));
