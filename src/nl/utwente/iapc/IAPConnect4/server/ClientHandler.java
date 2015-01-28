@@ -14,9 +14,8 @@ import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 import nl.utwente.iapc.IAPConnect4.core.networking.ProtocolError;
 
-public class ClientHandler extends Thread{
+public class ClientHandler extends Thread {
 	
-	private Socket sock;
 	private Server server;
 	private BufferedReader reader;
 	private BufferedWriter writer;
@@ -25,14 +24,15 @@ public class ClientHandler extends Thread{
 	private boolean ready;
 	private boolean exit;
 	
-	public ClientHandler(Socket sock, Server server) {
-		this.server = server;
-		this.sock = sock;
+	//@ requires sockArg != null;
+	//@ ensures !isExit() ==> getReader() != null && getWriter() != null;
+	public ClientHandler(Socket sockArg, Server serverArg) {
+		this.server = serverArg;
 		game = null;
 		exit = false;
 		try {
-			reader = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-			writer = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
+			reader = new BufferedReader(new InputStreamReader(sockArg.getInputStream()));
+			writer = new BufferedWriter(new OutputStreamWriter(sockArg.getOutputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
@@ -41,6 +41,8 @@ public class ClientHandler extends Thread{
 		ready = false;
 	}
 	
+	//@ requires !isExit() ==> getReader() != null && getWriter() != null;
+	//@ ensures isExit();
 	public void run() {
 		if (!exit) {
 			login();
@@ -51,7 +53,10 @@ public class ClientHandler extends Thread{
 		System.out.println("Client Disconnect");
 		closeConnection();
 	}
-
+	
+	
+	//@ requires getReader() != null && getWriter() != null;
+	//@ ensures !isExit() ==> player != null;
 	private void login() {
 		String playerName = null;
 		int groupNumber = -1;
@@ -65,7 +70,10 @@ public class ClientHandler extends Thread{
 				playerName = join.getArgument(1);
 				groupNumber = Integer.parseInt(join.getArgument(2));
 				if (groupNumber < 0 || groupNumber > 100) {
-					exit = true;
+					throw new InvalidCommandException();
+				}
+				
+				if (server.findClient(playerName) != null) {
 					throw new InvalidCommandException();
 				}
 				player = new ServerPlayer(this, playerName);
@@ -83,13 +91,8 @@ public class ClientHandler extends Thread{
 		}
 	}
 	
-	public void newGame(Game game) {
-		this.game = game;
-	}
-	
-	public void requestMove() {
-		server.broadcastCommand(new Command(Protocol.REQUEST_MOVE, player.getName()));
-		System.out.println("Requested move from: " + player.getName());
+	public void newGame(Game gameArg) {
+		this.game = gameArg;
 	}
 	
 	public void endGame() {
@@ -154,5 +157,17 @@ public class ClientHandler extends Thread{
 			System.err.println("Error while closing connections");
 		}
 		server.removeClient(this);
+	}
+	//@pure
+	public BufferedReader getReader() {
+		return reader;
+	}
+	//@pure
+	public BufferedWriter getWriter() {
+		return writer;
+	}
+	//@pure
+	public boolean isExit() {
+		return exit;
 	}
 }

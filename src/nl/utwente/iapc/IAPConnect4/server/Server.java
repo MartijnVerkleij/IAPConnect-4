@@ -63,7 +63,6 @@ public class Server extends Thread {
 	}
 	
 	
-	//requires clients.size() > 0 ==> 
 	public void broadcastCommand(Command c) {
 		for (ClientHandler cl : clients) {
 			cl.sendCommand(c);
@@ -107,9 +106,10 @@ public class Server extends Thread {
 	}
 	
 	// ensures
-	private ClientHandler findClient(String name) {
+	public ClientHandler findClient(String name) {
 		for (ClientHandler c : clients) {
-			if (c.getPlayer().getName().equals(name)) {
+			System.out.println(c.toString());
+			if (c.getPlayer() != null && c.getPlayer().getName().equals(name)) {
 				return c;
 			}
 		}
