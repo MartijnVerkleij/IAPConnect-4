@@ -14,7 +14,7 @@ public class ServerController {
 		IAPConnect4.getInstance().returnToMenu();
 	}
 	public void startServer() {
-		server.startServer();
+		server.start();
 	}
 
 }

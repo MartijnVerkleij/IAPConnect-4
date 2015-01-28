@@ -1,6 +1,5 @@
 package nl.utwente.iapc.IAPConnect4.server;
 
-import nl.utwente.iapc.IAPConnect4.core.Game;
 import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;

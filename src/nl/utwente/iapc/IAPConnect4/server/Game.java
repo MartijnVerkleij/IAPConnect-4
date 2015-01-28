@@ -1,4 +1,4 @@
-package nl.utwente.iapc.IAPConnect4.core;
+package nl.utwente.iapc.IAPConnect4.server;
 
 import java.util.ArrayList;
 
@@ -6,20 +6,19 @@ import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
-import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
-import nl.utwente.iapc.IAPConnect4.server.ServerPlayer;
+import nl.utwente.iapc.IAPConnect4.core.game.Board;
 
 public class Game  {
 
 	private ArrayList<Player> players;
-	private BoardModel board;
+	private Board board;
 	private int playerToMove; 
 	
 	public Game(Player player1, Player player2) {
 		players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		board = new BoardModel();
+		board = new Board();
 		playerToMove = 1;
 	}
 	
@@ -29,7 +28,7 @@ public class Game  {
 	
 	public void doMove(Player player, int move) throws InvalidMoveException {
 		if (players.indexOf(player) + 1 == playerToMove) {
-			BoardModel newBoard = board.move(move, playerToMove);
+			Board newBoard = board.move(move, playerToMove);
 			board = newBoard;
 			playerToMove = 1 + (playerToMove % players.size());
 			

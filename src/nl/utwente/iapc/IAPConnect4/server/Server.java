@@ -6,13 +6,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
-import nl.utwente.iapc.IAPConnect4.core.Game;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 
-public class Server {
+public class Server extends Thread {
 	
 	private ServerSocket ssock;
 	private LinkedList<ClientHandler> clients = new LinkedList<ClientHandler>();
@@ -37,6 +36,10 @@ public class Server {
 	}
 	
 	
+	public void run() {
+		startServer();
+	}
+	
 	//@ requires !isExiting() ==> getServerSocket() != null;
 	public void startServer() {
 		while (!exit) {
@@ -49,8 +52,12 @@ public class Server {
 				handler.start();
 				System.out.println("New Client");
 			} catch (IOException e) {
-				System.err.println("ERROR: Unsuucesfully accepted new Client.");
-				e.printStackTrace();
+				if (exit) {
+					System.out.println("Server Closed");
+				} else {
+					System.err.println("ERROR: Unsuccesfully accepted new Client.");
+				}
+				
 			}
 		}
 	}

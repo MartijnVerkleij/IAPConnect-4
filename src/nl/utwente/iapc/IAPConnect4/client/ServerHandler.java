@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import nl.utwente.iapc.IAPConnect4.core.Config;
-import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
+import nl.utwente.iapc.IAPConnect4.core.game.Board;
 import nl.utwente.iapc.IAPConnect4.core.game.InvalidMoveException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
@@ -28,7 +28,7 @@ public class ServerHandler extends Thread {
 	private BufferedWriter writer;
 	private String player;
 	
-	private BoardModel board;
+	private Board board;
 	private LinkedList<String> gamePlayers;
 	
 	private boolean ready;
@@ -57,6 +57,7 @@ public class ServerHandler extends Thread {
 				parseCommand();
 			}
 		}
+		closeConnection();
 	}
 	
 	private void login() {
@@ -90,7 +91,7 @@ public class ServerHandler extends Thread {
 				tempPlayers.add(command.getArgument(1));
 				tempPlayers.add(command.getArgument(2));
 				if (tempPlayers.indexOf(player) >= 0) {
-					board = new BoardModel();
+					board = new Board();
 					gamePlayers = tempPlayers;
 					client.newGame();
 				}
@@ -99,14 +100,19 @@ public class ServerHandler extends Thread {
 				
 			} else if (action.equals(Protocol.DONE_MOVE.toString())) {
 				try {
-					board = board.move(Integer.parseInt(command.getArgument(2)), 
-									gamePlayers.indexOf(command.getArgument(1))+1);
+					System.out.println("--Move is gemeld door server");
+					int boardPlayer = gamePlayers.indexOf(command.getArgument(1));
+					if (boardPlayer == -1) {
+						throw new InvalidCommandException();
+					}
+					
+					board = board.move(Integer.parseInt(command.getArgument(2)), boardPlayer + 1);
 					client.moveDone();
 				} catch (NumberFormatException | InvalidMoveException e) {
 					sendCommand(new Command(Protocol.ERROR, ProtocolError.INVALID_MOVE));
 				}
 				
-				//TODO disable UI on successful move
+				client.moveDone();
 			} else if (action.equals(Protocol.REQUEST_MOVE.toString())) {
 				if (command.getArgument(1).equals(player)) {
 					System.out.println("Doe een move");
@@ -137,8 +143,19 @@ public class ServerHandler extends Thread {
 		}
 	}
 	
-	public BoardModel getBoard() {
+	public Board getBoard() {
 		return board;
+	}
+	
+	public void closeConnection() {
+		exit = true;
+		try {
+			reader.close();
+			writer.close();
+			sock.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

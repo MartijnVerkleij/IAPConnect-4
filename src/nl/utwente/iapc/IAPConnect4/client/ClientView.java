@@ -3,8 +3,10 @@ package nl.utwente.iapc.IAPConnect4.client;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -14,6 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import nl.utwente.iapc.IAPConnect4.IAPConnect4;
+import nl.utwente.iapc.IAPConnect4.core.networking.Command;
+import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
+import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
 public class ClientView extends JFrame {
 
@@ -51,7 +58,22 @@ public class ClientView extends JFrame {
 		// Add elements
 		drawBoard(boardJPanel);
 		c.add(titleLabel);
+		
+		final JButton aiButton = new JButton("AI Toggled: " + controller.aiIsEnabled());
+		aiButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.toggleAI();
+				if (controller.aiIsEnabled() && controller.isOurMove()) {
+					controller.doAiMove();
+				}
+				aiButton.setText("AI Toggled: " + controller.aiIsEnabled());
+			}
+		});
+		
+		c.add(aiButton);
 		c.add(boardJPanel);
+		
 		c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
 		pack();
 		setVisible(true);
@@ -59,9 +81,11 @@ public class ClientView extends JFrame {
 	
 	private void drawBoard(JPanel target) {
 		target.setLayout(new GridLayout(0, controller.getBoard().getBoardWidth()));
+		System.out.println(controller.getBoard().toString());
+		target.setPreferredSize(new Dimension(700, 600));
 		for (int y = 0; y < controller.getBoard().getBoardHeight(); y++) {
 			for (int x = 0; x < controller.getBoard().getBoardWidth(); x++) {
-				JButton field = new JButton(x + "," + y);
+				JButton field = new JButton(/*x + "," + y*/ " ");
 				field.setEnabled(false);
 				switch (controller.getBoard().getField(x, y)) {
 					case 0: field.setBackground(empty);
@@ -82,11 +106,13 @@ public class ClientView extends JFrame {
 	
 	private void doMove(java.awt.event.ActionEvent e) {
 		// Executes when button pressed
-		controller.doMove(boardJPanel.getComponentZOrder((JButton) e.getSource()) % controller.getBoard().getBoardWidth());
-		
+		controller.doMove(boardJPanel.getComponentZOrder((JButton) e.getSource()) % 
+						controller.getBoard().getBoardWidth());
 	}
-	public void updateCell (int x, int y, int player, boolean enabled){
-		JButton field = (JButton) boardJPanel.getComponent(x * controller.getBoard().getBoardWidth() + y);
+	
+	public void updateCell(int x, int y, int player, boolean enabled){
+		JButton field = (JButton) boardJPanel.getComponent(x * 
+						controller.getBoard().getBoardWidth() + y);
 		field.setEnabled(enabled);
 		switch (controller.getBoard().getField(x, y)) {
 		case 0: field.setForeground(empty);
@@ -97,17 +123,24 @@ public class ClientView extends JFrame {
 			break;
 		}
 	}
-	public void updateAllCells (boolean enabled){
+	
+	public void updateAllCells(boolean enabled){
 		for (int x = 0; x < boardJPanel.getComponentCount(); x++) {
 			boardJPanel.getComponent(x).setEnabled(enabled);
 		}
 	}
+	
 	public void refreshBoard() {
 		JPanel newBoardJPanel = new JPanel();
 		drawBoard(newBoardJPanel);
+		getContentPane().remove(boardJPanel);
+		getContentPane().add(newBoardJPanel);
 		boardJPanel = newBoardJPanel;
+		getContentPane().revalidate();
+		getContentPane().repaint();
 	}
-	public void unlockBoard(){
+	
+	public void unlockBoard() {
 		for (Component field : boardJPanel.getComponents()) {
 			if (field.getBackground() == empty) {
 				field.setEnabled(true);
@@ -123,6 +156,27 @@ public class ClientView extends JFrame {
 		} else {
 			result += "lost!\nBetter luck next time!";
 		}
-		JOptionPane.showMessageDialog(this, result);
+		result += "\n Do you want to play another game?";
+		
+		int option = JOptionPane.showOptionDialog(this, result, "Game end", 
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, 
+						null, null, null);
+		
+		if (option == JOptionPane.YES_OPTION) {
+			controller.disposeView();
+			try {
+				controller.getClient().getHandler().sendCommand(
+								new Command(Protocol.READY_FOR_GAME));
+			} catch (InvalidCommandException e) {
+				e.printStackTrace();
+				controller.disconnect();
+				controller.disposeView();
+				IAPConnect4.getInstance().returnToMenu();
+			}
+		} else if (option == JOptionPane.NO_OPTION) {
+			controller.disconnect();
+			controller.disposeView();
+			IAPConnect4.getInstance().returnToMenu();
+		}
 	}
 }
