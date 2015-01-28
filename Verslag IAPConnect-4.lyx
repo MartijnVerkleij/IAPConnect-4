@@ -488,12 +488,22 @@ Client
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset Quotes prd
+\end_inset
+
 
 \emph on
 The client should have a user friendly TUI, which provides several options
  to the user (e.g., possibility to a enter port number and IP address) to
  request a game at the server.
- 
+\emph default
+
+\begin_inset Quotes prd
+\end_inset
+
+
+\emph on
+
 \begin_inset Newline newline
 \end_inset
 
@@ -510,14 +520,27 @@ nl.utwente.iapc.IAPConnect4.menu.MenuView
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
+\emph default
+De Swing GUI die wordt gemaakt is gebruiksvriendelijk en kan alle functies
+ van het spel aansturen.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset Quotes prd
+\end_inset
+
 
 \emph on
 The client should support human players, and computer players with (some)
  artificially intelligent behaviour.
- 
+\begin_inset Quotes prd
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -534,15 +557,13 @@ nl.utwente.iapc.IAPConnect4.client.ClientController
 \end_inset
 
 
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Enumerate
 
-\emph on
-The thinking time of the computer player (and thus the power of the artificial
- intelligence) should be a parameter that can be changed via the client
- TUI.
- 
+\emph default
+Als een client gestart wordt, draait deze in HumanPlayer modus.
+ Met een knop in de View kan eventueel een computerspeler het spel overnemen.
 \end_layout
 
 \begin_layout Enumerate
@@ -556,10 +577,20 @@ The client provides a hint functionality.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset Quotes prd
+\end_inset
+
 
 \emph on
 After the game is finished, the player should be able to start a new game.
- 
+\emph default
+
+\begin_inset Quotes prd
+\end_inset
+
+
+\emph on
+
 \begin_inset Newline newline
 \end_inset
 
@@ -576,16 +607,33 @@ nl.utwente.iapc.IAPConnect4.client.ClientController
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
+\emph default
+Er wordt na het afronden van een spel een PopUp gemaakt waarin de gebruiker
+ aan kan geven of er aan een nieuw speel deel mag worden genomen of niet.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset Quotes prd
+\end_inset
+
 
 \emph on
 If a player quits the game before it has finished, closes the UI, or the
  client crashes, the other players should be informed.
  In this case, the other players should be allowed to register again with
  the server to play the game.
- 
+\emph default
+
+\begin_inset Quotes prd
+\end_inset
+
+
+\emph on
+
 \begin_inset Newline newline
 \end_inset
 
@@ -602,23 +650,77 @@ nl.utwente.iapc.IAPConnect4.client.ClientController
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+Zodra een speler onverwacht de verbinding verbreekt, stuurt de server een
+ 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+game_end
+\end_layout
+
+\end_inset
+
+ commando naar de andere client.
+ Deze zal op zijn beurt het spel afronden als gelijkspel en de gebruiker
+ vragen wat nu te doen.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset Quotes prd
+\end_inset
+
 
 \emph on
 A server might at all times disconnect.
  The clients should react to this in a decent way, closing all open connections
  etc.
- 
+\emph default
+
+\begin_inset Quotes prd
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+nl.utwente.iapc.IAPConnect4.client.ClientController
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Als de server onverwacht de verbinding sluit, wordt de game afgerond.
 \end_layout
 
 \begin_layout Enumerate
+\begin_inset Quotes prd
+\end_inset
+
 
 \emph on
 The client should respect the protocol as defined for the tutorial group
  during the project session in Week 7, i.e., the client should be able to
  communicate with all other servers from the tutorial group.
+\emph default
+
+\begin_inset Quotes prd
+\end_inset
+
+
+\emph on
+
 \begin_inset Newline newline
 \end_inset
 
@@ -635,6 +737,11 @@ nl.utwente.iapc.IAPConnect4.core.networking.Protocol
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+Ook in dit geval wordt er van dezelfde Enum's gebruik gemaakt, uit core.networkin
+g.
 \end_layout
 
 \begin_layout Section
