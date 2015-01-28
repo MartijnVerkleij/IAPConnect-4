@@ -752,7 +752,7 @@ MVC en het Observer-patroon
 Om de code overzichtelijk en flexibel te houden, hebben we bij het schrijven
  van het spel gebruik gemaakt van MVC.
  Elk scherm van de UI wordt opgebouwd door een View en aangestuurd door
- ene Controller.
+ een Controller.
  Het model is hierbij verantwoordelijk voor de odnerliggende logica.
  Ook gebruiken we het Observer-patroon om gebeurtenissen vanuit het model
  aan een controller door te geven.
