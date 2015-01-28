@@ -1,7 +1,5 @@
 package nl.utwente.iapc.IAPConnect4.core.game;
 
-import nl.utwente.iapc.IAPConnect4.server.Game;
-
 
 /**
  * Interface describing a Player playing the Connect 4 game.
