@@ -4791,35 +4791,31 @@ Unit tests
 \end_layout
 
 \begin_layout Standard
-The report on the unit tests should describe for each class separately the
- following information:
+We hebben tests geschreven voor Board en voor Server.
 \end_layout
 
-\begin_layout Enumerate
-how the class has been tested (in isolation, together with other classes,
- not at all);
+\begin_layout Standard
+Board is getest met een testklasse die testte of invalidMove() en isLegalMove()
+ werkt.
 \end_layout
 
-\begin_layout Enumerate
-which test technique has been applied;
-\end_layout
-
-\begin_layout Enumerate
-if appropriate, test programs that have been developed;
-\end_layout
-
-\begin_layout Enumerate
-test results and expected results; and
-\end_layout
-
-\begin_layout Enumerate
-how much percent of each method are covered by tests (the coverage should
- be determined using Emma).
- Possibly discuss reasons and consequences of low coverage in a class.
+\begin_layout Standard
+Server is een systeemtest voor geschreven die een heel simpel spel speelt
+ op de server.
+ Deze is uitgereider beschreven in System Tests.
 \end_layout
 
 \begin_layout Section
 System tests
+\end_layout
+
+\begin_layout Standard
+Om de server te testen hadden wij een J-unit-test geschreven die alles voor
+ het inloggen en het spelen van een heel simpel spel tot het valideren van
+ de game_end-message testte.
+ Dit heeft ons geholpen bij het repareren van regressies tijdens het implementer
+en van nieuwe features en bugfixes.
+ 
 \end_layout
 
 \begin_layout Section
