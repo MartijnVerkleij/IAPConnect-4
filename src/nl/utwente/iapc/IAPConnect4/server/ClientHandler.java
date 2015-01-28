@@ -91,15 +91,20 @@ public class ClientHandler extends Thread {
 		}
 	}
 	
+	//@ requires gameArg != null;
+	//@ ensures getGame() != null;
 	public void newGame(Game gameArg) {
 		this.game = gameArg;
 	}
 	
+	//@ ensures getGame() == null && !isReady();
 	public void endGame() {
 		game = null;
 		ready = false;
 	}
 	
+	
+	//@ requires getReader() != null && getWriter() != null;
 	private void parseCommand() {
 		try {
 			Command command = Command.parse(reader.readLine());
@@ -123,6 +128,7 @@ public class ClientHandler extends Thread {
 		}
 	}
 	
+	//@ requires c.getArgument(0) != null; 
 	public void sendCommand(Command c) {
 		try {
 			writer.write(c.getCommand());
@@ -136,10 +142,12 @@ public class ClientHandler extends Thread {
 		return player;
 	}
 	
+	//@pure
 	public Game getGame() {
 		return game;
 	}
 	
+	//@pure
 	public boolean isReady() {
 		return ready;
 	}

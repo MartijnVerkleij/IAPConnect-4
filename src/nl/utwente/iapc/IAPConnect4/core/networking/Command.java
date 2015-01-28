@@ -27,6 +27,7 @@ public class Command {
 		arguments = args;
 	}
 	
+	//@pure
 	public String getArgument(int index) {
 		if (index == 0) {
 			return command.toString();
