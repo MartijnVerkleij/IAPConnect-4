@@ -339,15 +339,24 @@ nl.utwente.iapc.IAPConnect4.menu.MenuController
 \end_inset
 
 
-\end_layout
-
-\begin_layout Enumerate
-"If the port number already is in use, an appropriate error message is returned,
- and a new port number can be entered."
 \begin_inset Newline newline
 \end_inset
 
--
+Via het menu kan de gebruiker een poort kiezen,
+\end_layout
+
+\begin_layout Enumerate
+"
+\emph on
+If the port number already is in use, an appropriate error message is returned,
+ and a new port number can be entered."
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+In server.ServerController wordt gecontroleerd of de poort gebruikt kan worden.
+ Als dit niet zo is wordt de gebruiker teruggebracht naar het hoofdmenu.
 \end_layout
 
 \begin_layout Enumerate
@@ -371,14 +380,49 @@ nl.utwente.iapc.IAPConnect4.model.server.Server
 \end_inset
 
 
-\end_layout
-
-\begin_layout Enumerate
-The TUI ensures that all communication messages are written to System.out.
 \begin_inset Newline newline
 \end_inset
 
--
+Elke client die verbinding maakt met de server, krijgt een eigen 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Thread
+\end_layout
+
+\end_inset
+
+ middels een 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+ClientHandler
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+\begin_inset Quotes prd
+\end_inset
+
+The TUI ensures that all communication messages are written to System.out.
+\emph default
+
+\begin_inset Quotes prd
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Omdat wij een GUI hebben gebouwd, is deze requirement niet van toepassing.
 \end_layout
 
 \begin_layout Enumerate
@@ -403,6 +447,40 @@ nl.utwente.iapc.IAPConnect4.core.networking.Protocol
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+In de 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+Enum
+\end_layout
+
+\end_inset
+
+'s 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+core.networking.Protocol
+\end_layout
+
+\end_inset
+
+ en 
+\begin_inset Flex Code
+status open
+
+\begin_layout Plain Layout
+core.networking.ProtocolError
+\end_layout
+
+\end_inset
+
+ hebben we het protocol zoals vastgelegd in week 7 opgeslagen.
 \end_layout
 
 \begin_layout Subsection
