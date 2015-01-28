@@ -1,7 +1,5 @@
 package nl.utwente.iapc.IAPConnect4.core.game;
 
-
-
 /**
  * Interface describing a Player playing the Connect 4 game.
  * @author Martijn Verkleij

@@ -25,7 +25,7 @@ public class ServerView extends JFrame {
 	private void init() {
 		Container c = getContentPane();
 		
-		Font fnt = new Font("Comic Sans MS", java.awt.Font.BOLD , 24);
+		Font fnt = new Font("Arial", Font.BOLD, 24);
 		// Element declaration
 		titleLabel = new JLabel("Server");
 		stopButton = new JButton("Stop Server");

@@ -6,10 +6,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 
+import nl.utwente.iapc.IAPConnect4.client.Client;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 
+/**
+ * Class describes a {@link Server}, which can have {@link ClientHandler}s,
+ * handling clients from over the Internet. It also facilitates assigning
+ * {@link Game}s to {@link ClientHandler}s, so they can play a Game by
+ * themselves.
+ * 
+ * @author Martijn & Axel
+ *
+ */
 public class Server extends Thread {
 
 	private ServerSocket ssock;
@@ -35,7 +45,7 @@ public class Server extends Thread {
 			ssock = new ServerSocket(port);
 		} catch (BindException e) {
 			System.err.println("ERROR: Port " + port
-							+ " already in use. Exiting.");
+					+ " already in use. Exiting.");
 			exit = true;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -63,7 +73,7 @@ public class Server extends Thread {
 		while (!exit) {
 			try {
 				System.out
-								.println("IAPConnect4 Server\nAccepting connections on port "
+						.println("IAPConnect4 Server\nAccepting connections on port "
 								+ ssock.getLocalPort());
 				Socket newClient = ssock.accept();
 				ClientHandler handler = new ClientHandler(newClient, this);
@@ -125,18 +135,18 @@ public class Server extends Thread {
 
 		if (notInGame.size() > 1) {
 			Game game = new Game(notInGame.get(0).getPlayer(), notInGame.get(1)
-							.getPlayer());
+					.getPlayer());
 			System.out.println("New game with: "
-							+ notInGame.get(0).getPlayer().getName() + " + "
-							+ notInGame.get(1).getPlayer().getName());
+					+ notInGame.get(0).getPlayer().getName() + " + "
+					+ notInGame.get(1).getPlayer().getName());
 			notInGame.get(0).newGame(game);
 			notInGame.get(1).newGame(game);
 			notInGame.get(0).getPlayer().addGame(game);
 			notInGame.get(1).getPlayer().addGame(game);
 			games.add(game);
 			broadcastCommand(new Command(Protocol.START_GAME, notInGame.get(0)
-							.getPlayer().getName(), notInGame.get(1).getPlayer()
-							.getName()));
+					.getPlayer().getName(), notInGame.get(1).getPlayer()
+					.getName()));
 
 			game.startGame();
 		}
@@ -206,7 +216,9 @@ public class Server extends Thread {
 		}
 		try {
 			Thread.sleep(1000);
-			ssock.close();
+			if (ssock != null) {
+				ssock.close();
+			}
 		} catch (InterruptedException | IOException e) {
 			e.printStackTrace();
 		}
@@ -214,6 +226,7 @@ public class Server extends Thread {
 
 	/**
 	 * Getter for the {@link ServerSocket} UML.
+	 * 
 	 * @return {@link ServerSocket} instance.
 	 */
 	// @pure
@@ -223,6 +236,7 @@ public class Server extends Thread {
 
 	/**
 	 * Getter for the {@link Game}s UML.
+	 * 
 	 * @return {@link LinkedList} instance with {@link Game}s.
 	 */
 	// @pure
@@ -232,6 +246,7 @@ public class Server extends Thread {
 
 	/**
 	 * Whether the client will exit UML.
+	 * 
 	 * @return .
 	 */
 	// @pure
@@ -241,6 +256,7 @@ public class Server extends Thread {
 
 	/**
 	 * Getter for all Clients UML.
+	 * 
 	 * @return {@link LinkedList} instance with {@link ClientHandler}s
 	 */
 	// @pure

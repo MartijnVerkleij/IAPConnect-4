@@ -7,11 +7,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import nl.utwente.iapc.IAPConnect4.client.Client;
 import nl.utwente.iapc.IAPConnect4.core.Config;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
 import nl.utwente.iapc.IAPConnect4.core.networking.ProtocolError;
+
+/**
+ * {@link ClientHandler} Handles the communication between the client and the
+ * {@link Server}. It enables the server to see a {@link Client}'s prescence,
+ * and eventually assign it a {@link Game}. 
+ * 
+ * @author martijn
+ *
+ */
 
 public class ClientHandler extends Thread {
 
@@ -105,7 +115,7 @@ public class ClientHandler extends Thread {
 				player = new ServerPlayer(this, playerName);
 
 				sendCommand(new Command(Protocol.ACCEPT, ""
-								+ Config.GROUP_NUMBER));
+						+ Config.GROUP_NUMBER));
 				System.out.println("Client logged in: " + player.getName());
 			} catch (InvalidCommandException | IOException
 					| NumberFormatException e) {
@@ -161,7 +171,7 @@ public class ClientHandler extends Thread {
 					player.doMove(Integer.parseInt(command.getArgument(1)));
 				} catch (NumberFormatException e) {
 					sendCommand(new Command(Protocol.ERROR,
-									ProtocolError.INVALID_MOVE));
+							ProtocolError.INVALID_MOVE));
 				}
 			}
 
@@ -177,7 +187,7 @@ public class ClientHandler extends Thread {
 	 * @param c
 	 *            Command to send.
 	 */
-	//@ requires c.getArgument(0) != null;
+	// @ requires c.getArgument(0) != null;
 	public void sendCommand(Command c) {
 		try {
 			writer.write(c.getCommand());
@@ -263,6 +273,7 @@ public class ClientHandler extends Thread {
 	/**
 	 * Returns whether the client will exit, leading to a closeConnection()
 	 * invocation. JML
+	 * 
 	 * @return whether the ClientHandler is in the exit state.
 	 */
 	// @pure
