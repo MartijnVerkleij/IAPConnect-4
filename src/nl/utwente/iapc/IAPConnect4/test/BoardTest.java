@@ -45,8 +45,4 @@ public class BoardTest {
 			fail("Invalid move not properly given");
 		}
 	}
-	
-	
-	
-	
 }

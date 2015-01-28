@@ -1,7 +1,6 @@
 package nl.utwente.iapc.IAPConnect4.client.game;
 
 import nl.utwente.iapc.IAPConnect4.core.game.Board;
-import nl.utwente.iapc.IAPConnect4.server.Game;
 
 public class WinningComputer extends ComputerPlayer {
 

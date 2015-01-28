@@ -63,7 +63,7 @@ public class ServerProtocolTest {
 			writer.flush();
 			String accept = reader.readLine();
 			assertEquals("Accept message", Protocol.ACCEPT.toString() + " 26",
-					accept);
+							accept);
 		} catch (IOException e) {
 			fail("Exception while testing conversation");
 		}
@@ -76,7 +76,7 @@ public class ServerProtocolTest {
 			writer.flush();
 			String accept1arg = reader.readLine();
 			assertEquals("Accept message", Protocol.ACCEPT.toString() + " 26",
-					accept1arg);
+							accept1arg);
 		} catch (IOException e) {
 			fail("Exception while testing conversation");
 		}
@@ -89,7 +89,7 @@ public class ServerProtocolTest {
 			writer.flush();
 			String accept2arg = reader.readLine();
 			assertEquals("Accept message", Protocol.ACCEPT.toString() + " 26",
-					accept2arg);
+							accept2arg);
 		} catch (IOException e) {
 			fail("Exception while testing conversation");
 		}
@@ -102,7 +102,7 @@ public class ServerProtocolTest {
 			writer.flush();
 			String acceptFarg = reader.readLine();
 			assertEquals("Accept message", Protocol.ERROR.toString() + " 002",
-					acceptFarg);
+							acceptFarg);
 
 		} catch (IOException e) {
 			fail("Exception while testing conversation");
@@ -116,7 +116,7 @@ public class ServerProtocolTest {
 			writer.flush();
 			String acceptArg = reader.readLine();
 			assertEquals("Accept message", Protocol.ACCEPT.toString() + " 26",
-					acceptArg);
+							acceptArg);
 			writer.write(Protocol.READY_FOR_GAME.toString() + "\n");
 			writer.flush();
 
@@ -130,7 +130,7 @@ public class ServerProtocolTest {
 			writer2.flush();
 			String acceptArg2 = reader2.readLine();
 			assertEquals("Accept message", Protocol.ACCEPT.toString() + " 26",
-					acceptArg2);
+							acceptArg2);
 			writer2.write(Protocol.READY_FOR_GAME.toString() + "\n");
 			writer2.flush();
 
@@ -138,17 +138,17 @@ public class ServerProtocolTest {
 			String gameArg2 = reader2.readLine();
 
 			assertEquals("Game message", Protocol.START_GAME.toString()
-					+ " Martijn Axel", gameArg);
+							+ " Martijn Axel", gameArg);
 			assertEquals("Game message", Protocol.START_GAME.toString()
-					+ " Martijn Axel", gameArg2);
+							+ " Martijn Axel", gameArg2);
 
 			String moveArg = reader.readLine();
 			String moveArg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", moveArg);
+							+ " Martijn", moveArg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", moveArg2);
+							+ " Martijn", moveArg2);
 
 			writer.write(Protocol.DO_MOVE + " 3\n");
 			writer.flush();
@@ -157,17 +157,17 @@ public class ServerProtocolTest {
 			String doneMoveArg2 = reader2.readLine();
 
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMoveArg);
+							+ " Martijn 3", doneMoveArg);
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMoveArg2);
+							+ " Martijn 3", doneMoveArg2);
 
 			String move2Arg = reader.readLine();
 			String move2Arg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Axel", move2Arg);
+							+ " Axel", move2Arg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Axel", move2Arg2);
+							+ " Axel", move2Arg2);
 
 			writer2.write(Protocol.DO_MOVE + " 2\n");
 			writer2.flush();
@@ -176,17 +176,17 @@ public class ServerProtocolTest {
 			String doneMove2Arg2 = reader2.readLine();
 
 			assertEquals("move done 2 message", Protocol.DONE_MOVE.toString()
-					+ " Axel 2", doneMove2Arg);
+							+ " Axel 2", doneMove2Arg);
 			assertEquals("move done 2 message", Protocol.DONE_MOVE.toString()
-					+ " Axel 2", doneMove2Arg2);
+							+ " Axel 2", doneMove2Arg2);
 
 			String move3Arg = reader.readLine();
 			String move3Arg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", move3Arg);
+							+ " Martijn", move3Arg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", move3Arg2);
+							+ " Martijn", move3Arg2);
 
 			writer.write(Protocol.DO_MOVE + " 3\n");
 			writer.flush();
@@ -195,17 +195,17 @@ public class ServerProtocolTest {
 			String doneMove3Arg2 = reader2.readLine();
 
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMove3Arg);
+							+ " Martijn 3", doneMove3Arg);
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMove3Arg2);
+							+ " Martijn 3", doneMove3Arg2);
 
 			String move4Arg = reader.readLine();
 			String move4Arg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Axel", move4Arg);
+							+ " Axel", move4Arg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Axel", move4Arg2);
+							+ " Axel", move4Arg2);
 
 			writer2.write(Protocol.DO_MOVE + " 2\n");
 			writer2.flush();
@@ -214,17 +214,17 @@ public class ServerProtocolTest {
 			String doneMove4Arg2 = reader2.readLine();
 
 			assertEquals("move done 2 message", Protocol.DONE_MOVE.toString()
-					+ " Axel 2", doneMove4Arg);
+							+ " Axel 2", doneMove4Arg);
 			assertEquals("move done 2 message", Protocol.DONE_MOVE.toString()
-					+ " Axel 2", doneMove4Arg2);
+							+ " Axel 2", doneMove4Arg2);
 
 			String move5Arg = reader.readLine();
 			String move5Arg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", move5Arg);
+							+ " Martijn", move5Arg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", move5Arg2);
+							+ " Martijn", move5Arg2);
 
 			writer.write(Protocol.DO_MOVE + " 3\n");
 			writer.flush();
@@ -233,17 +233,17 @@ public class ServerProtocolTest {
 			String doneMove5Arg2 = reader2.readLine();
 
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMove5Arg);
+							+ " Martijn 3", doneMove5Arg);
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMove5Arg2);
+							+ " Martijn 3", doneMove5Arg2);
 
 			String move6Arg = reader.readLine();
 			String move6Arg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Axel", move6Arg);
+							+ " Axel", move6Arg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Axel", move6Arg2);
+							+ " Axel", move6Arg2);
 
 			writer2.write(Protocol.DO_MOVE + " 2\n");
 			writer2.flush();
@@ -252,17 +252,17 @@ public class ServerProtocolTest {
 			String doneMove6Arg2 = reader2.readLine();
 
 			assertEquals("move done 2 message", Protocol.DONE_MOVE.toString()
-					+ " Axel 2", doneMove6Arg);
+							+ " Axel 2", doneMove6Arg);
 			assertEquals("move done 2 message", Protocol.DONE_MOVE.toString()
-					+ " Axel 2", doneMove6Arg2);
+							+ " Axel 2", doneMove6Arg2);
 
 			String move7Arg = reader.readLine();
 			String move7Arg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", move7Arg);
+							+ " Martijn", move7Arg);
 			assertEquals("1move message", Protocol.REQUEST_MOVE.toString()
-					+ " Martijn", move7Arg2);
+							+ " Martijn", move7Arg2);
 
 			writer.write(Protocol.DO_MOVE + " 3\n");
 			writer.flush();
@@ -271,17 +271,17 @@ public class ServerProtocolTest {
 			String doneMove7Arg2 = reader2.readLine();
 
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMove7Arg);
+							+ " Martijn 3", doneMove7Arg);
 			assertEquals("move done 1 message", Protocol.DONE_MOVE.toString()
-					+ " Martijn 3", doneMove7Arg2);
+							+ " Martijn 3", doneMove7Arg2);
 
 			String winArg = reader.readLine();
 			String winArg2 = reader2.readLine();
 
 			assertEquals("1move message", Protocol.GAME_END.toString()
-					+ " Martijn", winArg);
+							+ " Martijn", winArg);
 			assertEquals("1move message", Protocol.GAME_END.toString()
-					+ " Martijn", winArg2);
+							+ " Martijn", winArg2);
 
 		} catch (IOException e) {
 			fail("Exception while testing game");

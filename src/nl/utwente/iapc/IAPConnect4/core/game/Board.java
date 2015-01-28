@@ -36,13 +36,12 @@ public class Board {
 	
 	/**
 	 * Protected constructor, used to advance in or end the game. 
-	 * @param board
+	 * @param boardArg
 	 * @param currentPlayer
 	 * @param playerCount
 	 */
-	protected Board(int[][] board, int moveDone) {
-		this.board = board;
-		//TODO Make this less ugly
+	protected Board(int[][] boardArg, int moveDone) {
+		this.board = boardArg;
 		if (this.getEmptyFields(moveDone) == 0) {
 			this.lastMove = new int[] {moveDone, this.getEmptyFields(moveDone)};
 		} else {
@@ -51,15 +50,15 @@ public class Board {
 	}
 	
 	/**
-	 * Do a move. Returns a new Board or TODO .
+	 * Do a move. Returns a new Board.
 	 * @param move Move to be done, integer between 0 and board.length - 1.
 	 * @param player Player that does the move
 	 * @return Board A new Board.
 	 */
 	public Board move(int move, int player) throws InvalidMoveException {
 		if (isLegalMove(move)) {
-			//TODO Update current player
-			System.out.println("moveDone: [" + move + "," + (getEmptyFields(move) - 1) + "] by " + player);
+			System.out.println("moveDone: [" + move + "," + (getEmptyFields(move) - 1) 
+							+ "] by " + player);
 			board[move][getEmptyFields(move) - 1] = player;
 			Board newBoard = new Board(board, move);
 			return newBoard;
@@ -76,7 +75,6 @@ public class Board {
 	
 	public boolean isLegalMove(int move) {
 		boolean legal = false;
-		// TODO move player check to Game
 		if (getField(move, 0) == 0) {
 			legal = true;
 		}
@@ -120,7 +118,6 @@ public class Board {
 	public boolean isFull() {
 		boolean full = false;
 		int column = 0;
-		// TODO: check < or <=
 		while (column < BOARDWIDTH) {
 			full = full && (getEmptyFields(column) == 0);
 			column++;

@@ -7,10 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.concurrent.Semaphore;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import nl.utwente.iapc.IAPConnect4.core.Config;
 import nl.utwente.iapc.IAPConnect4.core.game.Board;
@@ -31,8 +27,6 @@ public class ServerHandler extends Thread {
 	private Board board;
 	private LinkedList<String> gamePlayers;
 	
-	private boolean ready;
-	private Semaphore lastMoveReady = new Semaphore(1);
 	private boolean exit;
 
 	public ServerHandler(Socket sockArg, Client clientArg, String playerArg) {
@@ -47,7 +41,6 @@ public class ServerHandler extends Thread {
 			System.err.println("ERROR: Connection could not be succesfully established. Exiting.");
 			exit = true;
 		}
-		ready = false;
 	}
 	
 	public void run() {
@@ -133,7 +126,9 @@ public class ServerHandler extends Thread {
 		}
 	}
 	
-	
+	public LinkedList<String> getGamePlayers() {
+		return gamePlayers;
+	}	
 	
 	public void sendCommand(Command c) throws InvalidCommandException {
 		try {
