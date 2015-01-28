@@ -1,6 +1,6 @@
 package nl.utwente.iapc.IAPConnect4.client.game;
 
-import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
+import nl.utwente.iapc.IAPConnect4.core.game.Board;
 import nl.utwente.iapc.IAPConnect4.core.game.Player;
 
 
@@ -12,7 +12,7 @@ public abstract class ComputerPlayer implements Player {
 		this.name = name;
 	}
 	
-	public int nextMove(BoardModel board) {
+	public int nextMove(Board board) {
 		// TODO 
 		return 0;
 	}

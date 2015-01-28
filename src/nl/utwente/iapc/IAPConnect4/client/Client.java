@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Observable;
 
-import nl.utwente.iapc.IAPConnect4.core.game.BoardModel;
+import nl.utwente.iapc.IAPConnect4.core.game.Board;
 import nl.utwente.iapc.IAPConnect4.core.networking.Command;
 import nl.utwente.iapc.IAPConnect4.core.networking.InvalidCommandException;
 import nl.utwente.iapc.IAPConnect4.core.networking.Protocol;
@@ -35,7 +35,7 @@ public class Client extends Observable {
 		
 	}
 	
-	public BoardModel getBoard() {
+	public Board getBoard() {
 		return handler.getBoard();
 	}
 	
@@ -78,6 +78,10 @@ public class Client extends Observable {
 	
 	public String getPlayerName() {
 		return playerName;
+	}
+	
+	public void disconnect() {
+		handler.closeConnection();
 	}
 }
 

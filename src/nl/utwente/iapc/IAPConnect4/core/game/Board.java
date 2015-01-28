@@ -5,7 +5,7 @@ package nl.utwente.iapc.IAPConnect4.core.game;
  * @author Martijn Verkleij & Axel Vugts
  *
  */
-public class BoardModel {
+public class Board {
 
 	public static final int BOARDHEIGHT = 6;
 	public static final int BOARDWIDTH = 7;
@@ -18,7 +18,7 @@ public class BoardModel {
 	 * Create a Connect 4 Board with a size of <code>BOARDHEIGHT</code>*<code>BOARDWIDTH</code>.
 	 * @param numberOfPlayers Number of players
 	 */
-	public BoardModel() {
+	public Board() {
 		board = new int[BOARDWIDTH][BOARDHEIGHT];
 		lastMove = new int[] {0, 0};
 	}
@@ -29,7 +29,7 @@ public class BoardModel {
 	 * @param boardWidth Width of the Board
 	 * @param boardHeight Height of the Board
 	 */
-	public BoardModel(int boardWidth, int boardHeight) {
+	public Board(int boardWidth, int boardHeight) {
 		board = new int[boardWidth][boardHeight];
 		lastMove = new int[] {0, 0};
 	}
@@ -40,7 +40,7 @@ public class BoardModel {
 	 * @param currentPlayer
 	 * @param playerCount
 	 */
-	protected BoardModel(int[][] board, int moveDone) {
+	protected Board(int[][] board, int moveDone) {
 		this.board = board;
 		//TODO Make this less ugly
 		if (this.getEmptyFields(moveDone) == 0) {
@@ -56,13 +56,12 @@ public class BoardModel {
 	 * @param player Player that does the move
 	 * @return Board A new Board.
 	 */
-	public BoardModel move(int move, int player) throws InvalidMoveException {
+	public Board move(int move, int player) throws InvalidMoveException {
 		if (isLegalMove(move)) {
 			//TODO Update current player
-			int moveDone = move;
-			System.out.println("moveDone: [" + move + "," + (getEmptyFields(move) - 1) + "]");
+			System.out.println("moveDone: [" + move + "," + (getEmptyFields(move) - 1) + "] by " + player);
 			board[move][getEmptyFields(move) - 1] = player;
-			BoardModel newBoard = new BoardModel(board, moveDone);
+			Board newBoard = new Board(board, move);
 			return newBoard;
 		} else {
 			throw new InvalidMoveException(this);

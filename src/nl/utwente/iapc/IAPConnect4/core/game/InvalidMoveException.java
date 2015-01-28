@@ -5,13 +5,13 @@ public class InvalidMoveException extends Exception {
 	private static final long serialVersionUID = -8593386180456593769L;
 	Player player;
 	int playerInt;
-	BoardModel brd;
+	Board brd;
 	
-	public InvalidMoveException(Player player, BoardModel board) {
+	public InvalidMoveException(Player player, Board board) {
 		this.player = player;
 		this.brd = board;
 	}
-	public InvalidMoveException(BoardModel board) {
+	public InvalidMoveException(Board board) {
 		this.player = null;
 		this.brd = board;
 	}
@@ -20,7 +20,7 @@ public class InvalidMoveException extends Exception {
 		return player;
 	}
 	
-	public BoardModel getBoard() {
+	public Board getBoard() {
 		return brd;
 	}
 
