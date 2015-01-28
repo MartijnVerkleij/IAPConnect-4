@@ -29,10 +29,4 @@ public interface Player {
 	 */
 	public void result(Player player);
 	
-	/**
-	 * Adds the Game object to the Player.
-	 *  @param game Game to add
-	 */
-	
-	public void addGame(Game game);
 }

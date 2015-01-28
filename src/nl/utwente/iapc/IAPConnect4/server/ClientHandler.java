@@ -19,7 +19,7 @@ public class ClientHandler extends Thread {
 	private Server server;
 	private BufferedReader reader;
 	private BufferedWriter writer;
-	private Player player;
+	private ServerPlayer player;
 	private Game game;
 	private boolean ready;
 	private boolean exit;
@@ -132,7 +132,7 @@ public class ClientHandler extends Thread {
 		}
 	}
 	
-	public Player getPlayer() {
+	public ServerPlayer getPlayer() {
 		return player;
 	}
 	

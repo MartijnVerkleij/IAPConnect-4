@@ -31,10 +31,10 @@ public class RandomComputer extends ComputerPlayer {
 	}
 
 
-	@Override
+	/*@Override
 	public void addGame(Game game) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 	
 }
