@@ -75,7 +75,7 @@ public class MenuView extends JFrame {
 		titleLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 		showJoinButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		joinPanel.setVisible(false);
-		joinLabel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));;
+		joinLabel.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
 		showServerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		serverPanel.setVisible(false);
 		quitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -97,7 +97,8 @@ public class MenuView extends JFrame {
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				hideView();
-				controller.clientMode(joinNick.getText(), hostname.getText(), Integer.parseInt(joinPort.getText()));
+				controller.clientMode(joinNick.getText(), hostname.getText(), 
+								Integer.parseInt(joinPort.getText()));
 			} });
 		serverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {

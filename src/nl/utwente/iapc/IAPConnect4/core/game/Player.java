@@ -1,6 +1,5 @@
 package nl.utwente.iapc.IAPConnect4.core.game;
 
-import nl.utwente.iapc.IAPConnect4.server.Game;
 
 
 /**

@@ -7,8 +7,8 @@ public class InvalidMoveException extends Exception {
 	int playerInt;
 	Board brd;
 	
-	public InvalidMoveException(Player player, Board board) {
-		this.player = player;
+	public InvalidMoveException(Player playerArg, Board board) {
+		this.player = playerArg;
 		this.brd = board;
 	}
 	public InvalidMoveException(Board board) {

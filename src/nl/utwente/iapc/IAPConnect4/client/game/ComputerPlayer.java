@@ -8,8 +8,8 @@ public abstract class ComputerPlayer implements Player {
 
 	protected String name;
 	
-	public ComputerPlayer(String name) {
-		this.name = name;
+	public ComputerPlayer(String nameArg) {
+		this.name = nameArg;
 	}
 	
 	public int nextMove(Board board) {
